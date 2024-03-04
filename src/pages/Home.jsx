@@ -2,6 +2,7 @@ import React from 'react'
 import TopNavbar from '../components/TopNavbar/TopNavbar'
 import ChartTotalSale from '../components/Chart/ChartTotalSale'
 import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
+import ChartRatingProduct from '../components/Chart/ChartRatingProduct'
 
 const Home = () => {
     return (
@@ -375,25 +376,9 @@ const Home = () => {
                                             </div>
                                         </div>
                                     </div>
-                                    <div id="average-sales" className="apex-charts mb-4 mt-3" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00" />
-                                    <div className="chart-widget-list">
-                                        <p>
-                                            <i className="mdi mdi-square text-primary" /> Direct
-                                            <span className="float-end">$300.56</span>
-                                        </p>
-                                        <p>
-                                            <i className="mdi mdi-square text-danger" /> Affilliate
-                                            <span className="float-end">$135.18</span>
-                                        </p>
-                                        <p>
-                                            <i className="mdi mdi-square text-success" /> Sponsored
-                                            <span className="float-end">$48.96</span>
-                                        </p>
-                                        <p className="mb-0">
-                                            <i className="mdi mdi-square text-warning" /> E-mail
-                                            <span className="float-end">$154.02</span>
-                                        </p>
-                                    </div>
+                                    {/* <div id="average-sales" className="apex-charts mb-4 mt-3" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00" /> */}
+                                    <ChartRatingProduct/>
+                                    
                                 </div> {/* end card-body*/}
                             </div> {/* end card*/}
                         </div> {/* end col*/}
