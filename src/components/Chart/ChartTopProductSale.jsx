@@ -41,7 +41,7 @@ const ChartTopProductSale = () => {
             <XAxis dataKey="product.name" />
             <YAxis />
             <Tooltip formatter={(value, name, props) => [value, props.payload.date]} />
-            <Area type="monotone" dataKey="totalSold" stroke="#CD69C9" fill="#00FFFF" />
+            <Area type="monotone" dataKey="totalSold" stroke="#87CEFA" fill="#87CEFA" />
             {/* <Area type="monotone" dataKey="date" stroke="#8884d8" fill="#8884d8" /> */}
           </AreaChart>
         </ResponsiveContainer>

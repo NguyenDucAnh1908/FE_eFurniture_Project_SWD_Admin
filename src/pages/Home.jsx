@@ -1,10 +1,30 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import TopNavbar from '../components/TopNavbar/TopNavbar'
 import ChartTotalSale from '../components/Chart/ChartTotalSale'
 import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
 import ChartRatingProduct from '../components/Chart/ChartRatingProduct'
+import TotalCustomersThisMonth from '../components/Analysis/TotalCustomersThisMonth'
+import TotalOrders from '../components/Analysis/TotalOrders'
+import TotalRevenue from '../components/Analysis/TotalRevenue'
+import {DataTotalDay} from '../services/AnalysisApi/AnalysisApi'
 
 const Home = () => {
+    const [dataTotalDay, setDataTotalDay] = useState([]);
+
+    useEffect(() => {
+        getDataTotalDay();
+    }, []);
+
+    const getDataTotalDay = async () => {
+        try {
+            let res = await DataTotalDay();
+            setDataTotalDay(res.data);
+            //console.log(res.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
     return (
         <>
             <div className="content">
@@ -43,49 +63,22 @@ const Home = () => {
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="card widget-flat">
-                                        <div className="card-body">
-                                            <div className="float-end">
-                                                <i className="mdi mdi-account-multiple widget-icon" />
-                                            </div>
-                                            <h5 className="text-muted fw-normal mt-0" title="Number of Customers">Customers</h5>
-                                            <h3 className="mt-3 mb-3">36,254</h3>
-                                            <p className="mb-0 text-muted">
-                                                <span className="text-success me-2"><i className="mdi mdi-arrow-up-bold" /> 5.27%</span>
-                                                <span className="text-nowrap">Since last month</span>
-                                            </p>
-                                        </div> {/* end card-body*/}
+                                        <TotalCustomersThisMonth/>
+                                        {/* end card-body*/}
                                     </div> {/* end card*/}
                                 </div> {/* end col*/}
                                 <div className="col-sm-6">
                                     <div className="card widget-flat">
-                                        <div className="card-body">
-                                            <div className="float-end">
-                                                <i className="mdi mdi-cart-plus widget-icon" />
-                                            </div>
-                                            <h5 className="text-muted fw-normal mt-0" title="Number of Orders">Orders</h5>
-                                            <h3 className="mt-3 mb-3">5,543</h3>
-                                            <p className="mb-0 text-muted">
-                                                <span className="text-danger me-2"><i className="mdi mdi-arrow-down-bold" /> 1.08%</span>
-                                                <span className="text-nowrap">Since last month</span>
-                                            </p>
-                                        </div> {/* end card-body*/}
+                                        <TotalOrders/>
+                                         {/* end card-body*/}
                                     </div> {/* end card*/}
                                 </div> {/* end col*/}
                             </div> {/* end row */}
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="card widget-flat">
-                                        <div className="card-body">
-                                            <div className="float-end">
-                                                <i className="mdi mdi-currency-usd widget-icon" />
-                                            </div>
-                                            <h5 className="text-muted fw-normal mt-0" title="Average Revenue">Revenue</h5>
-                                            <h3 className="mt-3 mb-3">$6,254</h3>
-                                            <p className="mb-0 text-muted">
-                                                <span className="text-danger me-2"><i className="mdi mdi-arrow-down-bold" /> 7.00%</span>
-                                                <span className="text-nowrap">Since last month</span>
-                                            </p>
-                                        </div> {/* end card-body*/}
+                                        <TotalRevenue/>
+                                         {/* end card-body*/}
                                     </div> {/* end card*/}
                                 </div> {/* end col*/}
                                 <div className="col-sm-6">
@@ -161,17 +154,17 @@ const Home = () => {
                                     <div className="chart-content-bg">
                                         <div className="row text-center">
                                             <div className="col-sm-6">
-                                                <p className="text-muted mb-0 mt-3">Current Week</p>
+                                                <p className="text-muted mb-0 mt-3">Current Day</p>
                                                 <h2 className="fw-normal mb-3">
                                                     <small className="mdi mdi-checkbox-blank-circle text-primary align-middle me-1" />
-                                                    <span>$58,254</span>
+                                                    <span>${dataTotalDay.totalSalesToday}</span>
                                                 </h2>
                                             </div>
                                             <div className="col-sm-6">
-                                                <p className="text-muted mb-0 mt-3">Previous Week</p>
+                                                <p className="text-muted mb-0 mt-3">Previous Day</p>
                                                 <h2 className="fw-normal mb-3">
                                                     <small className="mdi mdi-checkbox-blank-circle text-success align-middle me-1" />
-                                                    <span>$69,524</span>
+                                                    <span>${dataTotalDay.totalSalesYesterday}</span>
                                                 </h2>
                                             </div>
                                         </div>
@@ -249,7 +242,7 @@ const Home = () => {
                     </div>
                     {/* end row */}
                     <div className="row">
-                        <div className="col-xl-6 col-lg-12 order-lg-2 order-xl-1">
+                        <div className="col-xl-6 col-lg-7 order-lg-2 order-xl-1">
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
@@ -355,7 +348,7 @@ const Home = () => {
                                 </div> {/* end card-body*/}
                             </div> {/* end card*/}
                         </div> {/* end col*/}
-                        <div className="col-xl-3 col-lg-6 order-lg-1">
+                        <div className="col-xl-6 col-lg-6 order-lg-1">
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center">
@@ -382,116 +375,7 @@ const Home = () => {
                                 </div> {/* end card-body*/}
                             </div> {/* end card*/}
                         </div> {/* end col*/}
-                        <div className="col-xl-3 col-lg-6 order-lg-1">
-                            <div className="card">
-                                <div className="card-body pb-0">
-                                    <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 className="header-title">Recent Activity</h4>
-                                        <div className="dropdown">
-                                            <a href="#" className="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
-                                                <i className="mdi mdi-dots-vertical" />
-                                            </a>
-                                            <div className="dropdown-menu dropdown-menu-end">
-                                                {/* item*/}
-                                                <a href="javascript:void(0);" className="dropdown-item">Sales Report</a>
-                                                {/* item*/}
-                                                <a href="javascript:void(0);" className="dropdown-item">Export Report</a>
-                                                {/* item*/}
-                                                <a href="javascript:void(0);" className="dropdown-item">Profit</a>
-                                                {/* item*/}
-                                                <a href="javascript:void(0);" className="dropdown-item">Action</a>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="card-body py-0" data-simplebar style={{ maxHeight: 405 }}>
-                                    <div className="timeline-alt py-0">
-                                        <div className="timeline-item">
-                                            <i className="mdi mdi-upload bg-info-lighten text-info timeline-icon" />
-                                            <div className="timeline-item-info">
-                                                <a href="javascript:void(0);" className="text-info fw-bold mb-1 d-block">You sold an item</a>
-                                                <small>Paul Burgess just purchased “Hyper - Admin Dashboard”!</small>
-                                                <p className="mb-0 pb-2">
-                                                    <small className="text-muted">5 minutes ago</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="timeline-item">
-                                            <i className="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon" />
-                                            <div className="timeline-item-info">
-                                                <a href="javascript:void(0);" className="text-primary fw-bold mb-1 d-block">Product on the Bootstrap Market</a>
-                                                <small>Dave Gamache added
-                                                    <span className="fw-bold">Admin Dashboard</span>
-                                                </small>
-                                                <p className="mb-0 pb-2">
-                                                    <small className="text-muted">30 minutes ago</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="timeline-item">
-                                            <i className="mdi mdi-microphone bg-info-lighten text-info timeline-icon" />
-                                            <div className="timeline-item-info">
-                                                <a href="javascript:void(0);" className="text-info fw-bold mb-1 d-block">Robert Delaney</a>
-                                                <small>Send you message
-                                                    <span className="fw-bold">"Are you there?"</span>
-                                                </small>
-                                                <p className="mb-0 pb-2">
-                                                    <small className="text-muted">2 hours ago</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="timeline-item">
-                                            <i className="mdi mdi-upload bg-primary-lighten text-primary timeline-icon" />
-                                            <div className="timeline-item-info">
-                                                <a href="javascript:void(0);" className="text-primary fw-bold mb-1 d-block">Audrey Tobey</a>
-                                                <small>Uploaded a photo
-                                                    <span className="fw-bold">"Error.jpg"</span>
-                                                </small>
-                                                <p className="mb-0 pb-2">
-                                                    <small className="text-muted">14 hours ago</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="timeline-item">
-                                            <i className="mdi mdi-upload bg-info-lighten text-info timeline-icon" />
-                                            <div className="timeline-item-info">
-                                                <a href="javascript:void(0);" className="text-info fw-bold mb-1 d-block">You sold an item</a>
-                                                <small>Paul Burgess just purchased “Hyper - Admin Dashboard”!</small>
-                                                <p className="mb-0 pb-2">
-                                                    <small className="text-muted">16 hours ago</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="timeline-item">
-                                            <i className="mdi mdi-airplane bg-primary-lighten text-primary timeline-icon" />
-                                            <div className="timeline-item-info">
-                                                <a href="javascript:void(0);" className="text-primary fw-bold mb-1 d-block">Product on the Bootstrap Market</a>
-                                                <small>Dave Gamache added
-                                                    <span className="fw-bold">Admin Dashboard</span>
-                                                </small>
-                                                <p className="mb-0 pb-2">
-                                                    <small className="text-muted">22 hours ago</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                        <div className="timeline-item">
-                                            <i className="mdi mdi-microphone bg-info-lighten text-info timeline-icon" />
-                                            <div className="timeline-item-info">
-                                                <a href="javascript:void(0);" className="text-info fw-bold mb-1 d-block">Robert Delaney</a>
-                                                <small>Send you message
-                                                    <span className="fw-bold">"Are you there?"</span>
-                                                </small>
-                                                <p className="mb-0 pb-2">
-                                                    <small className="text-muted">2 days ago</small>
-                                                </p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    {/* end timeline */}
-                                </div> {/* end slimscroll */}
-                            </div>
-                            {/* end card*/}
-                        </div>
+
                         {/* end col */}
                     </div>
                     {/* end row */}

@@ -46,7 +46,7 @@ const ChartTotalSale = () => {
                     <XAxis dataKey="date" />
                     <YAxis />
                     <Tooltip />
-                    <Line connectNulls type="monotone" dataKey="totalMoney" stroke="#8884d8" fill="#8884d8" />
+                    <Line connectNulls type="monotone" dataKey="totalMoney" stroke="#20B2AA" fill="#20B2AA" />
                 </LineChart>
             </ResponsiveContainer>
         </div>
