@@ -103,13 +103,13 @@ const header = () => {
                                         <a href="/product">Products</a>
                                     </li>
                                     <li>
-                                        <a href="/products-detail">Products Details</a>
+                                        <a href="/product-detail">Products Details</a>
                                     </li>
                                     <li>
                                         <a href="/order">Orders</a>
                                     </li>
                                     <li>
-                                        <a href="/orders-detail">Order Details</a>
+                                        <a href="/order-detail">Order Details</a>
                                     </li>
                                     <li>
                                         <a href="/customer">Customers</a>
