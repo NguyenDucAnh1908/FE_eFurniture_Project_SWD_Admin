@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, { useState, useEffect } from 'react'
 import TopNavbar from '../components/TopNavbar/TopNavbar'
 import ChartTotalSale from '../components/Chart/ChartTotalSale'
 import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
@@ -6,13 +6,15 @@ import ChartRatingProduct from '../components/Chart/ChartRatingProduct'
 import TotalCustomersThisMonth from '../components/Analysis/TotalCustomersThisMonth'
 import TotalOrders from '../components/Analysis/TotalOrders'
 import TotalRevenue from '../components/Analysis/TotalRevenue'
-import {DataTotalDay} from '../services/AnalysisApi/AnalysisApi'
+import { DataTotalDay, DataTop5Product } from '../services/AnalysisApi/AnalysisApi'
 
 const Home = () => {
     const [dataTotalDay, setDataTotalDay] = useState([]);
+    const [dataTop5Product, setDataTop5Product] = useState([]);
 
     useEffect(() => {
         getDataTotalDay();
+        getDataTop5Product();
     }, []);
 
     const getDataTotalDay = async () => {
@@ -20,6 +22,16 @@ const Home = () => {
             let res = await DataTotalDay();
             setDataTotalDay(res.data);
             //console.log(res.data);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    const getDataTop5Product = async () => {
+        try {
+            let res = await DataTop5Product();
+            setDataTop5Product(res.data);
+            console.log("Check top 5", res.data);
         } catch (error) {
             console.error('Error fetching data:', error);
         }
@@ -63,22 +75,22 @@ const Home = () => {
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="card widget-flat">
-                                        <TotalCustomersThisMonth/>
+                                        <TotalCustomersThisMonth />
                                         {/* end card-body*/}
                                     </div> {/* end card*/}
                                 </div> {/* end col*/}
                                 <div className="col-sm-6">
                                     <div className="card widget-flat">
-                                        <TotalOrders/>
-                                         {/* end card-body*/}
+                                        <TotalOrders />
+                                        {/* end card-body*/}
                                     </div> {/* end card*/}
                                 </div> {/* end col*/}
                             </div> {/* end row */}
                             <div className="row">
                                 <div className="col-sm-6">
                                     <div className="card widget-flat">
-                                        <TotalRevenue/>
-                                         {/* end card-body*/}
+                                        <TotalRevenue />
+                                        {/* end card-body*/}
                                     </div> {/* end card*/}
                                 </div> {/* end col*/}
                                 <div className="col-sm-6">
@@ -122,7 +134,7 @@ const Home = () => {
                                     <div dir="ltr">
                                         {/* <div id="high-performing-product" className="apex-charts" data-colors="#727cf5,#e3eaef" /> */}
                                         {/* i(new Error("Element not found")) */}
-                                        <ChartTotalSale/>
+                                        <ChartTotalSale />
                                     </div>
                                 </div> {/* end card-body*/}
                             </div> {/* end card*/}
@@ -179,7 +191,7 @@ const Home = () => {
                                     </div>
                                     <div dir="ltr">
                                         {/* <div id="revenue-chart" className="apex-charts mt-3" data-colors="#727cf5,#0acf97" /> */}
-                                        <ChartTopProductSale/>
+                                        <ChartTopProductSale />
                                     </div>
                                 </div> {/* end card-body*/}
                             </div> {/* end card*/}
@@ -252,96 +264,29 @@ const Home = () => {
                                     <div className="table-responsive">
                                         <table className="table table-centered table-nowrap table-hover mb-0">
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">ASOS Ridley High Waist</h5>
-                                                        <span className="text-muted font-13">07 April 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$79.49</h5>
-                                                        <span className="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">82</h5>
-                                                        <span className="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$6,518.18</h5>
-                                                        <span className="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">Marco Lightweight Shirt</h5>
-                                                        <span className="text-muted font-13">25 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$128.50</h5>
-                                                        <span className="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">37</h5>
-                                                        <span className="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$4,754.50</h5>
-                                                        <span className="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">Half Sleeve Shirt</h5>
-                                                        <span className="text-muted font-13">17 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$39.99</h5>
-                                                        <span className="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">64</h5>
-                                                        <span className="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$2,559.36</h5>
-                                                        <span className="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">Lightweight Jacket</h5>
-                                                        <span className="text-muted font-13">12 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$20.00</h5>
-                                                        <span className="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">184</h5>
-                                                        <span className="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$3,680.00</h5>
-                                                        <span className="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">Marco Shoes</h5>
-                                                        <span className="text-muted font-13">05 March 2018</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$28.49</h5>
-                                                        <span className="text-muted font-13">Price</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">69</h5>
-                                                        <span className="text-muted font-13">Quantity</span>
-                                                    </td>
-                                                    <td>
-                                                        <h5 className="font-14 my-1 fw-normal">$1,965.81</h5>
-                                                        <span className="text-muted font-13">Amount</span>
-                                                    </td>
-                                                </tr>
+                                                {dataTop5Product && dataTop5Product.length > 0 &&
+                                                    dataTop5Product.map((dataTop5ProductItem, index) => {
+                                                        return (
+                                                            <tr key={index}>
+                                                                <td>
+                                                                    <h5 className="font-14 my-1 fw-normal">{dataTop5ProductItem.product.name}</h5>
+                                                                    <span className="text-muted font-13">{dataTop5ProductItem.product.createdAt}</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 className="font-14 my-1 fw-normal">${dataTop5ProductItem.product.price}</h5>
+                                                                    <span className="text-muted font-13">Price</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 className="font-14 my-1 fw-normal">{dataTop5ProductItem.totalQuantitySold}</h5>
+                                                                    <span className="text-muted font-13">Quantity</span>
+                                                                </td>
+                                                                <td>
+                                                                    <h5 className="font-14 my-1 fw-normal">${dataTop5ProductItem.totalAmountSold}</h5>
+                                                                    <span className="text-muted font-13">Amount</span>
+                                                                </td>
+                                                            </tr>
+                                                        )
+                                                    })}
                                             </tbody>
                                         </table>
                                     </div> {/* end table-responsive*/}
@@ -370,8 +315,8 @@ const Home = () => {
                                         </div>
                                     </div>
                                     {/* <div id="average-sales" className="apex-charts mb-4 mt-3" data-colors="#727cf5,#0acf97,#fa5c7c,#ffbc00" /> */}
-                                    <ChartRatingProduct/>
-                                    
+                                    <ChartRatingProduct />
+
                                 </div> {/* end card-body*/}
                             </div> {/* end card*/}
                         </div> {/* end col*/}

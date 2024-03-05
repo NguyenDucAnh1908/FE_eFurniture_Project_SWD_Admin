@@ -16,5 +16,8 @@ const DataTotalDay = () => {
     return axios.get("http://localhost:8080/api/v1/orders/total-revenue-day");
 };
 
+const DataTop5Product = () => {
+    return axios.get("http://localhost:8080/api/v1/products/top5-best-selling");
+};
 
-export { DataTotalUser, DataTotalOrders, DataTotalRevenue, DataTotalDay };
+export { DataTotalUser, DataTotalOrders, DataTotalRevenue, DataTotalDay, DataTop5Product };
