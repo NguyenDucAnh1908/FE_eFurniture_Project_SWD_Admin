@@ -100,28 +100,28 @@ const header = () => {
                             <div className="collapse" id="sidebarEcommerce">
                                 <ul className="side-nav-second-level">
                                     <li>
-                                        <a href="apps-ecommerce-products.html">Products</a>
+                                        <a href="/product">Products</a>
                                     </li>
                                     <li>
-                                        <a href="apps-ecommerce-products-details.html">Products Details</a>
+                                        <a href="/product-detail">Products Details</a>
                                     </li>
                                     <li>
-                                        <a href="apps-ecommerce-orders.html">Orders</a>
+                                        <a href="/order">Orders</a>
                                     </li>
                                     <li>
-                                        <a href="apps-ecommerce-orders-details.html">Order Details</a>
+                                        <a href="/order-detail">Order Details</a>
                                     </li>
                                     <li>
-                                        <a href="apps-ecommerce-customers.html">Customers</a>
+                                        <a href="/customer">Customers</a>
                                     </li>
                                     <li>
-                                        <a href="apps-ecommerce-shopping-cart.html">Shopping Cart</a>
+                                        <a href="/shopping-cart">Shopping Cart</a>
                                     </li>
                                     <li>
-                                        <a href="apps-ecommerce-checkout.html">Checkout</a>
+                                        <a href="/checkout">Checkout</a>
                                     </li>
                                     <li>
-                                        <a href="apps-ecommerce-sellers.html">Sellers</a>
+                                        <a href="/seller">Sellers</a>
                                     </li>
                                 </ul>
                             </div>
