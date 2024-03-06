@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import TopNavbar from '../../components/TopNavbar/TopNavbar'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Product = () => {
     const [products, setProducts] = useState([]);
@@ -135,7 +136,9 @@ const Product = () => {
                                                             </td>
                                                             <td className="table-action">
                                                                 <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                                <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                                                                <Link to={`/update-product/${productsItem.id}`} className="action-icon">
+                                                                    <i className="mdi mdi-square-edit-outline" />
+                                                                </Link>
                                                                 <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                             </td>
                                                         </tr>

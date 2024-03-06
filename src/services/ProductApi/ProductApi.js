@@ -13,4 +13,14 @@ const createProduct = (name, description, thumbnail, price_sale, quantity, mater
         });
 };
 
-export { DataTotalSale, createProduct };
+const updateProduct = (id, name, description, thumbnail, price_sale, quantity, material, size,
+    color, quantity_sold, status, discount, category_id, brand_id, tags_product_id) => {
+    return axios.post(`http://localhost:8080/api/v1/products/${id}`,
+        {
+            name, description, thumbnail, price_sale, quantity, material, size,
+            color, quantity_sold, status, discount, category_id, brand_id, tags_product_id
+        });
+};
+
+
+export { DataTotalSale, createProduct, updateProduct };

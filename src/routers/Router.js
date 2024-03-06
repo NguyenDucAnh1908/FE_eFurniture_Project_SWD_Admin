@@ -10,6 +10,7 @@ import ProductDetail from '../pages/Ecommerce/ProductDetail'
 import Orderder from '../pages/Ecommerce/Order'
 import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
 import CreateProduct from '../pages/Ecommerce/FormEcommerce/CreateProduct'
+import UpdateProduct from '../pages/Ecommerce/FormEcommerce/UpdateProduct'
 
 function Router() {
 
@@ -23,7 +24,8 @@ function Router() {
                 <Route path='/seller' element={<Sellers />} />
                 <Route path='/order-detail' element={<OrderDetail />} />
                 <Route path='/product' element={<Product />} />
-                <Route path='/product-detail' element={<ProductDetail />} />
+                <Route path='/product-detail/:id' element={<ProductDetail />} />
+                <Route path='/update-product/:id' element={<UpdateProduct />} />
                 <Route path='/create-product' element={<CreateProduct />} />
                 <Route path='/chart' element={<ChartTopProductSale />} />
             </Routes>
