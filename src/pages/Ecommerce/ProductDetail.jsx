@@ -1,7 +1,50 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import TopNavbar from '../../components/TopNavbar/TopNavbar'
+import axios from 'axios'
+import { useNavigate, useParams, Link } from 'react-router-dom'
 
 const ProductDetail = () => {
+    const { id } = useParams();
+    const navigate = useNavigate()
+    const [productDetail, setProductDetail] = useState(null);
+    const [countOrder, setCountOrder] = useState(null);
+    const [revenueProduct, setRevenueProduct] = useState(null);
+
+    useEffect(() => {
+        fetchProductDetail();
+        fetchCountOrder();
+        fetchRevenueProduct();
+    }, [id])
+
+    const fetchProductDetail = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8080/api/v1/products/${id}`);
+            setProductDetail(res.data);
+            //console.log("Check product detail: ", res.data);
+        } catch (error) {
+            console.error('Error fetching product detail:', error);
+        }
+    };
+
+    const fetchCountOrder = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8080/api/v1/orders/count/${id}`);
+            setCountOrder(res.data);
+            //console.log("Check : ", res.data);
+        } catch (error) {
+            console.error('Error fetching:', error);
+        }
+    };
+
+    const fetchRevenueProduct = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8080/api/v1/orders/revenue/${id}`);
+            setRevenueProduct(res.data);
+            console.log("Check fetchRevenueProduct: ", res.data);
+        } catch (error) {
+            console.error('Error fetching:', error);
+        }
+    };
     return (
         <div>
             <TopNavbar />
@@ -27,78 +70,77 @@ const ProductDetail = () => {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <div className="row">
-                                    <div className="col-lg-5">
-                                        {/* Product image */}
-                                        <a href="javascript: void(0);" className="text-center d-block mb-4">
-                                            <img src="assets/images/products/product-5.jpg" className="img-fluid" style={{ maxWidth: 280 }} alt="Product-img" />
-                                        </a>
-                                        <div className="d-lg-flex d-none justify-content-center">
-                                            <a href="javascript: void(0);">
-                                                <img src="assets/images/products/product-1.jpg" className="img-fluid img-thumbnail p-2" style={{ maxWidth: 75 }} alt="Product-img" />
+                                {productDetail && (
+                                    <div className="row">
+                                        <div className="col-lg-5">
+                                            {/* Product image */}
+                                            <a href="javascript: void(0);" className="text-center d-block mb-4">
+                                                <img src={productDetail.thumbnail} className="img-fluid" style={{ maxWidth: 280 }} alt="Product-img" />
                                             </a>
-                                            <a href="javascript: void(0);" className="ms-2">
-                                                <img src="assets/images/products/product-6.jpg" className="img-fluid img-thumbnail p-2" style={{ maxWidth: 75 }} alt="Product-img" />
-                                            </a>
-                                            <a href="javascript: void(0);" className="ms-2">
-                                                <img src="assets/images/products/product-3.jpg" className="img-fluid img-thumbnail p-2" style={{ maxWidth: 75 }} alt="Product-img" />
-                                            </a>
-                                        </div>
-                                    </div> {/* end col */}
-                                    <div className="col-lg-7">
-                                        <form className="ps-lg-4">
-                                            {/* Product title */}
-                                            <h3 className="mt-0">Amazing Modern Chair (Orange) <a href="javascript: void(0);" className="text-muted"><i className="mdi mdi-square-edit-outline ms-2" /></a> </h3>
-                                            <p className="mb-1">Added Date: 09/12/2018</p>
-                                            <p className="font-16">
-                                                <span className="text-warning mdi mdi-star" />
-                                                <span className="text-warning mdi mdi-star" />
-                                                <span className="text-warning mdi mdi-star" />
-                                                <span className="text-warning mdi mdi-star" />
-                                                <span className="text-warning mdi mdi-star" />
-                                            </p>
-                                            {/* Product stock */}
-                                            <div className="mt-3">
-                                                <h4><span className="badge badge-success-lighten">Instock</span></h4>
+                                            <div className="d-lg-flex d-none justify-content-center">
+                                                {/* Loop through product images */}
+                                                {productDetail.productImages.map((image, index) => (
+                                                    <a key={index} href="javascript: void(0);">
+                                                        <img src={image.imageUrl} className="img-fluid img-thumbnail p-2" style={{ maxWidth: 75 }} alt={`Product-img-${index}`} />
+                                                    </a>
+                                                ))}
                                             </div>
-                                            {/* Product description */}
-                                            <div className="mt-4">
-                                                <h6 className="font-14">Retail Price:</h6>
-                                                <h3> $139.58</h3>
-                                            </div>
-                                            {/* Quantity */}
-                                            <div className="mt-4">
-                                                <h6 className="font-14">Quantity</h6>
-                                                <div className="d-flex">
-                                                    <input type="number" min={1} defaultValue={1} className="form-control" placeholder="Qty" style={{ width: 90 }} />
-                                                    <button type="button" className="btn btn-danger ms-2"><i className="mdi mdi-cart me-1" /> Add to cart</button>
+                                        </div> {/* end col */}
+                                        <div className="col-lg-7">
+                                            <form className="ps-lg-4">
+                                                {/* Product title */}
+                                                <h3 className="mt-0">{productDetail.name} <Link to={`/update-product/${productDetail.id}`} className="text-muted"><i className="mdi mdi-square-edit-outline ms-2" /></Link> </h3>
+                                                <p className="mb-1">Added Date: {productDetail.createdAt}</p>
+                                                <p className="font-16">
+                                                    <span className="text-warning mdi mdi-star" />
+                                                </p>
+                                                {/* Product stock */}
+                                                <div className="mt-3">
+                                                    <h4><span className="badge badge-success-lighten">{productDetail.status}</span></h4>
                                                 </div>
-                                            </div>
-                                            {/* Product description */}
-                                            <div className="mt-4">
-                                                <h6 className="font-14">Description:</h6>
-                                                <p>It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. </p>
-                                            </div>
-                                            {/* Product information */}
-                                            <div className="mt-4">
-                                                <div className="row">
-                                                    <div className="col-md-4">
-                                                        <h6 className="font-14">Available Stock:</h6>
-                                                        <p className="text-sm lh-150">1784</p>
+                                                {/* Product description */}
+                                                <div className="mt-4">
+                                                    <h6 className="font-14">Retail Price:</h6>
+                                                    <h3> ${productDetail.price}</h3>
+                                                </div>
+                                                {/* Quantity */}
+                                                {/* <div className="mt-4">
+                                                    <h6 className="font-14">Quantity</h6>
+                                                    <div className="d-flex">
+                                                        <input type="number" min={1} defaultValue={1} className="form-control" placeholder="Qty" style={{ width: 90 }} />
+                                                        <button type="button" className="btn btn-danger ms-2"><i className="mdi mdi-cart me-1" /> Add to cart</button>
                                                     </div>
-                                                    <div className="col-md-4">
-                                                        <h6 className="font-14">Number of Orders:</h6>
-                                                        <p className="text-sm lh-150">5,458</p>
-                                                    </div>
-                                                    <div className="col-md-4">
-                                                        <h6 className="font-14">Revenue:</h6>
-                                                        <p className="text-sm lh-150">$8,57,014</p>
+                                                </div> */}
+                                                {/* Product description */}
+                                                <div className="mt-4">
+                                                    <h6 className="font-14">Description:</h6>
+                                                    <p>{productDetail.description}</p>
+                                                </div>
+                                                {/* Product information */}
+                                                <div className="mt-4">
+                                                    <div className="row">
+                                                        <div className="col-md-4">
+                                                            <h6 className="font-14">Available Stock:</h6>
+                                                            <p className="text-sm lh-150">{productDetail.quantity}</p>
+                                                        </div>
+                                                        {countOrder && (
+                                                            <div className="col-md-4">
+                                                                <h6 className="font-14">Number of Orders:</h6>
+                                                                <p className="text-sm lh-150">{countOrder.orderCount}</p>
+                                                            </div>
+                                                        )}
+                                                        {revenueProduct && (
+                                                            <div className="col-md-4">
+                                                                <h6 className="font-14">Revenue:</h6>
+                                                                <p className="text-sm lh-150">${revenueProduct.totalRevenue}</p>
+                                                            </div>
+                                                        )}
                                                     </div>
                                                 </div>
-                                            </div>
-                                        </form>
-                                    </div> {/* end col */}
-                                </div> {/* end row*/}
+                                            </form>
+                                        </div> {/* end col */}
+                                    </div>
+                                )}
                                 <div className="table-responsive mt-4">
                                     <table className="table table-bordered table-centered mb-0">
                                         <thead className="table-light">
@@ -164,7 +206,8 @@ const ProductDetail = () => {
                                             </tr>
                                         </tbody>
                                     </table>
-                                </div> {/* end table-responsive*/}
+                                </div>
+                                {/* end table-responsive*/}
                             </div> {/* end card-body*/}
                         </div> {/* end card*/}
                     </div> {/* end col*/}

@@ -65,7 +65,7 @@ const Product = () => {
                             <div className="card-body">
                                 <div className="row mb-2">
                                     <div className="col-sm-5">
-                                        <a href="javascript:void(0);" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add Products</a>
+                                        <a href="/create-product" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add Products</a>
                                     </div>
                                     <div className="col-sm-7">
                                         <div className="text-sm-end">
@@ -85,12 +85,12 @@ const Product = () => {
                                     <table className="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
                                         <thead className="table-light">
                                             <tr>
-                                                <th className="all" style={{ width: 20 }}>
+                                                {/* <th className="all" style={{ width: 20 }}>
                                                     <div className="form-check">
                                                         <input type="checkbox" className="form-check-input" id="customCheck1" />
                                                         <label className="form-check-label" htmlFor="customCheck1">&nbsp;</label>
                                                     </div>
-                                                </th>
+                                                </th> */}
                                                 <th className="all">Product</th>
                                                 <th>Category</th>
                                                 <th>Added Date</th>
@@ -105,12 +105,12 @@ const Product = () => {
                                                 products.map((productsItem, index) => {
                                                     return (
                                                         <tr key={index}>
-                                                            <td>
+                                                            {/* <td>
                                                                 <div className="form-check">
                                                                     <input type="checkbox" className="form-check-input" id="customCheck2" />
                                                                     <label className="form-check-label" htmlFor="customCheck2">&nbsp;</label>
                                                                 </div>
-                                                            </td>
+                                                            </td> */}
                                                             <td>
                                                                 <img src="assets/images/products/product-1.jpg" alt="contact-img" title="contact-img" className="rounded me-3" height={48} />
                                                                 <p className="m-0 d-inline-block align-middle font-16">
@@ -126,16 +126,20 @@ const Product = () => {
                                                                 {productsItem.created_at}
                                                             </td>
                                                             <td>
-                                                                {productsItem.price}
+                                                                ${productsItem.price}
                                                             </td>
                                                             <td>
-                                                                ${productsItem.quantity}
+                                                                {productsItem.quantity}
                                                             </td>
                                                             <td>
-                                                                <span className="badge bg-success">{productsItem.status}</span>
+                                                                {productsItem.status === 1 ? (
+                                                                    <span className="badge bg-success">Active</span>
+                                                                ) : (
+                                                                    <span className="badge bg-danger">Deactive</span>
+                                                                )}
                                                             </td>
                                                             <td className="table-action">
-                                                                <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                                <Link to={`/product-detail/${productsItem.id}`} className="action-icon"> <i className="mdi mdi-eye" /></Link>
                                                                 <Link to={`/update-product/${productsItem.id}`} className="action-icon">
                                                                     <i className="mdi mdi-square-edit-outline" />
                                                                 </Link>

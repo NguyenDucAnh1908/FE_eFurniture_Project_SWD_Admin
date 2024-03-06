@@ -12,20 +12,6 @@ import axios from 'axios'
 const UpdateProduct = () => {
     const { id } = useParams();
     const navigate = useNavigate()
-    // const [name, setName] = useState('');
-    // const [description, setDescription] = useState('');
-    // const [thumbnail, setThumbnail] = useState('');
-    // const [price_sale, setPriceSale] = useState(null);
-    // const [quantity, setQuantity] = useState(null);
-    // const [material, setMaterial] = useState('');
-    // const [size, setSize] = useState('');
-    // const [color, setColor] = useState(null);
-    // const [quantity_sold, setQuantitySold] = useState(null);
-    // const [status, setStatus] = useState(null);
-    // const [discount, setDiscount] = useState(null);
-    // const [category_id, setCategoryId] = useState(null);
-    // const [brand_id, setBrandId] = useState(null);
-    // const [tags_product_id, setTagsProductId] = useState(null);
     const [selectedCategory, setSelectedCategory] = useState({
         id: '',
         name: ''
@@ -161,7 +147,7 @@ const UpdateProduct = () => {
         }
     }
 
-    const handleCreateProduct = async (event) => {
+    const handleUpdateProduct = async (event) => {
         //event.prevenDefault();
         axios.put('http://localhost:8080/api/v1/products/' + id, values)
             .then(res => {
@@ -346,7 +332,7 @@ const UpdateProduct = () => {
                             </div> {/* end card-body */}
                             <div class="justify-content-end row">
                                 <div class="col-9">
-                                    <button type="submit" onClick={() => handleCreateProduct()} class="btn btn-info">Create</button>
+                                    <button type="submit" onClick={() => handleUpdateProduct()} class="btn btn-info">Update</button>
                                 </div>
                             </div>
                         </div> {/* end card*/}
