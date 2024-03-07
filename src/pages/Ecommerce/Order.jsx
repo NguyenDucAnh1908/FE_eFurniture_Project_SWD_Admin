@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import TopNavbar from '../../components/TopNavbar/TopNavbar'
 import { dataOrderStatus } from '../../services/OrderApi/OrderApi'
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 
 
@@ -158,7 +159,7 @@ const Order = () => {
                                                         <h5><span className="badge badge-info-lighten">{order.orderStatus.name}</span></h5>
                                                     </td>
                                                     <td>
-                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                        <Link to={`/order-detail/${order.id}`} className="action-icon"> <i className="mdi mdi-eye" /></Link>
                                                         <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                         <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                     </td>

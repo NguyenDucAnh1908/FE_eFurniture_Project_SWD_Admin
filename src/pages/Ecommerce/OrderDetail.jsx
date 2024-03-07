@@ -1,6 +1,26 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import TopNavbar from '../../components/TopNavbar/TopNavbar'
+import { useNavigate, useParams, Link } from 'react-router-dom'
+import axios from 'axios'
+
 const OrderDetail = () => {
+    const { id } = useParams();
+    const navigate = useNavigate()
+    const [orderDetail, setOrderDetail] = useState(null);
+
+    useEffect(() => {
+        fetchProductDetail();
+    }, []);
+
+    const fetchProductDetail = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8080/api/v1/orders/${id}`);
+            setOrderDetail(res.data);
+            //console.log("Check product detail: ", res.data);
+        } catch (error) {
+            console.error('Error fetching order detail:', error);
+        }
+    };
     return (
         <div>
             <TopNavbar />
@@ -47,84 +67,72 @@ const OrderDetail = () => {
                 <div className="row">
                     <div className="col-lg-8">
                         <div className="card">
-                            <div className="card-body">
-                                <h4 className="header-title mb-3">Items from Order #12537</h4>
-                                <div className="table-responsive">
-                                    <table className="table mb-0">
-                                        <thead className="table-light">
-                                            <tr>
-                                                <th>Item</th>
-                                                <th>Quantity</th>
-                                                <th>Price</th>
-                                                <th>Total</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>The Military Duffle Bag</td>
-                                                <td>3</td>
-                                                <td>$128</td>
-                                                <td>$384</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Mountain Basket Ball</td>
-                                                <td>1</td>
-                                                <td>$199</td>
-                                                <td>$199</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Wavex Canvas Messenger Bag</td>
-                                                <td>5</td>
-                                                <td>$180</td>
-                                                <td>$900</td>
-                                            </tr>
-                                            <tr>
-                                                <td>The Utility Shirt</td>
-                                                <td>2</td>
-                                                <td>$79</td>
-                                                <td>$158</td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            {orderDetail && (
+                                <div className="card-body">
+                                    <h4 className="header-title mb-3">Items from Order #{orderDetail.fullName}</h4>
+                                    <div className="table-responsive">
+                                        <table className="table mb-0">
+                                            <thead className="table-light">
+                                                <tr>
+                                                    <th>Item</th>
+                                                    <th>Quantity</th>
+                                                    <th>Price</th>
+                                                    <th>Total</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {orderDetail.order_details.map((item, index) => (
+                                                    <tr key={index}>
+                                                        <td>The Military Duffle Bag</td>
+                                                        <td>{item.quantity}</td>
+                                                        <td>${item.price}</td>
+                                                        <td>$384</td>
+                                                    </tr>
+                                                ))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {/* end table-responsive */}
                                 </div>
-                                {/* end table-responsive */}
-                            </div>
+                            )}
                         </div>
                     </div> {/* end col */}
                     <div className="col-lg-4">
                         <div className="card">
-                            <div className="card-body">
-                                <h4 className="header-title mb-3">Order Summary</h4>
-                                <div className="table-responsive">
-                                    <table className="table mb-0">
-                                        <thead className="table-light">
-                                            <tr>
-                                                <th>Description</th>
-                                                <th>Price</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td>Grand Total :</td>
-                                                <td>$1641</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Shipping Charge :</td>
-                                                <td>$23</td>
-                                            </tr>
-                                            <tr>
-                                                <td>Estimated Tax : </td>
-                                                <td>$19.22</td>
-                                            </tr>
-                                            <tr>
-                                                <th>Total :</th>
-                                                <th>$1683.22</th>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                            {orderDetail && (
+                                <div className="card-body">
+                                    <h4 className="header-title mb-3">Order Summary</h4>
+                                    <div className="table-responsive">
+                                        <table className="table mb-0">
+                                            <thead className="table-light">
+                                                <tr>
+                                                    <th>Description</th>
+                                                    <th>Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                <tr>
+                                                    <td>Grand Total :</td>
+                                                    <td>$1641</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Shipping Charge :</td>
+                                                    <td>$23</td>
+                                                </tr>
+                                                <tr>
+                                                    <td>Estimated Tax : </td>
+                                                    <td>$19.22</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Total :</th>
+                                                    <th>$1683.22</th>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                    {/* end table-responsive */}
                                 </div>
-                                {/* end table-responsive */}
-                            </div>
+                            )}
                         </div>
                     </div> {/* end col */}
                 </div>
@@ -132,31 +140,36 @@ const OrderDetail = () => {
                 <div className="row">
                     <div className="col-lg-4">
                         <div className="card">
-                            <div className="card-body">
-                                <h4 className="header-title mb-3">Shipping Information</h4>
-                                <h5>Stanley Jones</h5>
-                                <address className="mb-0 font-14 address-lg">
-                                    795 Folsom Ave, Suite 600<br />
-                                    San Francisco, CA 94107<br />
-                                    <abbr title="Phone">P:</abbr> (123) 456-7890 <br />
-                                    <abbr title="Mobile">M:</abbr> (+01) 12345 67890
-                                </address>
-                            </div>
+                            {orderDetail && (
+                                <div className="card-body">
+                                    <h4 className="header-title mb-3">Shipping Information</h4>
+                                    <h5>{orderDetail.fullName}</h5>
+                                    <address className="mb-0 font-14 address-lg">
+                                        {orderDetail.province}, {orderDetail.district}<br />
+                                        {orderDetail.ward}, {orderDetail.address}<br />
+                                        <abbr title="Phone">Phone:</abbr> {orderDetail.phone_number} <br />
+                                        {/* <abbr title="Mobile">M:</abbr> (+01) 12345 67890 */}
+                                    </address>
+                                </div>
+                            )}
                         </div>
                     </div> {/* end col */}
                     <div className="col-lg-4">
                         <div className="card">
-                            <div className="card-body">
-                                <h4 className="header-title mb-3">Billing Information</h4>
-                                <ul className="list-unstyled mb-0">
-                                    <li>
-                                        <p className="mb-2"><span className="fw-bold me-2">Payment Type:</span> Credit Card</p>
-                                        <p className="mb-2"><span className="fw-bold me-2">Provider:</span> Visa ending in 2851</p>
-                                        <p className="mb-2"><span className="fw-bold me-2">Valid Date:</span> 02/2020</p>
-                                        <p className="mb-0"><span className="fw-bold me-2">CVV:</span> xxx</p>
-                                    </li>
-                                </ul>
-                            </div>
+                            {orderDetail && (
+                                <div className="card-body">
+
+                                    <h4 className="header-title mb-3">Billing Information</h4>
+                                    <ul className="list-unstyled mb-0">
+                                        <li>
+                                            <p className="mb-2"><span className="fw-bold me-2">Payment Type:</span> {orderDetail.payment_method}</p>
+                                            <p className="mb-2"><span className="fw-bold me-2">Shipping method:</span> {orderDetail.shipping_method}</p>
+                                            <p className="mb-2"><span className="fw-bold me-2">Valid Date:</span> 02/2020</p>
+                                            <p className="mb-0"><span className="fw-bold me-2">CVV:</span> xxx</p>
+                                        </li>
+                                    </ul>
+                                </div>
+                            )}
                         </div>
                     </div> {/* end col */}
                     <div className="col-lg-4">
