@@ -112,7 +112,7 @@ const Product = () => {
                                                                 </div>
                                                             </td> */}
                                                             <td>
-                                                                <img src="assets/images/products/product-1.jpg" alt="contact-img" title="contact-img" className="rounded me-3" height={48} />
+                                                                <img src={productsItem.thumbnail} alt="contact-img" title="contact-img" className="rounded me-3" height={48} />
                                                                 <p className="m-0 d-inline-block align-middle font-16">
                                                                     <a href="apps-ecommerce-products-details.html" className="text-body">{productsItem.name}</a>
                                                                     <br />

@@ -1,10 +1,64 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import TopNavbar from '../../components/TopNavbar/TopNavbar'
+import { dataOrderStatus } from '../../services/OrderApi/OrderApi'
+import axios from 'axios';
+
+
 
 const Order = () => {
+    const [orders, setOrders] = useState([]);
+    const [dataPaymentStatus, setDataPaymentStatus] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const [searchKeyword, setSearchKeyword] = useState('');
+    const [categoryIds, setCategoryIds] = useState('');
+
+    useEffect(() => {
+        getPaymentStatus();
+    }, []);
+
+    useEffect(() => {
+        fetchOrders();
+    }, [currentPage, searchKeyword, categoryIds]);
+
+    const getPaymentStatus = async () => {
+        let res = await dataOrderStatus();
+        if (res && res.data) {
+            setDataPaymentStatus(res.data);
+        }
+    };
+
+    const fetchOrders = async () => {
+        try {
+            const res = await axios.get('http://localhost:8080/api/v1/orders', {
+                params: {
+                    keyword: '',
+                    page: currentPage - 1,
+                    limit: 1,
+                    categoryIds: categoryIds
+                },
+            })
+            setOrders(res.data.orders);
+            setTotalPages(res.data.totalPages);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    };
+    const handlePaginationClick = (page) => {
+        if (page >= 1 && page <= totalPages) {
+            setCurrentPage(page);
+        }
+    };
+
+    const handleSearch = (event) => {
+        setSearchKeyword(event.target.value);
+    };
+    const handleCategoryChange = (event) => {
+        setCategoryIds(event.target.value);
+    };
     return (
         <div>
-         <TopNavbar />
+            <TopNavbar />
             {/* Start Content*/}
             <div className="container-fluid">
                 {/* start page title */}
@@ -29,26 +83,28 @@ const Order = () => {
                             <div className="card-body">
                                 <div className="row mb-2">
                                     <div className="col-xl-8">
-                                        <form className="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
+                                        <div className="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
                                             <div className="col-auto">
                                                 <label htmlFor="inputPassword2" className="visually-hidden">Search</label>
-                                                <input type="search" className="form-control" id="inputPassword2" placeholder="Search..." />
+                                                <input type="search" className="form-control" id="inputPassword2" placeholder="Search..."
+                                                    value={searchKeyword} onChange={handleSearch}
+                                                />
                                             </div>
                                             <div className="col-auto">
                                                 <div className="d-flex align-items-center">
                                                     <label htmlFor="status-select" className="me-2">Status</label>
-                                                    <select className="form-select" id="status-select">
+                                                    <select className="form-select" id="status-select" onChange={handleCategoryChange}>
                                                         <option selected>Choose...</option>
-                                                        <option value={1}>Paid</option>
-                                                        <option value={2}>Awaiting Authorization</option>
-                                                        <option value={3}>Payment failed</option>
-                                                        <option value={4}>Cash On Delivery</option>
-                                                        <option value={5}>Fulfilled</option>
-                                                        <option value={6}>Unfulfilled</option>
+                                                        {dataPaymentStatus.map((dataPaymentStatusItem) => (
+                                                            <option key={dataPaymentStatusItem.id}
+                                                                value={dataPaymentStatusItem.id}>
+                                                                {dataPaymentStatusItem.name}
+                                                            </option>
+                                                        ))}
                                                     </select>
                                                 </div>
                                             </div>
-                                        </form>
+                                        </div>
                                     </div>
                                     <div className="col-xl-4">
                                         <div className="text-xl-end mt-xl-0 mt-2">
@@ -77,281 +133,56 @@ const Order = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck2" />
-                                                        <label className="form-check-label" htmlFor="customCheck2">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9708</a> </td>
-                                                <td>
-                                                    August 05 2018 <small className="text-muted">10:29 PM</small>
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $176.41
-                                                </td>
-                                                <td>
-                                                    Mastercard
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck3" />
-                                                        <label className="form-check-label" htmlFor="customCheck3">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9707</a> </td>
-                                                <td>August 04 2018 <small className="text-muted">08:18 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-warning-lighten"><i className="mdi mdi-timer-sand" /> Awaiting Authorization</span></h5>
-                                                </td>
-                                                <td>
-                                                    $1,458.65
-                                                </td>
-                                                <td>
-                                                    Visa
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-warning-lighten">Processing</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck4" />
-                                                        <label className="form-check-label" htmlFor="customCheck4">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9706</a> </td>
-                                                <td>August 04 2018 <small className="text-muted">10:29 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $801.99
-                                                </td>
-                                                <td>
-                                                    Credit Card
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-warning-lighten">Processing</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck5" />
-                                                        <label className="form-check-label" htmlFor="customCheck5">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9705</a> </td>
-                                                <td>August 03 2018 <small className="text-muted">07:56 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $215.35
-                                                </td>
-                                                <td>
-                                                    Mastercard
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten">Delivered</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck6" />
-                                                        <label className="form-check-label" htmlFor="customCheck6">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9704</a> </td>
-                                                <td>May 22 2018 <small className="text-muted">07:22 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-danger-lighten"><i className="mdi mdi-cancel" /> Payment Failed</span></h5>
-                                                </td>
-                                                <td>
-                                                    $2,514.36
-                                                </td>
-                                                <td>
-                                                    Paypal
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-danger-lighten">Cancelled</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck7" />
-                                                        <label className="form-check-label" htmlFor="customCheck7">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9703</a> </td>
-                                                <td>April 02 2018 <small className="text-muted">03:02 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $183.20
-                                                </td>
-                                                <td>
-                                                    Payoneer
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck8" />
-                                                        <label className="form-check-label" htmlFor="customCheck8">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9702</a> </td>
-                                                <td>March 18 2018 <small className="text-muted">11:19 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-warning-lighten"><i className="mdi mdi-timer-sand" /> Awaiting Authorization</span></h5>
-                                                </td>
-                                                <td>
-                                                    $1,768.41
-                                                </td>
-                                                <td>
-                                                    Visa
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-warning-lighten">Processing</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck9" />
-                                                        <label className="form-check-label" htmlFor="customCheck9">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9701</a> </td>
-                                                <td>February 01 2018 <small className="text-muted">07:22 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-info-lighten"><i className="mdi mdi-cash" /> Unpaid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $3,582.99
-                                                </td>
-                                                <td>
-                                                    Paypal
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck10" />
-                                                        <label className="form-check-label" htmlFor="customCheck10">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9700</a> </td>
-                                                <td>January 22 2018 <small className="text-muted">08:09 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $923.95
-                                                </td>
-                                                <td>
-                                                    Credit Card
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten">Delivered</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck11" />
-                                                        <label className="form-check-label" htmlFor="customCheck11">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9699</a> </td>
-                                                <td>January 17 2018 <small className="text-muted">02:30 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $5,177.68
-                                                </td>
-                                                <td>
-                                                    Mastercard
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
+                                            {orders.map(order => (
+                                                <tr key={order.id}>
+                                                    <td>
+                                                        <div className="form-check">
+                                                            <input type="checkbox" className="form-check-input" id="customCheck2" />
+                                                            <label className="form-check-label" htmlFor="customCheck2">&nbsp;</label>
+                                                        </div>
+                                                    </td>
+                                                    <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#{order.fullName}</a> </td>
+                                                    <td>
+                                                        August 05 2018 <small className="text-muted">10:29 PM</small>
+                                                    </td>
+                                                    <td>
+                                                        <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> {order.paymentStatus.name}</span></h5>
+                                                    </td>
+                                                    <td>
+                                                        ${order.total_amount}
+                                                    </td>
+                                                    <td>
+                                                        {order.payment_method}
+                                                    </td>
+                                                    <td>
+                                                        <h5><span className="badge badge-info-lighten">{order.orderStatus.name}</span></h5>
+                                                    </td>
+                                                    <td>
+                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
+                                {/* Pagination */}
+                                <nav aria-label="...">
+                                    <ul className="pagination pagination-circle">
+                                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                            <button className="page-link" onClick={() => handlePaginationClick(currentPage - 1)}>Previous</button>
+                                        </li>
+                                        {Array.from({ length: totalPages }, (_, index) => index + 1).map(page => (
+                                            <li key={page} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+                                                <button className="page-link" onClick={() => handlePaginationClick(page)}>{page}</button>
+                                            </li>
+                                        ))}
+                                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                                            <button className="page-link" onClick={() => handlePaginationClick(currentPage + 1)}>Next</button>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div> {/* end card-body*/}
                         </div> {/* end card*/}
                     </div> {/* end col */}
