@@ -160,7 +160,7 @@ const Order = () => {
                                                     </td>
                                                     <td>
                                                         <Link to={`/order-detail/${order.id}`} className="action-icon"> <i className="mdi mdi-eye" /></Link>
-                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                                                        <Link to={`/update-status-order/${order.id}`} className="action-icon"> <i className="mdi mdi-square-edit-outline" /></Link>
                                                         <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                     </td>
                                                 </tr>

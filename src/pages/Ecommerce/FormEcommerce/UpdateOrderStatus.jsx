@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import TopNavbar from '../../components/TopNavbar/TopNavbar'
+import TopNavbar from '../../../components/TopNavbar/TopNavbar'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 
-const OrderDetail = () => {
+const UpdateOrderStatus = () => {
+
     const { id } = useParams();
     const navigate = useNavigate()
     const [orderDetail, setOrderDetail] = useState(null);
@@ -21,6 +22,7 @@ const OrderDetail = () => {
             console.error('Error fetching order detail:', error);
         }
     };
+
     return (
         <div>
             <TopNavbar />
@@ -116,9 +118,9 @@ const OrderDetail = () => {
                                                     <td>${orderDetail.sub_total}</td>
                                                 </tr>
                                                 {/* <tr>
-                                                    <td>Shipping Charge :</td>
-                                                    <td>$23</td>
-                                                </tr> */}
+                                            <td>Shipping Charge :</td>
+                                            <td>$23</td>
+                                        </tr> */}
                                                 <tr>
                                                     <td>Discount : </td>
                                                     <td>- ${orderDetail.discounts}</td>
@@ -164,8 +166,8 @@ const OrderDetail = () => {
                                         <li>
                                             <p className="mb-2"><span className="fw-bold me-2">Payment Type:</span> {orderDetail.payment_method}</p>
                                             <p className="mb-2"><span className="fw-bold me-2">Shipping method:</span> {orderDetail.shipping_method}</p>
-                                            <p className="mb-2"><span className="fw-bold me-2">Valid Date:</span> 02/2020</p>
-                                            <p className="mb-0"><span className="fw-bold me-2">CVV:</span> xxx</p>
+                                            <p className="mb-2"><span className="fw-bold me-2">Shipping Date:</span> {orderDetail.shipping_date}</p>
+                                            <p className="mb-0"><span className="fw-bold me-2">Payment status:</span> {orderDetail.paymentStatus.name}</p>
                                         </li>
                                     </ul>
                                 </div>
@@ -176,12 +178,22 @@ const OrderDetail = () => {
                         <div className="card">
                             <div className="card-body">
                                 <h4 className="header-title mb-3">Delivery Info</h4>
-                                <div className="text-center">
+                                {/* <div className="text-center">
                                     <i className="mdi mdi-truck-fast h2 text-muted" />
                                     <h5><b>UPS Delivery</b></h5>
                                     <p className="mb-1"><b>Order ID :</b> xxxx235</p>
                                     <p className="mb-0"><b>Payment Mode :</b> COD</p>
-                                </div>
+                                </div> */}
+                                <select class="browser-default custom-select">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                </select>
+                                <button>Update</button>
+                                <select class="browser-default custom-select">
+                                    <option selected>Open this select menu</option>
+                                    <option value="1">One</option>
+                                </select>
+                                <button>Update</button>
                             </div>
                         </div>
                     </div> {/* end col */}
@@ -193,4 +205,4 @@ const OrderDetail = () => {
     )
 }
 
-export default OrderDetail
+export default UpdateOrderStatus

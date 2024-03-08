@@ -11,6 +11,7 @@ import Orderder from '../pages/Ecommerce/Order'
 import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
 import CreateProduct from '../pages/Ecommerce/FormEcommerce/CreateProduct'
 import UpdateProduct from '../pages/Ecommerce/FormEcommerce/UpdateProduct'
+import UpdateOrderStatus from '../pages/Ecommerce/FormEcommerce/UpdateOrderStatus'
 
 function Router() {
 
@@ -23,6 +24,7 @@ function Router() {
                 <Route path='/order' element={<Orderder />} />
                 <Route path='/seller' element={<Sellers />} />
                 <Route path='/order-detail/:id' element={<OrderDetail />} />
+                <Route path='/update-status-order/:id' element={<UpdateOrderStatus />} />
                 <Route path='/product' element={<Product />} />
                 <Route path='/product-detail/:id' element={<ProductDetail />} />
                 <Route path='/update-product/:id' element={<UpdateProduct />} />
