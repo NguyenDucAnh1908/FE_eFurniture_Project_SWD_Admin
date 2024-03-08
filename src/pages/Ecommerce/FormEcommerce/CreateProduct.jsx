@@ -7,6 +7,9 @@ import { fetchallTagProduct } from '../../../services/TagProductApi/TagProductAp
 import { event } from 'jquery';
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
+import { imageDb } from '../../../Config/FireBaseConfig'
+import { ref, uploadBytes, getDownloadURL  } from "firebase/storage"
+import { v4 as uuidv4 } from 'uuid'
 
 const CreateProduct = () => {
     const navigate = useNavigate()
@@ -24,6 +27,7 @@ const CreateProduct = () => {
     const [category_id, setCategoryId] = useState(null);
     const [brand_id, setBrandId] = useState(null);
     const [tags_product_id, setTagsProductId] = useState(null);
+    const [productImages, setProductImages] = useState([]);
 
     const [category, setCategory] = useState([]);
     const [brand, setBrand] = useState([]);
@@ -32,6 +36,8 @@ const CreateProduct = () => {
     const [selectedCategoryId, setSelectedCategoryId] = useState('');
     const [selectedBrandId, setSelectedBrandId] = useState('');
     const [selectedTagProductId, setSelectedTagProducId] = useState('');
+
+    const [img, setImg] = useState('');
 
     useEffect(() => {
         getCategory();
@@ -69,8 +75,14 @@ const CreateProduct = () => {
 
     const handleCreateProduct = async () => {
         try {
+            const imageUrls = await Promise.all(productImages.map(async (image) => {
+                const imgRef = ref(imageDb, `images_eFurniture/${uuidv4()}`);
+                await uploadBytes(imgRef, image);
+                return getDownloadURL(imgRef);
+            }));
+            const formattedImages = imageUrls.map(imageUrl => ({ image_url: imageUrl }));
             let res = await createProduct(name, description, thumbnail, price_sale, quantity, material, size,
-                color, quantity_sold, status, discount, selectedCategoryId, selectedBrandId, selectedTagProductId);
+                color, quantity_sold, status, discount, selectedCategoryId, selectedBrandId, selectedTagProductId, formattedImages);
             console.log("Create productL ", res)
             if (res) {
                 // Chuyển hướng sang trang /product
@@ -94,6 +106,16 @@ const CreateProduct = () => {
         setSelectedTagProducId(event.target.value);
     };
 
+    const handleImageChange = (event) => {
+        const files = event.target.files;
+        const newImages = [];
+
+        for (let i = 0; i < files.length; i++) {
+            newImages.push(files[i]);
+        }
+
+        setProductImages(newImages);
+    };
 
     return (
         <>
@@ -179,15 +201,18 @@ const CreateProduct = () => {
                                         <div className="mb-3 mt-3 mt-xl-0">
                                             <label htmlFor="projectname" className="mb-0">Avatar</label>
                                             <p className="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
-                                            <form action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
+                                            {/* <div action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
                                                 <div className="fallback">
-                                                    <input name="file" type="file" />
+                                                    <input name="file" type="file" onChange={(event) => setImg(event.target.file[0])} />
+                                                    <button onClick={handleClick}>Upload</button>
                                                 </div>
                                                 <div className="dz-message needsclick">
                                                     <i className="h3 text-muted dripicons-cloud-upload" />
                                                     <h4>Drop files here or click to upload.</h4>
                                                 </div>
-                                            </form>
+                                            </div> */}
+                                            <input type="file" onChange={handleImageChange} multiple />
+                                            <button onClick={handleCreateProduct}>Create Product</button>
                                             {/* Preview */}
                                             <div className="dropzone-previews mt-3" id="file-previews" />
                                             {/* file preview template */}
