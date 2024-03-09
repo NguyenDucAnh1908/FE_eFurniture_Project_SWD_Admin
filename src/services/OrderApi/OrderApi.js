@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const dataOrderStatus = () => {
+const dataOrderpaymentStatus = () => {
     return axios.get("http://localhost:8080/api/v1/payment-status");
 };
 
@@ -8,4 +8,8 @@ const dataOrderDetail = () => {
     return axios.get("http://localhost:8080/api/v1/payment-status");
 };
 
-export { dataOrderStatus };
+const dataStatusOrder = () =>{
+    return axios.get("http://localhost:8080/api/v1/orders-status");
+};
+
+export { dataOrderpaymentStatus, dataStatusOrder };

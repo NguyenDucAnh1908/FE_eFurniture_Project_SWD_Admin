@@ -1,27 +1,141 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
 import TopNavbar from '../../../components/TopNavbar/TopNavbar'
 import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
+import { dataOrderpaymentStatus, dataStatusOrder } from '../../../services/OrderApi/OrderApi'
+import { UserContext } from '../../../context/UserContext'
 
 const UpdateOrderStatus = () => {
-
     const { id } = useParams();
+    const { user } = useContext(UserContext);
     const navigate = useNavigate()
     const [orderDetail, setOrderDetail] = useState(null);
+    const [statusOrder, setStatusOrder] = useState([]);
+    const [StatusPaymentOrder, setStatusPaymentOrder] = useState([]);
+    const [selectedOrderStatus, setSelectedOrderStatus] = useState({
+        id: '',
+        name: ''
+    });
+    const [selectedPaymentStatus, setSelectedPaymentStatus] = useState({
+        id: '',
+        name: ''
+    });
+    const user_id = user.account.user.id;
+    const [values, setValues] = useState({
+        id: parseInt(id),
+        user_id: '',
+        active: '',
+        address: '',
+        phone_number: '',
+        email: '',
+        fullName: '',
+        discounts: '',
+        notes: '',
+        orderStatus: '',
+        paymentStatus: '',
+        shipping_date: '',
+        shipping_method: '',
+        province: '',
+        district: '',
+        ward: '',
+        payment_method: '',
+        coupon_id: '',
+        total_amount: '',
+        sub_total: '',
+        cart_items: [],
+    });
+    const [paymentValues, setPaymentValues] = useState({
+        paymentStatus: '',
+    });
 
     useEffect(() => {
-        fetchProductDetail();
+        fetchOrderStatus();
+        fetchOrderPaymentStatus();
     }, []);
 
-    const fetchProductDetail = async () => {
+    useEffect(() => {
+        axios.get('http://localhost:8080/api/v1/orders/' + id)
+            .then(res => {
+                setValues({
+                    ...values,
+                    user_id: res.data.user_id,
+                    address: res.data.address,
+                    phone_number: res.data.phone_number,
+                    email: res.data.email,
+                    fullName: res.data.fullName,
+                    active: res.data.active,
+                    discounts: res.data.discounts,
+                    notes: res.data.notes,
+                    orderStatus: res.data.orderStatus.id,
+                    paymentStatus: res.data.paymentStatus.id,
+                    shipping_date: res.data.shipping_date,
+                    shipping_method: res.data.shipping_method,
+                    province: res.data.province,
+                    district: res.data.district,
+                    ward: res.data.ward,
+                    payment_method: res.data.payment_method,
+                    coupon_id: res.data.couponId,
+                    total_amount: res.data.total_amount,
+                    sub_total: res.data.sub_total,
+                    order_details: res.data.order_details,
+                });
+                setSelectedOrderStatus({
+                    id: res.data.orderStatus.id,
+                    name: res.data.orderStatus.name
+                });
+                setSelectedPaymentStatus({
+                    id: res.data.paymentStatus.id,
+                    name: res.data.paymentStatus.name
+                });
+            })
+            .catch(err => console.log(err));
+    }, [])
+
+    const fetchOrderStatus = async () => {
         try {
-            const res = await axios.get(`http://localhost:8080/api/v1/orders/${id}`);
-            setOrderDetail(res.data);
-            //console.log("Check product detail: ", res.data);
+            const res = await dataStatusOrder();
+            setStatusOrder(res.data);
+
         } catch (error) {
-            console.error('Error fetching order detail:', error);
+            console.error('Error fetching order status:', error);
         }
+    }
+    const fetchOrderPaymentStatus = async () => {
+        try {
+            const res = await dataOrderpaymentStatus();
+            setStatusPaymentOrder(res.data);
+
+        } catch (error) {
+            console.error('Error fetching order payment status:', error);
+        }
+    }
+
+    const handleStatusOrderChange = (event) => {
+        const statusOrderId = event.target.value;
+        setSelectedOrderStatus({
+            id: statusOrderId,
+            name: event.target.options[event.target.selectedIndex].text
+        });
+        setValues({ ...values, orderStatus: parseInt(statusOrderId) });
     };
+
+    const handlePaymentStatusChange = (event) => {
+        const paymentStatus = event.target.value;
+        setSelectedPaymentStatus({
+            id: paymentStatus,
+            name: event.target.options[event.target.selectedIndex].text
+        });
+        setValues({ ...values, paymentStatus: parseInt(paymentStatus) });
+    };
+
+    const handleUpdateProduct = async (event) => {
+        //event.prevenDefault();
+        axios.put('http://localhost:8080/api/v1/orders/' + id, values)
+            .then(res => {
+                navigate('/update-status-order/' + id);
+            })
+            .catch(err => console.log(err));
+    }
 
     return (
         <div>
@@ -69,72 +183,76 @@ const UpdateOrderStatus = () => {
                 <div className="row">
                     <div className="col-lg-8">
                         <div className="card">
-                            {orderDetail && (
-                                <div className="card-body">
-                                    <h4 className="header-title mb-3">Items from Order #{orderDetail.fullName}</h4>
-                                    <div className="table-responsive">
-                                        <table className="table mb-0">
-                                            <thead className="table-light">
-                                                <tr>
-                                                    <th>Item</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                    <th>Total</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                {orderDetail.order_details.map((item, index) => (
+                            <div className="card-body">
+                                <h4 className="header-title mb-3">Items from Order #{values.fullName}</h4>
+                                <div className="table-responsive">
+                                    <table className="table mb-0">
+                                        <thead className="table-light">
+                                            <tr>
+                                                <th>Item</th>
+                                                <th>Quantity</th>
+                                                <th>Price</th>
+                                                <th>Total</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {/* {values.order_details && values.order_details.map((item, index) => (
                                                     <tr key={index}>
-                                                        <td>The Military Duffle Bag</td>
+                                                        <td>{item.product.name}</td>
                                                         <td>{item.quantity}</td>
-                                                        <td>${item.price}</td>
-                                                        <td>${item.quantity * item.price}</td>
+                                                        <td>${item.product.price}</td>
+                                                        <td>${item.quantity * item.product.price}</td>
                                                     </tr>
-                                                ))}
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    {/* end table-responsive */}
+                                                ))} */}
+                                            {values.order_details && values.order_details.map((item, index) => (
+                                                <tr key={index}>
+                                                    <td>{item.product.name}</td>
+                                                    <td>{item.quantity}</td>
+                                                    <td>${item.product.price}</td>
+                                                    <td>${item.quantity * item.price}</td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
                                 </div>
-                            )}
+                                {/* end table-responsive */}
+                            </div>
                         </div>
                     </div> {/* end col */}
                     <div className="col-lg-4">
                         <div className="card">
-                            {orderDetail && (
-                                <div className="card-body">
-                                    <h4 className="header-title mb-3">Order Summary</h4>
-                                    <div className="table-responsive">
-                                        <table className="table mb-0">
-                                            <thead className="table-light">
-                                                <tr>
-                                                    <th>Description</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Grand Total :</td>
-                                                    <td>${orderDetail.sub_total}</td>
-                                                </tr>
-                                                {/* <tr>
+                            <div className="card-body">
+                                <h4 className="header-title mb-3">Order Summary</h4>
+                                <div className="table-responsive">
+                                    <table className="table mb-0">
+                                        <thead className="table-light">
+                                            <tr>
+                                                <th>Description</th>
+                                                <th>Price</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Grand Total :</td>
+                                                <td>${values.sub_total}</td>
+                                            </tr>
+                                            {/* <tr>
                                             <td>Shipping Charge :</td>
                                             <td>$23</td>
                                         </tr> */}
-                                                <tr>
-                                                    <td>Discount : </td>
-                                                    <td>- ${orderDetail.discounts}</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total :</th>
-                                                    <th>${orderDetail.total_amount}</th>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                    {/* end table-responsive */}
+                                            <tr>
+                                                <td>Discount : </td>
+                                                <td>- ${values.discounts}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total :</th>
+                                                <th>${values.total_amount}</th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                            )}
+                                {/* end table-responsive */}
+                            </div>
                         </div>
                     </div> {/* end col */}
                 </div>
@@ -142,36 +260,32 @@ const UpdateOrderStatus = () => {
                 <div className="row">
                     <div className="col-lg-4">
                         <div className="card">
-                            {orderDetail && (
-                                <div className="card-body">
-                                    <h4 className="header-title mb-3">Shipping Information</h4>
-                                    <h5>{orderDetail.fullName}</h5>
-                                    <address className="mb-0 font-14 address-lg">
-                                        {orderDetail.province}, {orderDetail.district}<br />
-                                        {orderDetail.ward}, {orderDetail.address}<br />
-                                        <abbr title="Phone">Phone:</abbr> {orderDetail.phone_number} <br />
-                                        {/* <abbr title="Mobile">M:</abbr> (+01) 12345 67890 */}
-                                    </address>
-                                </div>
-                            )}
+                            <div className="card-body">
+                                <h4 className="header-title mb-3">Shipping Information</h4>
+                                <h5>{values.fullName}</h5>
+                                <address className="mb-0 font-14 address-lg">
+                                    {values.province}, {values.district}<br />
+                                    {values.ward}, {values.address}<br />
+                                    <abbr title="Phone">Phone:</abbr> {values.phone_number} <br />
+                                    {/* <abbr title="Mobile">M:</abbr> (+01) 12345 67890 */}
+                                </address>
+                            </div>
                         </div>
                     </div> {/* end col */}
                     <div className="col-lg-4">
                         <div className="card">
-                            {orderDetail && (
-                                <div className="card-body">
+                            <div className="card-body">
 
-                                    <h4 className="header-title mb-3">Billing Information</h4>
-                                    <ul className="list-unstyled mb-0">
-                                        <li>
-                                            <p className="mb-2"><span className="fw-bold me-2">Payment Type:</span> {orderDetail.payment_method}</p>
-                                            <p className="mb-2"><span className="fw-bold me-2">Shipping method:</span> {orderDetail.shipping_method}</p>
-                                            <p className="mb-2"><span className="fw-bold me-2">Shipping Date:</span> {orderDetail.shipping_date}</p>
-                                            <p className="mb-0"><span className="fw-bold me-2">Payment status:</span> {orderDetail.paymentStatus.name}</p>
-                                        </li>
-                                    </ul>
-                                </div>
-                            )}
+                                <h4 className="header-title mb-3">Billing Information</h4>
+                                <ul className="list-unstyled mb-0">
+                                    <li>
+                                        <p className="mb-2"><span className="fw-bold me-2">Payment Type:</span> {values.payment_method}</p>
+                                        <p className="mb-2"><span className="fw-bold me-2">Shipping method:</span> {values.shipping_method}</p>
+                                        <p className="mb-2"><span className="fw-bold me-2">Shipping Date:</span> {values.shipping_date}</p>
+                                        <p className="mb-0"><span className="fw-bold me-2">Payment status:</span> {values.paymentStatus.name}</p>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div> {/* end col */}
                     <div className="col-lg-4">
@@ -184,17 +298,36 @@ const UpdateOrderStatus = () => {
                                     <p className="mb-1"><b>Order ID :</b> xxxx235</p>
                                     <p className="mb-0"><b>Payment Mode :</b> COD</p>
                                 </div> */}
-                                <select class="browser-default custom-select">
+                                <select value={selectedOrderStatus.id} onChange={handleStatusOrderChange}>
                                     <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
+                                    {statusOrder && statusOrder.length > 0 &&
+                                        statusOrder.map((statusOrderItem, index) => {
+                                            return (
+                                                <option
+                                                    key={statusOrderItem.id}
+                                                    value={statusOrderItem.id}>
+                                                    {statusOrderItem.name}
+                                                </option>
+                                            )
+                                        })
+                                    }
                                 </select>
-                                <button>Update</button>
-                                <select class="browser-default custom-select">
+                                <select value={selectedPaymentStatus.id} onChange={handlePaymentStatusChange} >
                                     <option selected>Open this select menu</option>
-                                    <option value="1">One</option>
+                                    {StatusPaymentOrder && StatusPaymentOrder.length > 0 &&
+                                        StatusPaymentOrder.map((StatusPaymentOrderItem, index) => {
+                                            return (
+                                                <option
+                                                    key={StatusPaymentOrderItem.id}
+                                                    value={StatusPaymentOrderItem.id}>
+                                                    {StatusPaymentOrderItem.name}
+                                                </option>
+                                            )
+                                        })
+                                    }
                                 </select>
-                                <button>Update</button>
                             </div>
+                            <button type="submit" onClick={() => handleUpdateProduct()}>Update</button>
                         </div>
                     </div> {/* end col */}
                 </div>

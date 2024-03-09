@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import TopNavbar from '../../components/TopNavbar/TopNavbar'
-import { dataOrderStatus } from '../../services/OrderApi/OrderApi'
+import { dataOrderpaymentStatus } from '../../services/OrderApi/OrderApi'
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
@@ -23,7 +23,7 @@ const Order = () => {
     }, [currentPage, searchKeyword, categoryIds]);
 
     const getPaymentStatus = async () => {
-        let res = await dataOrderStatus();
+        let res = await dataOrderpaymentStatus();
         if (res && res.data) {
             setDataPaymentStatus(res.data);
         }
