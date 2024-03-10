@@ -78,6 +78,7 @@ const UpdateOrderStatus = () => {
                     total_amount: res.data.total_amount,
                     sub_total: res.data.sub_total,
                     order_details: res.data.order_details,
+                    paymentStatus: res.data.paymentStatus,
                 });
                 setSelectedOrderStatus({
                     id: res.data.orderStatus.id,
