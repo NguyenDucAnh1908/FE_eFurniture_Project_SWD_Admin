@@ -12,6 +12,7 @@ import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
 import CreateProduct from '../pages/Ecommerce/FormEcommerce/CreateProduct'
 import UpdateProduct from '../pages/Ecommerce/FormEcommerce/UpdateProduct'
 import UpdateOrderStatus from '../pages/Ecommerce/FormEcommerce/UpdateOrderStatus'
+import CreateDesign from '../pages/Design/CreateDesign'
 
 function Router() {
 
@@ -30,6 +31,7 @@ function Router() {
                 <Route path='/update-product/:id' element={<UpdateProduct />} />
                 <Route path='/create-product' element={<CreateProduct />} />
                 <Route path='/chart' element={<ChartTopProductSale />} />
+                <Route path='/create-design' element={<CreateDesign />} />
             </Routes>
         </>
     )
