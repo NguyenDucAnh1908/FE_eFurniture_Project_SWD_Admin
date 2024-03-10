@@ -4,6 +4,7 @@ import { useNavigate, useParams, Link } from 'react-router-dom'
 import axios from 'axios'
 import { dataOrderpaymentStatus, dataStatusOrder } from '../../../services/OrderApi/OrderApi'
 import { UserContext } from '../../../context/UserContext'
+import './Ecommerce.css'
 
 const UpdateOrderStatus = () => {
     const { id } = useParams();
@@ -299,7 +300,7 @@ const UpdateOrderStatus = () => {
                                     <p className="mb-1"><b>Order ID :</b> xxxx235</p>
                                     <p className="mb-0"><b>Payment Mode :</b> COD</p>
                                 </div> */}
-                                <select value={selectedOrderStatus.id} onChange={handleStatusOrderChange}>
+                                <select className="select-box" value={selectedOrderStatus.id} onChange={handleStatusOrderChange}>
                                     <option selected>Open this select menu</option>
                                     {statusOrder && statusOrder.length > 0 &&
                                         statusOrder.map((statusOrderItem, index) => {
@@ -313,7 +314,7 @@ const UpdateOrderStatus = () => {
                                         })
                                     }
                                 </select>
-                                <select value={selectedPaymentStatus.id} onChange={handlePaymentStatusChange} >
+                                <select className="select-box" value={selectedPaymentStatus.id} onChange={handlePaymentStatusChange} >
                                     <option selected>Open this select menu</option>
                                     {StatusPaymentOrder && StatusPaymentOrder.length > 0 &&
                                         StatusPaymentOrder.map((StatusPaymentOrderItem, index) => {
@@ -328,7 +329,7 @@ const UpdateOrderStatus = () => {
                                     }
                                 </select>
                             </div>
-                            <button type="submit" onClick={() => handleUpdateProduct()}>Update</button>
+                            <button className="button" type="submit" onClick={() => handleUpdateProduct()}>Update</button>
                         </div>
                     </div> {/* end col */}
                 </div>

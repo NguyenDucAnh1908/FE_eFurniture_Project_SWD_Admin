@@ -1,16 +1,21 @@
-import React, { useState } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
-
+import { UserContext } from '../../context/UserContext'
+import TopNavbar from '../../components/TopNavbar/TopNavbar';
 const CreateDesign = () => {
+    const { user } = useContext(UserContext);
     const [staffName, setStaffName] = useState('');
     const [note, setNote] = useState('');
     const [status, setStatus] = useState('Processing'); // Default status
     const [imageUrls, setImageUrls] = useState(null);
     const [fileData, setFileData] = useState(null);
-
+    const staff_name = user.account.user.fullName;
+    useEffect(() => {
+        setStaffName(staff_name);
+    });
+    console.log("Check staff name: " + staff_name);
     const handleSubmit = async (event) => {
         event.preventDefault();
-
         const formData = new FormData();
         formData.append('staffName', staffName);
         formData.append('note', note);
@@ -39,6 +44,7 @@ const CreateDesign = () => {
 
     return (
         <>
+        <TopNavbar/>
             <div className="container-fluid">
                 {/* start page title */}
                 <div className="row">
@@ -63,12 +69,12 @@ const CreateDesign = () => {
                                 <div className="card-body">
                                     <div className="row">
                                         <div className="col-xl-6">
-                                            <div className="mb-3">
+                                            {/* <div className="mb-3">
                                                 <label htmlFor="projectname" className="form-label">Staff Name</label>
                                                 <input type="text"
                                                     value={staffName} onChange={(e) => setStaffName(e.target.value)} className="form-control"
                                                     placeholder="Enter staff name" />
-                                            </div>
+                                            </div> */}
 
                                             <div className="mb-3">
                                                 <label htmlFor="project-overview" className="form-label">Note</label>
