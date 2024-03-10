@@ -8,6 +8,9 @@ import { event } from 'jquery';
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import axios from 'axios'
+import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
+import { v4 as uuidv4 } from 'uuid'
+import { imageDb } from '../../../Config/FireBaseConfig'
 
 const UpdateProduct = () => {
     const { id } = useParams();
@@ -40,6 +43,7 @@ const UpdateProduct = () => {
         brand_id: '',
         tags_product_id: '',
         category_id: '',
+        productImages: []
     });
 
     const [category, setCategory] = useState([]);
@@ -75,6 +79,7 @@ const UpdateProduct = () => {
                     brand_id: res.data.brand.id,
                     tags_product_id: res.data.tagsProduct.id,
                     category_id: res.data.category.id,
+                    productImages: res.data.productImages
                 });
                 setSelectedCategory({
                     id: res.data.category.id,
@@ -91,6 +96,7 @@ const UpdateProduct = () => {
             })
             .catch(err => console.log(err));
     }, [])
+
 
 
     const handleCategoryChange = (event) => {
@@ -159,6 +165,25 @@ const UpdateProduct = () => {
     // const handleCategoryChange = (event) => {
     //     setSelectedCategoryId(event.target.value);
     // };
+
+    const handleImageUpload = async (event, index) => {
+        const file = event.target.files[0];
+        if (file) {
+            const file = event.target.files[0];
+            const imgRef = ref(imageDb, `images_eFurniture/${uuidv4()}`);
+            await uploadBytes(imgRef, file);
+            const downloadURL = await getDownloadURL(imgRef);
+
+            // Cập nhật đường dẫn ảnh vào mảng productImages
+            const updatedProductImages = [...values.productImages];
+            updatedProductImages[index] = { id: updatedProductImages[index].id, image_url: downloadURL };
+
+            // Cập nhật state
+            setValues({ ...values, productImages: updatedProductImages });
+        }
+    };
+
+
 
     return (
         <>
@@ -244,7 +269,7 @@ const UpdateProduct = () => {
                                         <div className="mb-3 mt-3 mt-xl-0">
                                             <label htmlFor="projectname" className="mb-0">Avatar</label>
                                             <p className="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
-                                            <form action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
+                                            {/* <form action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
                                                 <div className="fallback">
                                                     <input name="file" type="file" />
                                                 </div>
@@ -252,7 +277,15 @@ const UpdateProduct = () => {
                                                     <i className="h3 text-muted dripicons-cloud-upload" />
                                                     <h4>Drop files here or click to upload.</h4>
                                                 </div>
-                                            </form>
+                                            </form> */}
+                                            <div className="product-images" style={{ width: "50%", display: "flex", justifyContent: "left" }}>
+                                                {values.productImages.map((image, index) => (
+                                                    <div key={index} style={{ marginRight: '10px' }}>
+                                                        <img value={image.id} src={image.imageUrl} alt={`Image ${index}`} style={{ width: "100px", height: "auto", margin: "0 5px" }} />
+                                                        <input type="file" onChange={(event) => handleImageUpload(event, index)} />
+                                                    </div>
+                                                ))}
+                                            </div>
                                             {/* Preview */}
                                             <div className="dropzone-previews mt-3" id="file-previews" />
                                             {/* file preview template */}
