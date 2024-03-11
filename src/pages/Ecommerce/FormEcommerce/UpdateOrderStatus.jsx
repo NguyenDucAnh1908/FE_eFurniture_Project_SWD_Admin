@@ -13,14 +13,19 @@ const UpdateOrderStatus = () => {
     const [orderDetail, setOrderDetail] = useState(null);
     const [statusOrder, setStatusOrder] = useState([]);
     const [StatusPaymentOrder, setStatusPaymentOrder] = useState([]);
-    const [selectedOrderStatus, setSelectedOrderStatus] = useState({
-        id: '',
-        name: ''
-    });
+    // const [selectedOrderStatus, setSelectedOrderStatus] = useState({
+    //     id: '',
+    //     name: ''
+    // });
+    const [selectedStatus, setSelectedStatus] = useState(1);
+    const handleStatusChange = (e) => {
+        setSelectedStatus(parseInt(e.target.value));
+    };
     const [selectedPaymentStatus, setSelectedPaymentStatus] = useState({
         id: '',
         name: ''
     });
+    const [productDetail, setProductDetail] = useState(null);
     const user_id = user.account.user.id;
     const [values, setValues] = useState({
         id: parseInt(id),
@@ -55,6 +60,18 @@ const UpdateOrderStatus = () => {
     }, []);
 
     useEffect(() => {
+        fetchProductDetail();
+    }, [id])
+
+    useEffect(() => {
+        // Khi giá trị của selectedStatus thay đổi, cập nhật giá trị của orderStatus trong state values
+        setValues(prevState => ({
+            ...prevState,
+            orderStatus: selectedStatus
+        }));
+    }, [selectedStatus]);
+
+    useEffect(() => {
         axios.get('http://localhost:8080/api/v1/orders/' + id)
             .then(res => {
                 setValues({
@@ -79,11 +96,13 @@ const UpdateOrderStatus = () => {
                     total_amount: res.data.total_amount,
                     sub_total: res.data.sub_total,
                     order_details: res.data.order_details,
+                    //paymentStatus: res.data.paymentStatus,
                 });
-                setSelectedOrderStatus({
-                    id: res.data.orderStatus.id,
-                    name: res.data.orderStatus.name
-                });
+                // setSelectedOrderStatus({
+                //     id: res.data.orderStatus.id,
+                //     name: res.data.orderStatus.name
+                // });
+                setSelectedStatus(parseInt(res.data.orderStatus.id));
                 setSelectedPaymentStatus({
                     id: res.data.paymentStatus.id,
                     name: res.data.paymentStatus.name
@@ -91,6 +110,16 @@ const UpdateOrderStatus = () => {
             })
             .catch(err => console.log(err));
     }, [])
+
+    const fetchProductDetail = async () => {
+        try {
+            const res = await axios.get(`http://localhost:8080/api/v1/orders/${id}`);
+            setProductDetail(res.data);
+            //console.log("Check product detail: ", res.data);
+        } catch (error) {
+            console.error('Error fetching product detail:', error);
+        }
+    };
 
     const fetchOrderStatus = async () => {
         try {
@@ -111,14 +140,14 @@ const UpdateOrderStatus = () => {
         }
     }
 
-    const handleStatusOrderChange = (event) => {
-        const statusOrderId = event.target.value;
-        setSelectedOrderStatus({
-            id: statusOrderId,
-            name: event.target.options[event.target.selectedIndex].text
-        });
-        setValues({ ...values, orderStatus: parseInt(statusOrderId) });
-    };
+    // const handleStatusOrderChange = (event) => {
+    //     const statusOrderId = event.target.value;
+    //     setSelectedOrderStatus({
+    //         id: statusOrderId,
+    //         name: event.target.options[event.target.selectedIndex].text
+    //     });
+    //     setValues({ ...values, orderStatus: parseInt(statusOrderId) });
+    // };
 
     const handlePaymentStatusChange = (event) => {
         const paymentStatus = event.target.value;
@@ -159,24 +188,50 @@ const UpdateOrderStatus = () => {
                     </div>
                 </div>
                 {/* end page title */}
-                <div className="row justify-content-center">
-                    <div className="col-lg-7 col-md-10 col-sm-11">
+                {/* <div className="row justify-content-center">
+                    <div className="col-lg-9 col-md-10 col-sm-11">
                         <div className="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
                             <div className="horizontal-steps-content">
                                 <div className="step-item">
-                                    <span data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="20/08/2018 07:24 PM">Order Placed</span>
+                                    <span data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="20/08/2018 07:24 PM">Order</span>
                                 </div>
                                 <div className="step-item current">
-                                    <span data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="21/08/2018 11:32 AM">Packed</span>
+                                    <span data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title="21/08/2018 11:32 AM">Confirm</span>
                                 </div>
                                 <div className="step-item">
-                                    <span>Shipped</span>
+                                    <span>Packing</span>
                                 </div>
                                 <div className="step-item">
-                                    <span>Delivered</span>
+                                    <span>Export from warehouse</span>
+                                </div>
+                                <div className="step-item">
+                                    <span>Waiting for delivery</span>
+                                </div>
+                                <div className="step-item">
+                                    <span>Successful delivery</span>
                                 </div>
                             </div>
                             <div className="process-line" style={{ width: '33%' }} />
+                        </div>
+                    </div>
+                </div> */}
+                <div className="row justify-content-center">
+                    <div className="col-lg-9 col-md-10 col-sm-11">
+                        <div className="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
+                            <div className="horizontal-steps-content">
+                                {statusOrder.map((statusOrderItem, index) => {
+                                    if (statusOrderItem.code !== "cancelled" && statusOrderItem.code !== "delivery_canceled") {
+                                        return (
+                                            <div key={statusOrderItem.id} className={`step-item ${selectedStatus === statusOrderItem.id ? 'current' : ''}`}>
+                                                <span data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title={`21/08/2018 11:32 AM`}>{statusOrderItem.name}</span>
+                                            </div>
+                                        );
+                                    } else {
+                                        return null;
+                                    }
+                                })}
+                            </div>
+                            <div className="process-line" style={{ width: `${(selectedStatus + 2) * (100 / statusOrder.length)}%` }} />
                         </div>
                     </div>
                 </div>
@@ -283,7 +338,9 @@ const UpdateOrderStatus = () => {
                                         <p className="mb-2"><span className="fw-bold me-2">Payment Type:</span> {values.payment_method}</p>
                                         <p className="mb-2"><span className="fw-bold me-2">Shipping method:</span> {values.shipping_method}</p>
                                         <p className="mb-2"><span className="fw-bold me-2">Shipping Date:</span> {values.shipping_date}</p>
-                                        <p className="mb-0"><span className="fw-bold me-2">Payment status:</span> {values.paymentStatus.name}</p>
+                                        {productDetail && (
+                                            <p className="mb-0"><span className="fw-bold me-2">Payment status:</span> {productDetail.paymentStatus.name}</p>
+                                        )}
                                     </li>
                                 </ul>
                             </div>
@@ -299,7 +356,7 @@ const UpdateOrderStatus = () => {
                                     <p className="mb-1"><b>Order ID :</b> xxxx235</p>
                                     <p className="mb-0"><b>Payment Mode :</b> COD</p>
                                 </div> */}
-                                <select className="select-box" value={selectedOrderStatus.id} onChange={handleStatusOrderChange}>
+                                {/* <select className="select-box" value={selectedOrderStatus.id} onChange={handleStatusOrderChange}>
                                     <option selected>Open this select menu</option>
                                     {statusOrder && statusOrder.length > 0 &&
                                         statusOrder.map((statusOrderItem, index) => {
@@ -312,6 +369,19 @@ const UpdateOrderStatus = () => {
                                             )
                                         })
                                     }
+                                </select> */}
+                                <select className="select-box" value={selectedStatus} onChange={handleStatusChange}>
+                                    <option value={1}>Order</option>
+                                    {statusOrder.map((statusOrderItem) => {
+                                        if (statusOrderItem.id >= selectedStatus) {
+                                            return (
+                                                <option key={statusOrderItem.id} value={statusOrderItem.id}>
+                                                    {statusOrderItem.name}
+                                                </option>
+                                            );
+                                        }
+                                        return null;
+                                    })}
                                 </select>
                                 <select className="select-box" value={selectedPaymentStatus.id} onChange={handlePaymentStatusChange} >
                                     <option selected>Open this select menu</option>
