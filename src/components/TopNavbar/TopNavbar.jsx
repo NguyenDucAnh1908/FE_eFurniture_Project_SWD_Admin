@@ -1,6 +1,14 @@
-import React from 'react'
-
+import React, { useEffect, useState, useContext } from 'react'
+import { UserContext } from '../../context/UserContext'
+import { useNavigate } from 'react-router-dom'
+import Account from '../AccountComponent/Account'
 const TopNavbar = () => {
+    const navigate = useNavigate()
+    const { user, logout } = useContext(UserContext);
+    const handleLogout = () => {
+        logout();
+        navigate("/")
+    };
     return (
         <div className="navbar-custom">
             <ul className="list-unstyled topbar-menu float-end mb-0">
@@ -213,41 +221,11 @@ const TopNavbar = () => {
                             <img src="assets/images/users/avatar-1.jpg" alt="user-image" className="rounded-circle" />
                         </span>
                         <span>
-                            <span className="account-user-name">Dominic Keller</span>
-                            <span className="account-position">Founder</span>
+                            <span className="account-user-name">{user.account.user.fullName}</span>
+                            <span className="account-position">{user.account.user.role}</span>
                         </span>
                     </a>
-                    <div className="dropdown-menu dropdown-menu-end dropdown-menu-animated topbar-dropdown-menu profile-dropdown">
-                        {/* item*/}
-                        <div className=" dropdown-header noti-title">
-                            <h6 className="text-overflow m-0">Welcome !</h6>
-                        </div>
-                        {/* item*/}
-                        <a href="javascript:void(0);" className="dropdown-item notify-item">
-                            <i className="mdi mdi-account-circle me-1" />
-                            <span>My Account</span>
-                        </a>
-                        {/* item*/}
-                        <a href="javascript:void(0);" className="dropdown-item notify-item">
-                            <i className="mdi mdi-account-edit me-1" />
-                            <span>Settings</span>
-                        </a>
-                        {/* item*/}
-                        <a href="javascript:void(0);" className="dropdown-item notify-item">
-                            <i className="mdi mdi-lifebuoy me-1" />
-                            <span>Support</span>
-                        </a>
-                        {/* item*/}
-                        <a href="javascript:void(0);" className="dropdown-item notify-item">
-                            <i className="mdi mdi-lock-outline me-1" />
-                            <span>Lock Screen</span>
-                        </a>
-                        {/* item*/}
-                        <a href="javascript:void(0);" className="dropdown-item notify-item">
-                            <i className="mdi mdi-logout me-1" />
-                            <span>Logout</span>
-                        </a>
-                    </div>
+                    <Account />
                 </li>
             </ul>
             <button className="button-menu-mobile open-left">
