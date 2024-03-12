@@ -1,6 +1,7 @@
 import React from 'react'
-import TopNavbar from '../components/TopNavbar/TopNavbar'
-const Customer = () => {
+import TopNavbar from '../../components/TopNavbar/TopNavbar'
+
+const Designer = () => {
     return (
         <div>
             <TopNavbar />
@@ -14,10 +15,10 @@ const Customer = () => {
                                 <ol className="breadcrumb m-0">
                                     <li className="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
                                     <li className="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
-                                    <li className="breadcrumb-item active">Customers</li>
+                                    <li className="breadcrumb-item active">Sellers</li>
                                 </ol>
                             </div>
-                            <h4 className="page-title">Customers</h4>
+                            <h4 className="page-title">Sellers</h4>
                         </div>
                     </div>
                 </div>
@@ -28,7 +29,7 @@ const Customer = () => {
                             <div className="card-body">
                                 <div className="row mb-2">
                                     <div className="col-sm-5">
-                                        <a href="javascript:void(0);" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add Customers</a>
+                                        <a href="javascript:void(0);" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add Sellers</a>
                                     </div>
                                     <div className="col-sm-7">
                                         <div className="text-sm-end">
@@ -39,8 +40,8 @@ const Customer = () => {
                                     </div>{/* end col*/}
                                 </div>
                                 <div className="table-responsive">
-                                    <table className="table table-centered table-striped dt-responsive nowrap w-100" id="products-datatable">
-                                        <thead>
+                                    <table className="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="products-datatable">
+                                        <thead className="table-light">
                                             <tr>
                                                 <th style={{ width: 20 }}>
                                                     <div className="form-check">
@@ -48,12 +49,12 @@ const Customer = () => {
                                                         <label className="form-check-label" htmlFor="customCheck1">&nbsp;</label>
                                                     </div>
                                                 </th>
-                                                <th>Customer</th>
-                                                <th>Phone</th>
-                                                <th>Email</th>
-                                                <th>Location</th>
+                                                <th>Seller</th>
+                                                <th>Store Name</th>
+                                                <th>Products</th>
+                                                <th>Wallet Balance</th>
                                                 <th>Create Date</th>
-                                                <th>Status</th>
+                                                <th>Revenue</th>
                                                 <th style={{ width: 75 }}>Action</th>
                                             </tr>
                                         </thead>
@@ -70,19 +71,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Paul J. Friend</a>
                                                 </td>
                                                 <td>
-                                                    937-330-1634
+                                                    Homovee
                                                 </td>
                                                 <td>
-                                                    pauljfrnd@jourrapide.com
+                                                    <span className="fw-semibold">128</span>
                                                 </td>
                                                 <td>
-                                                    New York
+                                                    $128,250
                                                 </td>
                                                 <td>
                                                     07/07/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -101,19 +102,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Bryan J. Luellen</a>
                                                 </td>
                                                 <td>
-                                                    215-302-3376
+                                                    Execucy
                                                 </td>
                                                 <td>
-                                                    bryuellen@dayrep.com
+                                                    <span className="fw-semibold">09</span>
                                                 </td>
                                                 <td>
-                                                    New York
+                                                    $78,410
                                                 </td>
                                                 <td>
                                                     09/12/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 45, 63, 25, 66, 12, 45, 9, 54]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -132,19 +133,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Kathryn S. Collier</a>
                                                 </td>
                                                 <td>
-                                                    828-216-2190
+                                                    Epiloo
                                                 </td>
                                                 <td>
-                                                    collier@jourrapide.com
+                                                    <span className="fw-semibold">78</span>
                                                 </td>
                                                 <td>
-                                                    Canada
+                                                    $89,458
                                                 </td>
                                                 <td>
                                                     06/30/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-danger-lighten">Blocked</span>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 34, 63, 25, 34, 12, 434, 9, 54]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -163,19 +164,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Timothy Kauper</a>
                                                 </td>
                                                 <td>
-                                                    (216) 75 612 706
+                                                    Uberer
                                                 </td>
                                                 <td>
-                                                    thykauper@rhyta.com
+                                                    <span className="fw-semibold">847</span>
                                                 </td>
                                                 <td>
-                                                    Denmark
+                                                    $258,125
                                                 </td>
                                                 <td>
                                                     09/08/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-danger-lighten">Blocked</span>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 34, 33, 25, 34, 50, 65, 9, 54]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -194,19 +195,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Zara Raws</a>
                                                 </td>
                                                 <td>
-                                                    (02) 75 150 655
+                                                    Symic
                                                 </td>
                                                 <td>
-                                                    austin@dayrep.com
+                                                    <span className="fw-semibold">235</span>
                                                 </td>
                                                 <td>
-                                                    Germany
+                                                    $56,210
                                                 </td>
                                                 <td>
                                                     07/15/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 45, 34, 33, 34, 34, 50, 55, 9, 54]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -225,19 +226,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Annette P. Kelsch</a>
                                                 </td>
                                                 <td>
-                                                    (+15) 73 483 758
+                                                    Insulore
                                                 </td>
                                                 <td>
-                                                    annette@email.net
+                                                    <span className="fw-semibold">485</span>
                                                 </td>
                                                 <td>
-                                                    India
+                                                    $330,251
                                                 </td>
                                                 <td>
                                                     09/05/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 30, 67, 33, 25, 34, 56, 65, 9, 54]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -256,19 +257,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Jenny C. Gero</a>
                                                 </td>
                                                 <td>
-                                                    078 7173 9261
+                                                    Susadmin
                                                 </td>
                                                 <td>
-                                                    jennygero@teleworm.us
+                                                    <span className="fw-semibold">38</span>
                                                 </td>
                                                 <td>
-                                                    Lesotho
+                                                    $12,000
                                                 </td>
                                                 <td>
                                                     08/02/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-danger-lighten">Blocked</span>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 30, 45, 33, 25, 44, 56, 33, 9, 33]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -287,19 +288,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Edward Roseby</a>
                                                 </td>
                                                 <td>
-                                                    078 6013 3854
+                                                    Hyperill
                                                 </td>
                                                 <td>
-                                                    edwardR@armyspy.com
+                                                    <span className="fw-semibold">77</span>
                                                 </td>
                                                 <td>
-                                                    Monaco
+                                                    $45,216
                                                 </td>
                                                 <td>
                                                     08/23/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 43, 30, 67, 34, 25, 34, 56, 43, 9, 56]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -318,19 +319,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Anna Ciantar</a>
                                                 </td>
                                                 <td>
-                                                    (216) 76 298 896
+                                                    Vicedel
                                                 </td>
                                                 <td>
-                                                    annac@hotmai.us
+                                                    <span className="fw-semibold">347</span>
                                                 </td>
                                                 <td>
-                                                    Philippines
+                                                    $7,815
                                                 </td>
                                                 <td>
                                                     05/06/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 23, 30, 67, 34, 56, 34, 56, 85, 9, 56]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -349,19 +350,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Dean Smithies</a>
                                                 </td>
                                                 <td>
-                                                    077 6157 4248
+                                                    Circumous
                                                 </td>
                                                 <td>
-                                                    deanes@dayrep.com
+                                                    <span className="fw-semibold">506</span>
                                                 </td>
                                                 <td>
-                                                    Singapore
+                                                    $68,143
                                                 </td>
                                                 <td>
                                                     04/09/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 82, 30, 67, 65, 25, 34, 56, 44, 9, 22]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -380,19 +381,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Labeeb Ghali</a>
                                                 </td>
                                                 <td>
-                                                    050 414 8778
+                                                    Laudent
                                                 </td>
                                                 <td>
-                                                    labebswad@teleworm.us
+                                                    <span className="fw-semibold">121</span>
                                                 </td>
                                                 <td>
-                                                    United Kingdom
+                                                    $17,514
                                                 </td>
                                                 <td>
                                                     06/19/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-success-lighten">Active</span>
+                                                    <div className="spark-chart" data-dataset="[25, 54, 30, 44, 65, 25, 34, 33, 44, 9, 23]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -411,19 +412,19 @@ const Customer = () => {
                                                     <a href="javascript:void(0);" className="text-body fw-semibold">Rory Seekamp</a>
                                                 </td>
                                                 <td>
-                                                    078 5054 8877
+                                                    Centinte
                                                 </td>
                                                 <td>
-                                                    roryamp@dayrep.com
+                                                    <span className="fw-semibold">89</span>
                                                 </td>
                                                 <td>
-                                                    United States
+                                                    $14,384
                                                 </td>
                                                 <td>
                                                     03/24/2018
                                                 </td>
                                                 <td>
-                                                    <span className="badge badge-danger-lighten">Blocked</span>
+                                                    <div className="spark-chart" data-dataset="[25, 82, 23, 67, 65, 67, 65, 56, 32, 19, 22]" />
                                                 </td>
                                                 <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
@@ -439,10 +440,9 @@ const Customer = () => {
                 </div>
                 {/* end row */}
             </div> {/* container */}
-            {/* content */}
 
         </div>
     )
 }
 
-export default Customer
+export default Designer

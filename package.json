@@ -7,6 +7,7 @@
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
+    "firebase": "^10.8.1",
     "font-awesome": "^4.7.0",
     "jquery": "^3.7.1",
     "lodash": "^4.17.21",
@@ -25,6 +26,7 @@
     "react-use-cart": "^1.13.0",
     "react-zoom-pan-pinch": "^3.4.2",
     "recharts": "^2.12.2",
+    "uuid": "^9.0.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

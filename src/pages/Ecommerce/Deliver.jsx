@@ -1,10 +1,10 @@
 import React from 'react'
-import TopNavbar from '../components/TopNavbar/TopNavbar'
+import TopNavbar from '../../components/TopNavbar/TopNavbar'
 
-const Order = () => {
+const Deliver = () => {
     return (
         <div>
-         <TopNavbar />
+            <TopNavbar />
             {/* Start Content*/}
             <div className="container-fluid">
                 {/* start page title */}
@@ -15,10 +15,10 @@ const Order = () => {
                                 <ol className="breadcrumb m-0">
                                     <li className="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
                                     <li className="breadcrumb-item"><a href="javascript: void(0);">eCommerce</a></li>
-                                    <li className="breadcrumb-item active">Orders</li>
+                                    <li className="breadcrumb-item active">Sellers</li>
                                 </ol>
                             </div>
-                            <h4 className="page-title">Orders</h4>
+                            <h4 className="page-title">Sellers</h4>
                         </div>
                     </div>
                 </div>
@@ -28,37 +28,19 @@ const Order = () => {
                         <div className="card">
                             <div className="card-body">
                                 <div className="row mb-2">
-                                    <div className="col-xl-8">
-                                        <form className="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
-                                            <div className="col-auto">
-                                                <label htmlFor="inputPassword2" className="visually-hidden">Search</label>
-                                                <input type="search" className="form-control" id="inputPassword2" placeholder="Search..." />
-                                            </div>
-                                            <div className="col-auto">
-                                                <div className="d-flex align-items-center">
-                                                    <label htmlFor="status-select" className="me-2">Status</label>
-                                                    <select className="form-select" id="status-select">
-                                                        <option selected>Choose...</option>
-                                                        <option value={1}>Paid</option>
-                                                        <option value={2}>Awaiting Authorization</option>
-                                                        <option value={3}>Payment failed</option>
-                                                        <option value={4}>Cash On Delivery</option>
-                                                        <option value={5}>Fulfilled</option>
-                                                        <option value={6}>Unfulfilled</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </form>
+                                    <div className="col-sm-5">
+                                        <a href="javascript:void(0);" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add Sellers</a>
                                     </div>
-                                    <div className="col-xl-4">
-                                        <div className="text-xl-end mt-xl-0 mt-2">
-                                            <button type="button" className="btn btn-danger mb-2 me-2"><i className="mdi mdi-basket me-1" /> Add New Order</button>
+                                    <div className="col-sm-7">
+                                        <div className="text-sm-end">
+                                            <button type="button" className="btn btn-success mb-2 me-1"><i className="mdi mdi-cog" /></button>
+                                            <button type="button" className="btn btn-light mb-2 me-1">Import</button>
                                             <button type="button" className="btn btn-light mb-2">Export</button>
                                         </div>
                                     </div>{/* end col*/}
                                 </div>
                                 <div className="table-responsive">
-                                    <table className="table table-centered table-nowrap mb-0">
+                                    <table className="table table-centered table-borderless table-hover w-100 dt-responsive nowrap" id="products-datatable">
                                         <thead className="table-light">
                                             <tr>
                                                 <th style={{ width: 20 }}>
@@ -67,13 +49,13 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck1">&nbsp;</label>
                                                     </div>
                                                 </th>
-                                                <th>Order ID</th>
-                                                <th>Date</th>
-                                                <th>Payment Status</th>
-                                                <th>Total</th>
-                                                <th>Payment Method</th>
-                                                <th>Order Status</th>
-                                                <th style={{ width: 125 }}>Action</th>
+                                                <th>Seller</th>
+                                                <th>Store Name</th>
+                                                <th>Products</th>
+                                                <th>Wallet Balance</th>
+                                                <th>Create Date</th>
+                                                <th>Revenue</th>
+                                                <th style={{ width: 75 }}>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -84,24 +66,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck2">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9708</a> </td>
-                                                <td>
-                                                    August 05 2018 <small className="text-muted">10:29 PM</small>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-4.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Paul J. Friend</a>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
+                                                    Homovee
                                                 </td>
                                                 <td>
-                                                    $176.41
+                                                    <span className="fw-semibold">128</span>
                                                 </td>
                                                 <td>
-                                                    Mastercard
+                                                    $128,250
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
+                                                    07/07/2018
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -113,22 +97,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck3">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9707</a> </td>
-                                                <td>August 04 2018 <small className="text-muted">08:18 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-warning-lighten"><i className="mdi mdi-timer-sand" /> Awaiting Authorization</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-3.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Bryan J. Luellen</a>
                                                 </td>
                                                 <td>
-                                                    $1,458.65
+                                                    Execucy
                                                 </td>
                                                 <td>
-                                                    Visa
+                                                    <span className="fw-semibold">09</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-warning-lighten">Processing</span></h5>
+                                                    $78,410
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    09/12/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 45, 63, 25, 66, 12, 45, 9, 54]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -140,22 +128,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck4">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9706</a> </td>
-                                                <td>August 04 2018 <small className="text-muted">10:29 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-3.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Kathryn S. Collier</a>
                                                 </td>
                                                 <td>
-                                                    $801.99
+                                                    Epiloo
                                                 </td>
                                                 <td>
-                                                    Credit Card
+                                                    <span className="fw-semibold">78</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-warning-lighten">Processing</span></h5>
+                                                    $89,458
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    06/30/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 34, 63, 25, 34, 12, 434, 9, 54]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -167,22 +159,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck5">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9705</a> </td>
-                                                <td>August 03 2018 <small className="text-muted">07:56 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-1.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Timothy Kauper</a>
                                                 </td>
                                                 <td>
-                                                    $215.35
+                                                    Uberer
                                                 </td>
                                                 <td>
-                                                    Mastercard
+                                                    <span className="fw-semibold">847</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-success-lighten">Delivered</span></h5>
+                                                    $258,125
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    09/08/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 34, 33, 25, 34, 50, 65, 9, 54]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -194,22 +190,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck6">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9704</a> </td>
-                                                <td>May 22 2018 <small className="text-muted">07:22 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-danger-lighten"><i className="mdi mdi-cancel" /> Payment Failed</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-5.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Zara Raws</a>
                                                 </td>
                                                 <td>
-                                                    $2,514.36
+                                                    Symic
                                                 </td>
                                                 <td>
-                                                    Paypal
+                                                    <span className="fw-semibold">235</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-danger-lighten">Cancelled</span></h5>
+                                                    $56,210
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    07/15/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 45, 34, 33, 34, 34, 50, 55, 9, 54]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -221,22 +221,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck7">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9703</a> </td>
-                                                <td>April 02 2018 <small className="text-muted">03:02 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-6.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Annette P. Kelsch</a>
                                                 </td>
                                                 <td>
-                                                    $183.20
+                                                    Insulore
                                                 </td>
                                                 <td>
-                                                    Payoneer
+                                                    <span className="fw-semibold">485</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
+                                                    $330,251
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    09/05/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 30, 67, 33, 25, 34, 56, 65, 9, 54]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -248,22 +252,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck8">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9702</a> </td>
-                                                <td>March 18 2018 <small className="text-muted">11:19 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-warning-lighten"><i className="mdi mdi-timer-sand" /> Awaiting Authorization</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-7.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Jenny C. Gero</a>
                                                 </td>
                                                 <td>
-                                                    $1,768.41
+                                                    Susadmin
                                                 </td>
                                                 <td>
-                                                    Visa
+                                                    <span className="fw-semibold">38</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-warning-lighten">Processing</span></h5>
+                                                    $12,000
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    08/02/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 66, 30, 45, 33, 25, 44, 56, 33, 9, 33]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -275,22 +283,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck9">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9701</a> </td>
-                                                <td>February 01 2018 <small className="text-muted">07:22 AM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-info-lighten"><i className="mdi mdi-cash" /> Unpaid</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-8.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Edward Roseby</a>
                                                 </td>
                                                 <td>
-                                                    $3,582.99
+                                                    Hyperill
                                                 </td>
                                                 <td>
-                                                    Paypal
+                                                    <span className="fw-semibold">77</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
+                                                    $45,216
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    08/23/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 43, 30, 67, 34, 25, 34, 56, 43, 9, 56]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -302,22 +314,26 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck10">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9700</a> </td>
-                                                <td>January 22 2018 <small className="text-muted">08:09 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-9.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Anna Ciantar</a>
                                                 </td>
                                                 <td>
-                                                    $923.95
+                                                    Vicedel
                                                 </td>
                                                 <td>
-                                                    Credit Card
+                                                    <span className="fw-semibold">347</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-success-lighten">Delivered</span></h5>
+                                                    $7,815
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    05/06/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 23, 30, 67, 34, 56, 34, 56, 85, 9, 56]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -329,22 +345,88 @@ const Order = () => {
                                                         <label className="form-check-label" htmlFor="customCheck11">&nbsp;</label>
                                                     </div>
                                                 </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9699</a> </td>
-                                                <td>January 17 2018 <small className="text-muted">02:30 PM</small></td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-10.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Dean Smithies</a>
                                                 </td>
                                                 <td>
-                                                    $5,177.68
+                                                    Circumous
                                                 </td>
                                                 <td>
-                                                    Mastercard
+                                                    <span className="fw-semibold">506</span>
                                                 </td>
                                                 <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
+                                                    $68,143
                                                 </td>
                                                 <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                    04/09/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 82, 30, 67, 65, 25, 34, 56, 44, 9, 22]" />
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div className="form-check">
+                                                        <input type="checkbox" className="form-check-input" id="customCheck12" />
+                                                        <label className="form-check-label" htmlFor="customCheck12">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-1.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Labeeb Ghali</a>
+                                                </td>
+                                                <td>
+                                                    Laudent
+                                                </td>
+                                                <td>
+                                                    <span className="fw-semibold">121</span>
+                                                </td>
+                                                <td>
+                                                    $17,514
+                                                </td>
+                                                <td>
+                                                    06/19/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 54, 30, 44, 65, 25, 34, 33, 44, 9, 23]" />
+                                                </td>
+                                                <td>
+                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td>
+                                                    <div className="form-check">
+                                                        <input type="checkbox" className="form-check-input" id="customCheck13" />
+                                                        <label className="form-check-label" htmlFor="customCheck13">&nbsp;</label>
+                                                    </div>
+                                                </td>
+                                                <td className="table-user">
+                                                    <img src="assets/images/users/avatar-2.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Rory Seekamp</a>
+                                                </td>
+                                                <td>
+                                                    Centinte
+                                                </td>
+                                                <td>
+                                                    <span className="fw-semibold">89</span>
+                                                </td>
+                                                <td>
+                                                    $14,384
+                                                </td>
+                                                <td>
+                                                    03/24/2018
+                                                </td>
+                                                <td>
+                                                    <div className="spark-chart" data-dataset="[25, 82, 23, 67, 65, 67, 65, 56, 32, 19, 22]" />
+                                                </td>
+                                                <td>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
                                                     <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
                                                 </td>
@@ -358,8 +440,9 @@ const Order = () => {
                 </div>
                 {/* end row */}
             </div> {/* container */}
+
         </div>
     )
 }
 
-export default Order
+export default Deliver
