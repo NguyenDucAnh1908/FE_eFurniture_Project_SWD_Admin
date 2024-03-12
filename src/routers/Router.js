@@ -10,7 +10,9 @@ import Sellers from '../pages/Sellers'
 import Customers from '../pages/Customers'
 
 import Product from '../pages/Ecommerce/Product'
+import Booking from '../pages/Booking/Booking'
 
+import Chat from '../pages/Feedback/Chat'
 
 import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
 
@@ -27,6 +29,8 @@ function Router() {
                 <Route path='/order-detail' element={<OrderDetail />} />
                 <Route path='/product' element={<Product />} />
                 <Route path='/product-detail' element={<ProductDetail />} />
+                <Route path='/chat' element={<Chat />} />
+                <Route path='/booking' element={<Booking />} />
 
                 <Route path='/chart' element={<ChartTopProductSale />} />
             </Routes>
