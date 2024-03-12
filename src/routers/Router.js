@@ -13,6 +13,9 @@ import CreateProduct from '../pages/Ecommerce/FormEcommerce/CreateProduct'
 import UpdateProduct from '../pages/Ecommerce/FormEcommerce/UpdateProduct'
 import UpdateOrderStatus from '../pages/Ecommerce/FormEcommerce/UpdateOrderStatus'
 import CreateDesign from '../pages/Design/CreateDesign'
+import ProjectBooking from '../pages/ProjectBookings/ProjectBooking'
+import CreateProjectBooking from '../pages/ProjectBookings/CreateProjectBooking'
+import UpdateProjectBooking from '../pages/ProjectBookings/UpdateProjectBooking'
 
 function Router() {
 
@@ -32,6 +35,10 @@ function Router() {
                 <Route path='/create-product' element={<CreateProduct />} />
                 <Route path='/chart' element={<ChartTopProductSale />} />
                 <Route path='/create-design' element={<CreateDesign />} />
+                <Route path='/view-project-booking' element={<ProjectBooking />} />
+                <Route path= '/create-project-booking' element= {<CreateProjectBooking />} />
+                <Route path= '/update-project-booking/:id' element= {<UpdateProjectBooking />} />
+                
             </Routes>
         </>
     )
