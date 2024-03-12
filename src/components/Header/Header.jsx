@@ -126,6 +126,9 @@ const header = () => {
                                     <li>
                                         <a href="/create-design">Create Design</a>
                                     </li>
+                                    <li>
+                                        <a href="/create-blog">Create Blog</a>
+                                    </li>
                                 </ul>
                             </div>
                         </li>
