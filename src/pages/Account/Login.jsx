@@ -4,7 +4,7 @@ import { loginUser } from '../../services/UserApi/UserApi'
 import { useNavigate } from 'react-router-dom'
 import { UserContext } from '../../context/UserContext'
 
-const Login = () => {
+const Login = (props) => {
     const { login } = useContext(UserContext);
     const navigate = useNavigate()
 
@@ -29,8 +29,9 @@ const Login = () => {
         }
         let response = await loginUser(valueLogin, valuePassword);
         console.log("Check login", response);
-        let role = response.user.role;
-        if (response && response.staus === "Success" && role === "ADMIN") {
+        // let role = response.user.role;
+        // && role === "ADMIN"
+        if (response && response.staus === "Success" && response.role === "ADMIN") {
             let user = response.user;
             let tokenJwt = response.token;
             let data = {
@@ -44,7 +45,7 @@ const Login = () => {
             login(data);
             navigate("/");
             // window.location.reload();
-            // toast.success("Login Success");
+            toast.success("Login Success");
         } else {
             toast.error("An error occurred during login")
         }
