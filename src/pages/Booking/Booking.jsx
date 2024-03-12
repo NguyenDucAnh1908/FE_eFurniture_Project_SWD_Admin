@@ -5,19 +5,19 @@ const Booking = () => {
     const [bookings, setBookings] = useState([]);
 
     useEffect(() => {
-        // Fetch bookings from the backend when the component mounts
-        axios.get('/api/bookings/all')
-            .then(response => {
-                setBookings(response.data);
-            })
-            .catch(error => {
-                console.error('Error fetching bookings:', error);
-            });
+        fetchBookings();
     }, []);
 
-    const fetchBookings(async = ()=>{
-        
-    })
+    const fetchBookings = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/api/v1/booking/all')
+            setBookings(response.data);
+        } catch (error) {
+            console.error('Error fetching orders:', error);
+        }
+    }
+
+
 
     return (
         <div>
@@ -81,42 +81,40 @@ const Booking = () => {
                                                 <th>Date</th>
                                                 <th>Status</th>
                                                 <th>Username</th>
-                                                <th>Payment Method</th>
-                                                <th>Order Status</th>
+                                                <th>Address </th>
+                                                <th>Address </th>
                                                 <th style={{ width: 125 }}>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck2" />
-                                                        <label className="form-check-label" htmlFor="customCheck2">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td><a href="apps-ecommerce-orders-details.html" className="text-body fw-bold">#BM9708</a> </td>
-                                                <td>
-                                                    August 05 2018 <small className="text-muted">10:29 PM</small>
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-success-lighten"><i className="mdi mdi-bitcoin" /> Paid</span></h5>
-                                                </td>
-                                                <td>
-                                                    $176.41
-                                                </td>
-                                                <td>
-                                                    Mastercard
-                                                </td>
-                                                <td>
-                                                    <h5><span className="badge badge-info-lighten">Shipped</span></h5>
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
+                                            {bookings.map(booking => (
+                                                <tr key={booking.id}>
+                                                    <td>
+                                                        <div className="form-check">
+                                                            <input type="checkbox" className="form-check-input" id={`customCheck${booking.id}`} />
+                                                            <label className="form-check-label" htmlFor={`customCheck${booking.id}`}>&nbsp;</label>
+                                                        </div>
+                                                    </td>
+                                                    <td><a href={`apps-ecommerce-orders-details.html`} className="text-body fw-bold">#{booking.id}</a></td>
+                                                    <td>{booking.created_at}</td>
+                                                    <td>
+                                                        <h5><span className={`badge ${booking.status === 'Confirmed' ? 'badge-success-lighten' : 'badge-info-lighten'}`}>
+                                                            {booking.status === 'Paid' ? <i className="mdi mdi-bitcoin" /> : null}
+                                                            {booking.status}
+                                                        </span></h5>
+                                                    </td>
+                                                    <td>{booking.firstName} {booking.lastName}</td>
+                                                    <td>{booking.streetAddress}, {booking.wardName}, {booking.districtName}, {booking.provinceName}</td>
+                                                    <td>
 
+                                                    </td>
+                                                    <td>
+                                                        <a href="/" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                                                    </td>
+                                                </tr>
+                                            ))}
                                         </tbody>
                                     </table>
                                 </div>
