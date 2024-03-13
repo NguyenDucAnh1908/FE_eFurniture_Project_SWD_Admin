@@ -9,7 +9,7 @@ const CreateDesign = () => {
     const { user } = useContext(UserContext);
     const [staffName, setStaffName] = useState('');
     const [note, setNote] = useState('');
-    const [status, setStatus] = useState('Processing'); 
+    const [status, setStatus] = useState('Processing');
     const [imageUrls, setImageUrls] = useState(null);
     const [fileData, setFileData] = useState(null);
     const staff_name = user.account.user.fullName;
@@ -55,8 +55,8 @@ const CreateDesign = () => {
                         <div className="page-title-box">
                             <div className="page-title-right">
                                 <ol className="breadcrumb m-0">
-                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
+                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Booking</a></li>
+                                    <li className="breadcrumb-item"><a href="javascript: void(0);">ProjectBooking</a></li>
                                     <li className="breadcrumb-item active">Create Design</li>
                                 </ol>
                             </div>
@@ -191,11 +191,13 @@ const CreateDesign = () => {
 
                                     {/* end row */}
                                 </div> {/* end card-body */}
-                                <div class="justify-content-end row">
-                                    <div class="col-9">
-                                        <button type="submit" class="btn btn-info">Create</button>
-                                    </div>
+
+                                <div class="col-9" style={{ marginLeft: '23px' }}>
+                                    <button type="submit" class="btn btn-info">Create</button>
                                 </div>
+
+
+                                <br />
                             </div> {/* end card*/}
 
                         </form>
