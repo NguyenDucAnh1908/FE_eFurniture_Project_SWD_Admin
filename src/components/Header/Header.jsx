@@ -96,9 +96,8 @@ const Header = () => {
                                     <li>
                                         <a href="/order">Orders</a>
                                     </li>
-                                    <li>
-                                        <a href="/create-design">Create Design</a>
-                                    </li>
+                                   
+                                   
                                 </ul>
                             </div>
                         </li>
@@ -124,7 +123,7 @@ const Header = () => {
                         <li className="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarProjects" aria-expanded="false" aria-controls="sidebarProjects" className="side-nav-link">
                                 <i className="uil-briefcase" />
-                                <span> Projects </span>
+                                <span> Booking </span>
                                 <span className="menu-arrow" />
                             </a>
                             <div className="collapse" id="sidebarProjects">
@@ -152,10 +151,10 @@ const Header = () => {
                             </a>
                         </li> */}
                         {/* Tasks */}
-                        {/* <li className="side-nav-item">
+                        <li className="side-nav-item">
                             <a data-bs-toggle="collapse" href="#sidebarTasks" aria-expanded="false" aria-controls="sidebarTasks" className="side-nav-link">
                                 <i className="uil-clipboard-alt" />
-                                <span> Tasks </span>
+                                <span> Blogs </span>
                                 <span className="menu-arrow" />
                             </a>
                             <div className="collapse" id="sidebarTasks">
@@ -163,15 +162,19 @@ const Header = () => {
                                     <li>
                                         <a href="apps-tasks.html">List</a>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <a href="apps-tasks-details.html">Details</a>
                                     </li>
                                     <li>
                                         <a href="apps-kanban.html">Kanban Board</a>
+                                    </li> */}
+                                    <li>
+                                        <a href="/create-blog">Create Blog</a>
                                     </li>
+                                    
                                 </ul>
                             </div>
-                        </li> */}
+                        </li>
                         {/* file manager */}
                         {/* <li className="side-nav-item">
                             <a href="apps-file-manager.html" className="side-nav-link">
