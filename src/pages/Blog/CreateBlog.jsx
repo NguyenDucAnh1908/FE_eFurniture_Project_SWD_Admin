@@ -114,55 +114,7 @@ const CreateBlog = () => {
                                             </div>
 
 
-                                            {/* <div className="mb-3">
-                                                <label htmlFor="category" className="form-label">Category</label>
-
-
-                                                <input className="form-control"
-                                                    type="text" name="categoryBlogIds"
-                                                    value={formData.categoryBlogIds.join(' ')} onChange={handleChange} required />
-                                            </div>
-                                            <div className="mb-3">
-                                                <label htmlFor="tags" className="form-label">Tags</label>
-
-
-                                                <input className="form-control"
-                                                    type="text" name="tagBlogIds"
-                                                    value={formData.tagBlogIds.join(' ')} onChange={handleChange} required />
-                                            </div>
-                                            */}
-
-
-                                            {/* <div>
-                                                <label>Category:</label>
-                                                <Select
-                                                    value={formData.categoryBlogIds}
-                                                    onChange={handleChange}
-                                                    name="categoryBlogIds"
-                                                    multiple
-                                                >
-                                                    {categories.map(category => (
-                                                        <MenuItem key={category.id} value={category.id}>
-                                                            {category.name}
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </div>
-                                            <div>
-                                                <label>Tags:</label>
-                                                <Select
-                                                    value={formData.tagBlogIds}
-                                                    onChange={handleChange}
-                                                    name="tagBlogIds"
-                                                    multiple
-                                                >
-                                                    {tags.map(tag => (
-                                                        <MenuItem key={tag.id} value={tag.id}>
-                                                            {tag.tagName}
-                                                        </MenuItem>
-                                                    ))}
-                                                </Select>
-                                            </div> */}
+                                          
 
 
 
