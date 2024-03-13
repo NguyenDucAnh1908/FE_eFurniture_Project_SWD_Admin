@@ -3,6 +3,7 @@ import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Select, MenuItem } from '@material-ui/core';
+import TopNavbar from '../../components/TopNavbar/TopNavbar';
 
 const CreateBlog = () => {
     const [formData, setFormData] = useState({
@@ -67,6 +68,7 @@ const CreateBlog = () => {
 
     return (
         <>
+        <TopNavbar/>
             <div className="container-fluid">
                 {/* start page title */}
                 <div className="row">

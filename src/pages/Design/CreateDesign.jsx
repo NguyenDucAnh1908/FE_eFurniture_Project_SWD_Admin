@@ -102,17 +102,14 @@ const CreateDesign = () => {
                                             <div className="mb-3 mt-3 mt-xl-0">
                                                 <label htmlFor="projectname" className="mb-0">Avatar Staff Design</label>
                                                 <p className="text-muted font-14">Recommended image size 90x100 (px).</p>
-                                                <div action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
+                                                
                                                     <div className="fallback">
                                                         <input type="file"
                                                             onChange={(e) => setImageUrls(e.target.files[0])} />
-                                                        <button >Upload</button>
+                                                        {/* <button >Upload</button> */}
                                                     </div>
-                                                    <div className="dz-message needsclick">
-                                                        <i className="h3 text-muted dripicons-cloud-upload" />
-                                                        <h4>Drop files here or click to upload.</h4>
-                                                    </div>
-                                                </div>
+                                                   
+                                               
 
                                                 {/* Preview */}
                                                 <div className="dropzone-previews mt-3" id="file-previews" />
@@ -147,17 +144,14 @@ const CreateDesign = () => {
                                                 <div className="mb-3 mt-3 mt-xl-0">
                                                     <label htmlFor="projectname" className="mb-0">Upload File</label>
                                                     <p className="text-muted font-14">Recommended file size less than 10MB.</p>
-                                                    <div action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
-                                                        <div className="fallback">
+                                                   
+                                                      
                                                             <input type="file"
                                                                 onChange={(e) => setFileData(e.target.files[0])} />
-                                                            <button >Upload</button>
-                                                        </div>
-                                                        <div className="dz-message needsclick">
-                                                            <i className="h3 text-muted dripicons-cloud-upload" />
-                                                            <h4>Drop files here or click to upload.</h4>
-                                                        </div>
-                                                    </div>
+                                                            
+                                                     
+                                                       
+                                                  
 
                                                     {/* Preview */}
                                                     <div className="dropzone-previews mt-3" id="file-previews" />

@@ -160,7 +160,7 @@ const Header = () => {
                             <div className="collapse" id="sidebarTasks">
                                 <ul className="side-nav-second-level">
                                     <li>
-                                        <a href="apps-tasks.html">List</a>
+                                        <a href="/list-blog">List</a>
                                     </li>
                                     {/* <li>
                                         <a href="apps-tasks-details.html">Details</a>

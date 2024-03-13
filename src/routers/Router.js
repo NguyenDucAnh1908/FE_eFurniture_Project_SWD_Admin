@@ -15,6 +15,7 @@ import UpdateOrderStatus from '../pages/Ecommerce/FormEcommerce/UpdateOrderStatu
 import CreateDesign from '../pages/Design/CreateDesign'
 
 import CreateBlog from '../pages/Blog/CreateBlog'
+import ListBlog from '../pages/Blog/ListBlog'
 
 import Designer from '../pages/Ecommerce/Designer'
 import Deliver from '../pages/Ecommerce/Deliver'
@@ -43,6 +44,8 @@ function Router() {
                 <Route path='/create-design' element={<CreateDesign />} />
 
                 <Route path='/create-blog' element={<CreateBlog />} />
+                <Route path='/list-blog' element={<ListBlog />} />
+
 
                 <Route path='/designer' element={<Designer />} />
                 <Route path='/deliver' element={<Deliver />} />
