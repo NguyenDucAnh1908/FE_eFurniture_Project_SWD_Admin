@@ -3,6 +3,8 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
 
+
+
 const ProjectBooking = () => {
     const [projectBookings, setProjectBookings] = useState([]);
    
@@ -94,6 +96,7 @@ const ProjectBooking = () => {
                                                 <th>User ID</th>
                                                 <th>Booking ID</th>
                                                 <th>Action</th>
+                                                <th>Add Design</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -116,6 +119,8 @@ const ProjectBooking = () => {
                                                             <i className="mdi mdi-square-edit-outline" />
                                                         </Link>
                                                     </td>
+                                                    
+                                                  <td>    <Link to={`/create-design/${projectBooking.id}`}>Add Design</Link></td>
                                                 </tr>
                                             ))}
                                         </tbody>

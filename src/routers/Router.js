@@ -49,7 +49,7 @@ function Router() {
                 <Route path='/booking' element={<Booking />} />
 
                 <Route path='/chart' element={<ChartTopProductSale />} />
-                <Route path='/create-design' element={<CreateDesign />} />
+                <Route path='/create-design/:id' element={<CreateDesign />} />
 
                 <Route path='/create-blog' element={<CreateBlog />} />
                 <Route path='/list-blog' element={<ListBlog />} />

@@ -103,6 +103,7 @@ const Booking = () => {
                                                 <th>Status</th>
                                                 <th>Schedule</th>
                                                 <th style={{ width: 125 }}>Action</th>
+                                             
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -148,7 +149,7 @@ const Booking = () => {
                                                         <a className="action-icon" onClick={() => handleCancelBooking(booking.id)}>
                                                             <i className="mdi mdi-delete" />
                                                         </a>
-                                                    </td>
+                                                    </td>  <td> <a href="/create-design">Create Design</a></td>
                                                 </tr>
                                             ))}
                                         </tbody>

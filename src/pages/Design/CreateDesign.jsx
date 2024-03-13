@@ -2,11 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../context/UserContext'
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
+import { useParams } from 'react-router-dom';
+
 const CreateDesign = () => {
+    const { id } = useParams();
     const { user } = useContext(UserContext);
     const [staffName, setStaffName] = useState('');
     const [note, setNote] = useState('');
-    const [status, setStatus] = useState('Processing'); // Default status
+    const [status, setStatus] = useState('Processing'); 
     const [imageUrls, setImageUrls] = useState(null);
     const [fileData, setFileData] = useState(null);
     const staff_name = user.account.user.fullName;
@@ -22,7 +25,7 @@ const CreateDesign = () => {
         formData.append('status', status);
         formData.append('imageUrls', imageUrls);
         formData.append('fileData', fileData);
-        formData.append('projectBookingId', '1'); // Default projectBookingId
+        formData.append('projectBookingId', id);
 
         try {
             const response = await axios.post(
@@ -44,7 +47,7 @@ const CreateDesign = () => {
 
     return (
         <>
-        <TopNavbar/>
+            <TopNavbar />
             <div className="container-fluid">
                 {/* start page title */}
                 <div className="row">
@@ -102,14 +105,14 @@ const CreateDesign = () => {
                                             <div className="mb-3 mt-3 mt-xl-0">
                                                 <label htmlFor="projectname" className="mb-0">Avatar Staff Design</label>
                                                 <p className="text-muted font-14">Recommended image size 90x100 (px).</p>
-                                                
-                                                    <div className="fallback">
-                                                        <input type="file"
-                                                            onChange={(e) => setImageUrls(e.target.files[0])} />
-                                                        {/* <button >Upload</button> */}
-                                                    </div>
-                                                   
-                                               
+
+                                                <div className="fallback">
+                                                    <input type="file"
+                                                        onChange={(e) => setImageUrls(e.target.files[0])} />
+                                                    {/* <button >Upload</button> */}
+                                                </div>
+
+
 
                                                 {/* Preview */}
                                                 <div className="dropzone-previews mt-3" id="file-previews" />
@@ -144,14 +147,14 @@ const CreateDesign = () => {
                                                 <div className="mb-3 mt-3 mt-xl-0">
                                                     <label htmlFor="projectname" className="mb-0">Upload File</label>
                                                     <p className="text-muted font-14">Recommended file size less than 10MB.</p>
-                                                   
-                                                      
-                                                            <input type="file"
-                                                                onChange={(e) => setFileData(e.target.files[0])} />
-                                                            
-                                                     
-                                                       
-                                                  
+
+
+                                                    <input type="file"
+                                                        onChange={(e) => setFileData(e.target.files[0])} />
+
+
+
+
 
                                                     {/* Preview */}
                                                     <div className="dropzone-previews mt-3" id="file-previews" />
