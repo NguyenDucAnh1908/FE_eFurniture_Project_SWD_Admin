@@ -8,6 +8,10 @@ import Customers from '../pages/Ecommerce/Customers'
 import Sellers from '../pages/Ecommerce/Sellers'
 import ProductDetail from '../pages/Ecommerce/ProductDetail'
 import Orderder from '../pages/Ecommerce/Order'
+import Booking from '../pages/Booking/Booking'
+
+import Chat from '../pages/Feedback/Chat'
+
 import ChartTopProductSale from '../components/Chart/ChartTopProductSale'
 import CreateProduct from '../pages/Ecommerce/FormEcommerce/CreateProduct'
 import UpdateProduct from '../pages/Ecommerce/FormEcommerce/UpdateProduct'
@@ -40,6 +44,10 @@ function Router() {
                 <Route path='/product-detail/:id' element={<ProductDetail />} />
                 <Route path='/update-product/:id' element={<UpdateProduct />} />
                 <Route path='/create-product' element={<CreateProduct />} />
+                <Route path='/product-detail' element={<ProductDetail />} />
+                <Route path='/chat' element={<Chat />} />
+                <Route path='/booking' element={<Booking />} />
+
                 <Route path='/chart' element={<ChartTopProductSale />} />
                 <Route path='/create-design' element={<CreateDesign />} />
 
