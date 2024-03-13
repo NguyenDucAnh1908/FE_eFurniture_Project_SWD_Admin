@@ -3,6 +3,7 @@ import axios from 'axios';
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
+import { toast } from 'react-toastify'
 
 
 const Booking = () => {
@@ -33,16 +34,22 @@ const Booking = () => {
 
     const handleReceiveAndConfirm = async (bookingId) => {
         try {
-            const response = await axios.put(`http://localhost:8080/api/v1/booking/receive-booking-request/${bookingId}`,
-                {
-                    schedule: selectedDates[bookingId],
-                    designerId: 1
-                }
-            );
+            // Check if a schedule has been selected
+            if (!selectedDates[bookingId]) {
+                toast.warning("Please select a schedule before confirming.");
 
+                return;
+            }
+    
+            const response = await axios.put(`http://localhost:8080/api/v1/booking/receive-booking-request/${bookingId}`, {
+                schedule: selectedDates[bookingId],
+                designerId: 1
+            });
+    
             const updatedBookings = bookings.map(booking =>
                 booking.id === bookingId ? { ...booking, schedule: selectedDates[bookingId] } : booking
             );
+            toast.success("Apply booking successful.");
 
             setBookings(updatedBookings);
             fetchBookings();
@@ -51,6 +58,7 @@ const Booking = () => {
             console.error('Error confirming booking:', error);
         }
     }
+    
 
     const handlePageChange = (pageNumber) => {
         fetchBookings(pageNumber);
@@ -61,6 +69,7 @@ const Booking = () => {
         try {
             const response = await axios.delete(`http://localhost:8080/api/v1/booking/cancel-booking/${bookingId}`);
             console.log(response.data);
+            toast.success("Cancel booking successful.");
             fetchBookings();
         } catch (error) {
             console.error('Error canceling booking:', error);
