@@ -26,6 +26,7 @@ import Deliver from '../pages/Ecommerce/Deliver'
 import ProjectBooking from '../pages/ProjectBookings/ProjectBooking'
 import CreateProjectBooking from '../pages/ProjectBookings/CreateProjectBooking'
 import UpdateProjectBooking from '../pages/ProjectBookings/UpdateProjectBooking'
+import MyProfile from '../pages/Account/MyProfile'
 
 function Router() {
 
@@ -58,6 +59,8 @@ function Router() {
                 <Route path='/view-project-booking' element={<ProjectBooking />} />
                 <Route path= '/create-project-booking' element= {<CreateProjectBooking />} />
                 <Route path= '/update-project-booking/:id' element= {<UpdateProjectBooking />} />
+
+                <Route path='/my-profile' element={<MyProfile />} />
                 
             </Routes>
         </>
