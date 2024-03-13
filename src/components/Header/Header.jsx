@@ -129,10 +129,10 @@ const Header = () => {
                             <div className="collapse" id="sidebarProjects">
                                 <ul className="side-nav-second-level">
                                     <li>
-                                        <a href="/booking">List</a>
+                                        <a href="/booking">Booking</a>
                                     </li>
                                     <li>
-                                        <a href="apps-projects-details.html">Details</a>
+                                        <a href="/view-project-booking">ProjectBooking</a>
                                     </li>
                                     <li>
                                         <a href="apps-projects-gantt.html">Gantt <span className="badge rounded-pill bg-light text-dark font-10 float-end">New</span></a>

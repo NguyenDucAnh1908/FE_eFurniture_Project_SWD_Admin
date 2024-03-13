@@ -69,7 +69,7 @@ const Booking = () => {
 
     return (
         <div>
-            {/* <TopNavbar/> */}
+            <TopNavbar/>
             {/* Start Content*/}
             <div className="container-fluid">
                 {/* start page title */}
@@ -98,19 +98,21 @@ const Booking = () => {
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Date</th>
+                                                <th>Full Name</th>
+                                                <th>Address</th>
                                                 <th>Status</th>
-                                                <th>Username</th>
-                                                <th>Address </th>
-                                                <th>Schedule </th>
+                                                <th>Schedule</th>
                                                 <th style={{ width: 125 }}>Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
                                             {bookings.map(booking => (
                                                 <tr key={booking.id}>
-  
+
                                                     <td><a href={`apps-ecommerce-orders-details.html`} className="text-body fw-bold">#{booking.id}</a></td>
                                                     <td>{booking.created_at}</td>
+                                                    <td>{booking.firstName} {booking.lastName}</td>
+                                                    <td>{booking.streetAddress}, {booking.wardName}, {booking.districtName}, {booking.provinceName}</td>
                                                     <td>
                                                         <h5>
                                                             <span className={`badge ${booking.status === 'Confirmed' ? 'badge-success-lighten' : booking.status === 'Cancel' ? 'badge-danger-lighten' : 'badge-info-lighten'}`}>
@@ -120,8 +122,6 @@ const Booking = () => {
                                                         </h5>
 
                                                     </td>
-                                                    <td>{booking.firstName} {booking.lastName}</td>
-                                                    <td>{booking.streetAddress}, {booking.wardName}, {booking.districtName}, {booking.provinceName}</td>
                                                     <td>
                                                         <DatePicker
                                                             selected={selectedDates[booking.id] || (booking.schedule ? new Date(booking.schedule) : null)}
