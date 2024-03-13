@@ -5,35 +5,34 @@ import TopNavbar from '../../components/TopNavbar/TopNavbar';
 
 const ProjectBooking = () => {
     const [projectBookings, setProjectBookings] = useState([]);
+   
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [keyword, setKeyword] = useState('');
     const limit = 2;
 
-    const handleSearch = (e) => {
-        setKeyword(e.target.value);
-        setCurrentPage(1); // reset về trang đầu tiên khi tìm kiếm
-    };
+  
+
     const handlePaginationClick = (page) => {
         setCurrentPage(page);
     };
 
     useEffect(() => {
-      fetchProjectBookings();
+        fetchProjectBookings();
     }, [currentPage, keyword]);
+
     const fetchProjectBookings = async () => {
         try {
             const response = await axios.get("http://localhost:8080/api/v1/booking/getAllProjectBooking", {
                 params: {
                     keyword: keyword,
-                    page: currentPage - 1, // trang hiện tại
-                    limit: limit // số lượng mục trên mỗi trang
+                    page: currentPage - 1,
+                    limit: limit
                 }
             });
             setProjectBookings(response.data);
-            setTotalPages(response.data.totalPages); // tính tổng số trang
-            console.log(response.data);
+            setTotalPages(response.data.totalPages);
         } catch (error) {
             setError(error.response.data);
         }
@@ -76,11 +75,7 @@ const ProjectBooking = () => {
                                         </div>
                                     </div>{/* end col*/}
                                 </div>
-                                <div className="input-group">
-                                    <input type="search" className="form-control rounded" placeholder="Search" aria-label="Search"
-                                        aria-describedby="search-addon" value={keyword} onChange={handleSearch} />
-                                    <button type="button" className="btn btn-outline-primary" data-mdb-ripple-init>search</button>
-                                </div>
+                                
                                 <div className="table-responsive">
 
                                     <table className="table table-centered w-100 dt-responsive nowrap" id="products-datatable">
@@ -126,21 +121,7 @@ const ProjectBooking = () => {
                                         </tbody>
                                     </table>
                                 </div>
-                                {/* <nav aria-label="...">
-                                    <ul className="pagination pagination-circle">
-                                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
-                                            <button className="page-link" onClick={() => handlePaginationClick(currentPage - 1)}>Previous</button>
-                                        </li>
-                                        {Array.from({ length: totalPages }, (_, index) => index + 1).map(page => (
-                                            <li key={page} className={`page-item ${currentPage === page ? 'active' : ''}`}>
-                                                <button className="page-link" onClick={() => handlePaginationClick(page)}>{page}</button>
-                                            </li>
-                                        ))}
-                                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
-                                            <button className="page-link" onClick={() => handlePaginationClick(currentPage + 1)}>Next</button>
-                                        </li>
-                                    </ul>
-                                </nav> */}
+                               
                             </div> {/* end card-body*/}
                         </div> {/* end card*/}
                     </div> {/* end col */}
