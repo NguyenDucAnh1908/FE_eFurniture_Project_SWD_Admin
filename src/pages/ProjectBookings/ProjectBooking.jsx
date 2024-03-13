@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
 
+
+
 const ProjectBooking = () => {
     const [projectBookings, setProjectBookings] = useState([]);
-   
+    const { bookingId } = useParams();
     const [error, setError] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -24,7 +27,7 @@ const ProjectBooking = () => {
 
     const fetchProjectBookings = async () => {
         try {
-            const response = await axios.get("http://localhost:8080/api/v1/booking/getAllProjectBooking", {
+            const response = await axios.get(`http://localhost:8080/api/v1/booking/by-booking-id/${bookingId}`, {
                 params: {
                     keyword: keyword,
                     page: currentPage - 1,
@@ -94,30 +97,33 @@ const ProjectBooking = () => {
                                                 <th>User ID</th>
                                                 <th>Booking ID</th>
                                                 <th>Action</th>
+                                                <th>Add Design</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            {projectBookings.map((projectBooking, index) => (
-                                                <tr key={index}>
-                                                    <td>{projectBooking.projectName}</td>
-                                                    <td>{projectBooking.projectType}</td>
-                                                    <td>{projectBooking.size}</td>
-                                                    <td>{projectBooking.designStyle}</td>
-                                                    <td>{projectBooking.colorSchemes}</td>
-                                                    <td>{projectBooking.intendUse}</td>
-                                                    <td>{projectBooking.occupantsNumber}</td>
-                                                    <td>{projectBooking.timeLine}</td>
-                                                    <td>{projectBooking.projectPrice}</td>
-                                                    <td>{projectBooking.code}</td>
-                                                    <td>{projectBooking.userId}</td>
-                                                    <td>{projectBooking.bookingId}</td>
+                                            
+                                                <tr >
+                                                    <td>{projectBookings.projectName}</td>
+                                                    <td>{projectBookings.projectType}</td>
+                                                    <td>{projectBookings.size}</td>
+                                                    <td>{projectBookings.designStyle}</td>
+                                                    <td>{projectBookings.colorSchemes}</td>
+                                                    <td>{projectBookings.intendUse}</td>
+                                                    <td>{projectBookings.occupantsNumber}</td>
+                                                    <td>{projectBookings.timeLine}</td>
+                                                    <td>{projectBookings.projectPrice}</td>
+                                                    <td>{projectBookings.code}</td>
+                                                    <td>{projectBookings.userId}</td>
+                                                    <td>{projectBookings.bookingId}</td>
                                                     <td className="table-action">
-                                                        <Link to={`/update-project-booking/${projectBooking.id}`} className="action-icon">
+                                                        <Link to={`/update-project-booking/${projectBookings.id}`} className="action-icon">
                                                             <i className="mdi mdi-square-edit-outline" />
                                                         </Link>
                                                     </td>
+                                                    
+                                                  <td>    <Link to={`/create-design/${projectBookings.id}`}>Add Design</Link></td>
                                                 </tr>
-                                            ))}
+                                            
                                         </tbody>
                                     </table>
                                 </div>

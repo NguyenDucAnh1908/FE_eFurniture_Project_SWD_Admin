@@ -129,17 +129,15 @@ const Header = () => {
                             <div className="collapse" id="sidebarProjects">
                                 <ul className="side-nav-second-level">
                                     <li>
-                                        <a href="/booking">Booking</a>
+                                        <a href="/booking">List Booking</a>
                                     </li>
-                                    <li>
-                                        <a href="/view-project-booking">ProjectBooking</a>
-                                    </li>
-                                    <li>
+                                  
+                                    {/* <li>
                                         <a href="apps-projects-gantt.html">Gantt <span className="badge rounded-pill bg-light text-dark font-10 float-end">New</span></a>
-                                    </li>
-                                    <li>
+                                    </li> */}
+                                    {/* <li>
                                         <a href="/create-design">Create Design</a>
-                                    </li>
+                                    </li> */}
                                 </ul>
                             </div>
                         </li>
@@ -160,7 +158,7 @@ const Header = () => {
                             <div className="collapse" id="sidebarTasks">
                                 <ul className="side-nav-second-level">
                                     <li>
-                                        <a href="apps-tasks.html">List</a>
+                                        <a href="/list-blog">List</a>
                                     </li>
                                     {/* <li>
                                         <a href="apps-tasks-details.html">Details</a>

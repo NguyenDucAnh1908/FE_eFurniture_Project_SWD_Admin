@@ -2,11 +2,14 @@ import React, { useState, useContext, useEffect } from 'react';
 import axios from 'axios';
 import { UserContext } from '../../context/UserContext'
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
+import { useParams } from 'react-router-dom';
+
 const CreateDesign = () => {
+    const { id } = useParams();
     const { user } = useContext(UserContext);
     const [staffName, setStaffName] = useState('');
     const [note, setNote] = useState('');
-    const [status, setStatus] = useState('Processing'); // Default status
+    const [status, setStatus] = useState('Processing');
     const [imageUrls, setImageUrls] = useState(null);
     const [fileData, setFileData] = useState(null);
     const staff_name = user.account.user.fullName;
@@ -22,7 +25,7 @@ const CreateDesign = () => {
         formData.append('status', status);
         formData.append('imageUrls', imageUrls);
         formData.append('fileData', fileData);
-        formData.append('projectBookingId', '1'); // Default projectBookingId
+        formData.append('projectBookingId', id);
 
         try {
             const response = await axios.post(
@@ -44,7 +47,7 @@ const CreateDesign = () => {
 
     return (
         <>
-        <TopNavbar/>
+            <TopNavbar />
             <div className="container-fluid">
                 {/* start page title */}
                 <div className="row">
@@ -52,8 +55,8 @@ const CreateDesign = () => {
                         <div className="page-title-box">
                             <div className="page-title-right">
                                 <ol className="breadcrumb m-0">
-                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
+                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Booking</a></li>
+                                    <li className="breadcrumb-item"><a href="javascript: void(0);">ProjectBooking</a></li>
                                     <li className="breadcrumb-item active">Create Design</li>
                                 </ol>
                             </div>
@@ -102,17 +105,14 @@ const CreateDesign = () => {
                                             <div className="mb-3 mt-3 mt-xl-0">
                                                 <label htmlFor="projectname" className="mb-0">Avatar Staff Design</label>
                                                 <p className="text-muted font-14">Recommended image size 90x100 (px).</p>
-                                                <div action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
-                                                    <div className="fallback">
-                                                        <input type="file"
-                                                            onChange={(e) => setImageUrls(e.target.files[0])} />
-                                                        <button >Upload</button>
-                                                    </div>
-                                                    <div className="dz-message needsclick">
-                                                        <i className="h3 text-muted dripicons-cloud-upload" />
-                                                        <h4>Drop files here or click to upload.</h4>
-                                                    </div>
+
+                                                <div className="fallback">
+                                                    <input type="file"
+                                                        onChange={(e) => setImageUrls(e.target.files[0])} />
+                                                    {/* <button >Upload</button> */}
                                                 </div>
+
+
 
                                                 {/* Preview */}
                                                 <div className="dropzone-previews mt-3" id="file-previews" />
@@ -147,17 +147,14 @@ const CreateDesign = () => {
                                                 <div className="mb-3 mt-3 mt-xl-0">
                                                     <label htmlFor="projectname" className="mb-0">Upload File</label>
                                                     <p className="text-muted font-14">Recommended file size less than 10MB.</p>
-                                                    <div action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
-                                                        <div className="fallback">
-                                                            <input type="file"
-                                                                onChange={(e) => setFileData(e.target.files[0])} />
-                                                            <button >Upload</button>
-                                                        </div>
-                                                        <div className="dz-message needsclick">
-                                                            <i className="h3 text-muted dripicons-cloud-upload" />
-                                                            <h4>Drop files here or click to upload.</h4>
-                                                        </div>
-                                                    </div>
+
+
+                                                    <input type="file"
+                                                        onChange={(e) => setFileData(e.target.files[0])} />
+
+
+
+
 
                                                     {/* Preview */}
                                                     <div className="dropzone-previews mt-3" id="file-previews" />
@@ -194,11 +191,13 @@ const CreateDesign = () => {
 
                                     {/* end row */}
                                 </div> {/* end card-body */}
-                                <div class="justify-content-end row">
-                                    <div class="col-9">
-                                        <button type="submit" class="btn btn-info">Create</button>
-                                    </div>
+
+                                <div class="col-9" style={{ marginLeft: '23px' }}>
+                                    <button type="submit" class="btn btn-info">Create</button>
                                 </div>
+
+
+                                <br />
                             </div> {/* end card*/}
 
                         </form>

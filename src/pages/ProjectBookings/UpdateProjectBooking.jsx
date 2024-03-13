@@ -74,7 +74,7 @@ const UpdateProjectBooking = () => {
       );
       console.log("Update project booking response: ", response.data);
       // Redirect or navigate to another page
-      navigate(`/view-project-booking`); // Example: Redirect to view project booking page
+      // navigate(`/view-project-booking`); // Example: Redirect to view project booking page
       // Optionally show a success message
       // toast.success("Update project booking successfully")
     } catch (error) {
@@ -146,19 +146,7 @@ const UpdateProjectBooking = () => {
                                       <label className="form-label">Start Date</label>
                                       <input type="text" className="form-control" data-provide="datepicker" data-date-container="#datepicker1" data-date-format="d-M-yyyy" data-date-autoclose="true" />
                                   </div> */}
-                    <div className="mb-3">
-                      <label htmlFor="project-budget" className="form-label">
-                        Size
-                      </label>
-                      <input
-                        type="text"
-                        id="project-budget"
-                        className="form-control"
-                        placeholder="Enter project size"
-                        value={size}
-                        onChange={(event) => setSize(event.target.value)}
-                      />
-                    </div>
+
                     <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
                         Design Style
@@ -213,7 +201,7 @@ const UpdateProjectBooking = () => {
                         value={occupantsNumber}
                         onChange={(event) => {
                           const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
                           if (!isNaN(value) && +value >= 0) {
                             setOccupantsNumber(value);
                           } else if (value === "") {
@@ -222,7 +210,6 @@ const UpdateProjectBooking = () => {
                           }
                           // Nếu không, không cập nhật giá trị (tức là khi nhập giá trị âm)
                         }}
-                      
                       />
                     </div>
                     <div className="mb-3">
@@ -250,7 +237,7 @@ const UpdateProjectBooking = () => {
                         value={projectPrice}
                         onChange={(event) => {
                           const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
                           if (!isNaN(value) && +value >= 0) {
                             setProjectPrice(value);
                           } else if (value === "") {
@@ -389,7 +376,7 @@ const UpdateProjectBooking = () => {
                         value={size}
                         onChange={(event) => {
                           const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
                           if (!isNaN(value) && +value >= 0) {
                             setSize(value);
                           } else if (value === "") {
@@ -411,12 +398,28 @@ const UpdateProjectBooking = () => {
               <div class="justify-content-end row">
                 <div class="col-9">
                   <button
-                  style={{ backgroundColor: "blue", color: "white", fontSize: "18px", border: "none", padding: "10px 20px", borderRadius: "5px", cursor: "pointer" }}
+                    style={{
+                      backgroundColor: "blue",
+                      color: "white",
+                      fontSize: "18px",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
                     type="submit"
-                    onClick={() => handleUpdateProjectBooking()}
+                    onClick={() => {
+                      const confirmed = window.confirm(
+                        "Are you sure you want to update?"
+                      );
+                      if (confirmed) {
+                        handleUpdateProjectBooking();
+                        window.history.back(); // Go back to the previous page
+                      }
+                    }}
                     class="btn btn-info"
                   >
-                    <a href="/view-project-booking" style={{ color: "white", textDecoration: "none" }}> Update </a>
+                    Update
                   </button>
                 </div>
               </div>

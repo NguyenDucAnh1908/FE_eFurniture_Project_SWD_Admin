@@ -19,6 +19,7 @@ import UpdateOrderStatus from '../pages/Ecommerce/FormEcommerce/UpdateOrderStatu
 import CreateDesign from '../pages/Design/CreateDesign'
 
 import CreateBlog from '../pages/Blog/CreateBlog'
+import ListBlog from '../pages/Blog/ListBlog'
 
 import Designer from '../pages/Ecommerce/Designer'
 import Deliver from '../pages/Ecommerce/Deliver'
@@ -49,14 +50,16 @@ function Router() {
                 <Route path='/booking' element={<Booking />} />
 
                 <Route path='/chart' element={<ChartTopProductSale />} />
-                <Route path='/create-design' element={<CreateDesign />} />
+                <Route path='/create-design/:id' element={<CreateDesign />} />
 
                 <Route path='/create-blog' element={<CreateBlog />} />
+                <Route path='/list-blog' element={<ListBlog />} />
+
 
                 <Route path='/designer' element={<Designer />} />
                 <Route path='/deliver' element={<Deliver />} />
 
-                <Route path='/view-project-booking' element={<ProjectBooking />} />
+                <Route path='/view-project-booking/:bookingId' element={<ProjectBooking />} />
                 <Route path= '/create-project-booking' element= {<CreateProjectBooking />} />
                 <Route path= '/update-project-booking/:id' element= {<UpdateProjectBooking />} />
 
