@@ -1,26 +1,75 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import TopNavbar from '../../components/TopNavbar/TopNavbar';
+import 'react-datepicker/dist/react-datepicker.css';
+import DatePicker from 'react-datepicker';
+
 
 const Booking = () => {
     const [bookings, setBookings] = useState([]);
+    const [selectedDates, setSelectedDates] = useState({});
+    const [bookingsPage, setBookingsPage] = useState({
+        totalPages: 0,
+        totalElements: 0,
+        currentPage: 0
+    });
 
+    const fetchBookings = async (page) => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/v1/booking/all?page=${page}&size=10`);
+            setBookingsPage({
+                totalPages: response.data.totalPages,
+                totalElements: response.data.totalElements,
+                currentPage: response.data.number
+            });
+            setBookings(response.data.content);
+        } catch (error) {
+            console.error('Error fetching bookings:', error);
+        }
+    }
     useEffect(() => {
         fetchBookings();
     }, []);
 
-    const fetchBookings = async () => {
+    const handleReceiveAndConfirm = async (bookingId) => {
         try {
-            const response = await axios.get('http://localhost:8080/api/v1/booking/all')
-            setBookings(response.data);
+            const response = await axios.put(`http://localhost:8080/api/v1/booking/receive-booking-request/${bookingId}`,
+                {
+                    schedule: selectedDates[bookingId],
+                    designerId: 1
+                }
+            );
+
+            const updatedBookings = bookings.map(booking =>
+                booking.id === bookingId ? { ...booking, schedule: selectedDates[bookingId] } : booking
+            );
+
+            setBookings(updatedBookings);
+            fetchBookings();
+            console.log(response.data);
         } catch (error) {
-            console.error('Error fetching orders:', error);
+            console.error('Error confirming booking:', error);
         }
     }
 
+    const handlePageChange = (pageNumber) => {
+        fetchBookings(pageNumber);
+    }
 
+
+    const handleCancelBooking = async (bookingId) => {
+        try {
+            const response = await axios.delete(`http://localhost:8080/api/v1/booking/cancel-booking/${bookingId}`);
+            console.log(response.data);
+            fetchBookings();
+        } catch (error) {
+            console.error('Error canceling booking:', error);
+        }
+    }
 
     return (
         <div>
+            {/* <TopNavbar/> */}
             {/* Start Content*/}
             <div className="container-fluid">
                 {/* start page title */}
@@ -43,30 +92,6 @@ const Booking = () => {
                     <div className="col-12">
                         <div className="card">
                             <div className="card-body">
-                                <div className="row mb-2">
-                                    <div className="col-xl-8">
-                                        <form className="row gy-2 gx-2 align-items-center justify-content-xl-start justify-content-between">
-                                            <div className="col-auto">
-                                                <label htmlFor="inputPassword2" className="visually-hidden">Search</label>
-                                                <input type="search" className="form-control" id="inputPassword2" placeholder="Search..." />
-                                            </div>
-                                            <div className="col-auto">
-                                                <div className="d-flex align-items-center">
-                                                    <label htmlFor="status-select" className="me-2">Status</label>
-                                                    <select className="form-select" id="status-select">
-                                                        <option selected>Choose...</option>
-                                                        <option value={1}>Paid</option>
-                                                        <option value={2}>Awaiting Authorization</option>
-                                                        <option value={3}>Payment failed</option>
-                                                        <option value={4}>Cash On Delivery</option>
-                                                        <option value={5}>Fulfilled</option>
-                                                        <option value={6}>Unfulfilled</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
                                 <div className="table-responsive">
                                     <table className="table table-centered table-nowrap mb-0">
                                         <thead className="table-light">
@@ -82,7 +107,7 @@ const Booking = () => {
                                                 <th>Status</th>
                                                 <th>Username</th>
                                                 <th>Address </th>
-                                                <th>Address </th>
+                                                <th>Schedule </th>
                                                 <th style={{ width: 125 }}>Action</th>
                                             </tr>
                                         </thead>
@@ -98,25 +123,53 @@ const Booking = () => {
                                                     <td><a href={`apps-ecommerce-orders-details.html`} className="text-body fw-bold">#{booking.id}</a></td>
                                                     <td>{booking.created_at}</td>
                                                     <td>
-                                                        <h5><span className={`badge ${booking.status === 'Confirmed' ? 'badge-success-lighten' : 'badge-info-lighten'}`}>
-                                                            {booking.status === 'Paid' ? <i className="mdi mdi-bitcoin" /> : null}
-                                                            {booking.status}
-                                                        </span></h5>
+                                                        <h5>
+                                                            <span className={`badge ${booking.status === 'Confirmed' ? 'badge-success-lighten' : booking.status === 'Cancel' ? 'badge-danger-lighten' : 'badge-info-lighten'}`}>
+                                                                {booking.status === 'Paid' ? <i className="mdi mdi-bitcoin" /> : null}
+                                                                {booking.status}
+                                                            </span>
+                                                        </h5>
+
                                                     </td>
                                                     <td>{booking.firstName} {booking.lastName}</td>
                                                     <td>{booking.streetAddress}, {booking.wardName}, {booking.districtName}, {booking.provinceName}</td>
                                                     <td>
+                                                        <DatePicker
+                                                            selected={selectedDates[booking.id] || (booking.schedule ? new Date(booking.schedule) : null)}
+                                                            onChange={(date) => {
+                                                                setSelectedDates((prevState) => ({
+                                                                    ...prevState,
+                                                                    [booking.id]: date,
+                                                                }));
+                                                            }}
+                                                            showTimeSelect
+                                                            timeFormat="HH:mm"
+                                                            timeIntervals={15}
+                                                            dateFormat="yyyy-MM-dd HH:mm"
+                                                            placeholderText={booking.schedule ? booking.schedule.toString() : 'Select date and time'}
+                                                            disabled={booking.status === 'Confirmed' || booking.status === 'Cancel'}
+                                                        />
 
                                                     </td>
                                                     <td>
                                                         <a href="/" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                        <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                                                        <a className="action-icon" onClick={() => handleReceiveAndConfirm(booking.id)}>
+                                                            <i className="mdi mdi-check" />
+                                                        </a>
+                                                        <a className="action-icon" onClick={() => handleCancelBooking(booking.id)}>
+                                                            <i className="mdi mdi-delete" />
+                                                        </a>
                                                     </td>
                                                 </tr>
                                             ))}
                                         </tbody>
                                     </table>
+                                    <br />
+                                    <div className="pagination justify-content-end pr-3">
+                                        <button className="btn btn-secondary" onClick={() => handlePageChange(bookingsPage.currentPage - 1)} disabled={bookingsPage.currentPage === 0}>Previous</button>
+                                        <span className="align-self-center mr-2">&nbsp;&nbsp;Page {bookingsPage.currentPage + 1} of {bookingsPage.totalPages}&nbsp;&nbsp;</span>
+                                        <button className="btn btn-secondary" onClick={() => handlePageChange(bookingsPage.currentPage + 1)} disabled={bookingsPage.currentPage === bookingsPage.totalPages - 1}>Next</button>
+                                    </div>
                                 </div>
                             </div> {/* end card-body*/}
                         </div> {/* end card*/}
