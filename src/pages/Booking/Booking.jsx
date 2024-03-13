@@ -161,7 +161,7 @@ const Booking = () => {
                                                         <a className="action-icon" onClick={() => handleCancelBooking(booking.id)}>
                                                             <i className="mdi mdi-delete" />
                                                         </a>
-                                                    </td>  <td> <a href="/create-design">Create Design</a></td>
+                                                     </td>
                                                 </tr>
                                             ))}
                                         </tbody>
