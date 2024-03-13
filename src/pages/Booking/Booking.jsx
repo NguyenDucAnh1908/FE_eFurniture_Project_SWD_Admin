@@ -96,13 +96,7 @@ const Booking = () => {
                                     <table className="table table-centered table-nowrap mb-0">
                                         <thead className="table-light">
                                             <tr>
-                                                <th style={{ width: 20 }}>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck1" />
-                                                        <label className="form-check-label" htmlFor="customCheck1">&nbsp;</label>
-                                                    </div>
-                                                </th>
-                                                <th>Booking ID</th>
+                                                <th>ID</th>
                                                 <th>Date</th>
                                                 <th>Status</th>
                                                 <th>Username</th>
@@ -114,12 +108,7 @@ const Booking = () => {
                                         <tbody>
                                             {bookings.map(booking => (
                                                 <tr key={booking.id}>
-                                                    <td>
-                                                        <div className="form-check">
-                                                            <input type="checkbox" className="form-check-input" id={`customCheck${booking.id}`} />
-                                                            <label className="form-check-label" htmlFor={`customCheck${booking.id}`}>&nbsp;</label>
-                                                        </div>
-                                                    </td>
+  
                                                     <td><a href={`apps-ecommerce-orders-details.html`} className="text-body fw-bold">#{booking.id}</a></td>
                                                     <td>{booking.created_at}</td>
                                                     <td>
@@ -152,7 +141,7 @@ const Booking = () => {
 
                                                     </td>
                                                     <td>
-                                                        <a href="/" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                        <a href="/view-project-booking" className="action-icon"> <i className="mdi mdi-eye" /></a>
                                                         <a className="action-icon" onClick={() => handleReceiveAndConfirm(booking.id)}>
                                                             <i className="mdi mdi-check" />
                                                         </a>
