@@ -96,12 +96,8 @@ const Header = () => {
                                     <li>
                                         <a href="/order">Orders</a>
                                     </li>
-                                    <li>
-                                        <a href="/create-design">Create Design</a>
-                                    </li>
-                                    <li>
-                                        <a href="/create-blog">Create Blog</a>
-                                    </li>
+                                   
+                                   
                                 </ul>
                             </div>
                         </li>
@@ -166,12 +162,16 @@ const Header = () => {
                                     <li>
                                         <a href="apps-tasks.html">List</a>
                                     </li>
-                                    <li>
+                                    {/* <li>
                                         <a href="apps-tasks-details.html">Details</a>
                                     </li>
                                     <li>
                                         <a href="apps-kanban.html">Kanban Board</a>
+                                    </li> */}
+                                    <li>
+                                        <a href="/create-blog">Create Blog</a>
                                     </li>
+                                    
                                 </ul>
                             </div>
                         </li>
