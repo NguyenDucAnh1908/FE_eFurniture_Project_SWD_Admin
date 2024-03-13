@@ -27,6 +27,7 @@ import Deliver from '../pages/Ecommerce/Deliver'
 import ProjectBooking from '../pages/ProjectBookings/ProjectBooking'
 import CreateProjectBooking from '../pages/ProjectBookings/CreateProjectBooking'
 import UpdateProjectBooking from '../pages/ProjectBookings/UpdateProjectBooking'
+import UpdateBlog from '../pages/Blog/UpdateBlog'
 
 function Router() {
 
@@ -53,6 +54,7 @@ function Router() {
 
                 <Route path='/create-blog' element={<CreateBlog />} />
                 <Route path='/list-blog' element={<ListBlog />} />
+                <Route path='/update-blog/:id' element={<UpdateBlog />} />
 
 
                 <Route path='/designer' element={<Designer />} />
