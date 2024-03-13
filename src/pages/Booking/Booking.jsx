@@ -40,12 +40,12 @@ const Booking = () => {
 
                 return;
             }
-    
+
             const response = await axios.put(`http://localhost:8080/api/v1/booking/receive-booking-request/${bookingId}`, {
                 schedule: selectedDates[bookingId],
                 designerId: 1
             });
-    
+
             const updatedBookings = bookings.map(booking =>
                 booking.id === bookingId ? { ...booking, schedule: selectedDates[bookingId] } : booking
             );
@@ -58,7 +58,7 @@ const Booking = () => {
             console.error('Error confirming booking:', error);
         }
     }
-    
+
 
     const handlePageChange = (pageNumber) => {
         fetchBookings(pageNumber);
@@ -78,7 +78,7 @@ const Booking = () => {
 
     return (
         <div>
-            <TopNavbar/>
+            <TopNavbar />
             {/* Start Content*/}
             <div className="container-fluid">
                 {/* start page title */}
@@ -145,15 +145,18 @@ const Booking = () => {
                                                             timeIntervals={15}
                                                             dateFormat="yyyy-MM-dd HH:mm"
                                                             placeholderText={booking.schedule ? booking.schedule.toString() : 'Select date and time'}
-                                                            disabled={booking.status === 'Confirmed' || booking.status === 'Cancel'}
+                                                            disabled={booking.status === 'Cancel'}
                                                         />
 
                                                     </td>
                                                     <td>
                                                         <a href="/view-project-booking" className="action-icon"> <i className="mdi mdi-eye" /></a>
-                                                        <a className="action-icon" onClick={() => handleReceiveAndConfirm(booking.id)}>
-                                                            <i className="mdi mdi-check" />
-                                                        </a>
+                                                        {booking.status !== 'Cancel' && (
+                                                            <a className="action-icon" onClick={() => handleReceiveAndConfirm(booking.id)}>
+                                                                <i className="mdi mdi-check" />
+                                                            </a>
+                                                        )}
+
                                                         <a className="action-icon" onClick={() => handleCancelBooking(booking.id)}>
                                                             <i className="mdi mdi-delete" />
                                                         </a>
