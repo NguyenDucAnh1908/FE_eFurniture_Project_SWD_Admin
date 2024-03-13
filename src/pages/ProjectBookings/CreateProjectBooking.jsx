@@ -359,11 +359,12 @@ const CreateProjectBooking = () => {
               <div class="justify-content-end row">
                 <div class="col-9">
                   <button
+                  style={{ backgroundColor: "blue", color: "white", fontSize: "18px", border: "none", padding: "10px 20px", borderRadius: "5px", cursor: "pointer" }}
                     type="submit"
                     onClick={() => handleCreateProjectBooking()}
                     class="btn btn-info"
                   >
-                   <a href = "view-project-booking">Create</a>
+                   <a href = "view-project-booking" style={{ color: "white", textDecoration: "none" }}>Create</a>
                   </button>
                 </div>
               </div>
