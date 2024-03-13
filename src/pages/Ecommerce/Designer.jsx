@@ -1,7 +1,35 @@
-import React from 'react'
+import React, { useState, useEffect } from 'react'
 import TopNavbar from '../../components/TopNavbar/TopNavbar'
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const Designer = () => {
+    const [designer, setDesigner] = useState([]);
+    const [currentPage, setCurrentPage] = useState(1);
+    const [totalPages, setTotalPages] = useState(1);
+    const limit = 2;
+    useEffect(() => {
+        fetchDesigner();
+    }, [currentPage]);
+
+    const fetchDesigner = async () => {
+        try {
+            const response = await axios.get(`http://localhost:8080/api/v1/get-all-designer`, {
+                params: {
+                    page: currentPage - 1, // trang hiện tại
+                    limit: limit // số lượng mục trên mỗi trang
+                }
+            });
+            setDesigner(response.data.userResponses);
+            setTotalPages(response.data.totalPages); // tính tổng số trang
+            console.log("Check user: ", response)
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+    const handlePaginationClick = (page) => {
+        setCurrentPage(page);
+    };
     return (
         <div>
             <TopNavbar />
@@ -59,381 +87,60 @@ const Designer = () => {
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck2" />
-                                                        <label className="form-check-label" htmlFor="customCheck2">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-4.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Paul J. Friend</a>
-                                                </td>
-                                                <td>
-                                                    Homovee
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">128</span>
-                                                </td>
-                                                <td>
-                                                    $128,250
-                                                </td>
-                                                <td>
-                                                    07/07/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck3" />
-                                                        <label className="form-check-label" htmlFor="customCheck3">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-3.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Bryan J. Luellen</a>
-                                                </td>
-                                                <td>
-                                                    Execucy
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">09</span>
-                                                </td>
-                                                <td>
-                                                    $78,410
-                                                </td>
-                                                <td>
-                                                    09/12/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 45, 63, 25, 66, 12, 45, 9, 54]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck4" />
-                                                        <label className="form-check-label" htmlFor="customCheck4">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-3.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Kathryn S. Collier</a>
-                                                </td>
-                                                <td>
-                                                    Epiloo
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">78</span>
-                                                </td>
-                                                <td>
-                                                    $89,458
-                                                </td>
-                                                <td>
-                                                    06/30/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 34, 63, 25, 34, 12, 434, 9, 54]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck5" />
-                                                        <label className="form-check-label" htmlFor="customCheck5">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-1.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Timothy Kauper</a>
-                                                </td>
-                                                <td>
-                                                    Uberer
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">847</span>
-                                                </td>
-                                                <td>
-                                                    $258,125
-                                                </td>
-                                                <td>
-                                                    09/08/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 66, 41, 34, 33, 25, 34, 50, 65, 9, 54]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck6" />
-                                                        <label className="form-check-label" htmlFor="customCheck6">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-5.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Zara Raws</a>
-                                                </td>
-                                                <td>
-                                                    Symic
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">235</span>
-                                                </td>
-                                                <td>
-                                                    $56,210
-                                                </td>
-                                                <td>
-                                                    07/15/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 66, 45, 34, 33, 34, 34, 50, 55, 9, 54]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck7" />
-                                                        <label className="form-check-label" htmlFor="customCheck7">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-6.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Annette P. Kelsch</a>
-                                                </td>
-                                                <td>
-                                                    Insulore
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">485</span>
-                                                </td>
-                                                <td>
-                                                    $330,251
-                                                </td>
-                                                <td>
-                                                    09/05/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 66, 30, 67, 33, 25, 34, 56, 65, 9, 54]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck8" />
-                                                        <label className="form-check-label" htmlFor="customCheck8">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-7.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Jenny C. Gero</a>
-                                                </td>
-                                                <td>
-                                                    Susadmin
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">38</span>
-                                                </td>
-                                                <td>
-                                                    $12,000
-                                                </td>
-                                                <td>
-                                                    08/02/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 66, 30, 45, 33, 25, 44, 56, 33, 9, 33]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck9" />
-                                                        <label className="form-check-label" htmlFor="customCheck9">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-8.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Edward Roseby</a>
-                                                </td>
-                                                <td>
-                                                    Hyperill
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">77</span>
-                                                </td>
-                                                <td>
-                                                    $45,216
-                                                </td>
-                                                <td>
-                                                    08/23/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 43, 30, 67, 34, 25, 34, 56, 43, 9, 56]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck10" />
-                                                        <label className="form-check-label" htmlFor="customCheck10">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-9.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Anna Ciantar</a>
-                                                </td>
-                                                <td>
-                                                    Vicedel
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">347</span>
-                                                </td>
-                                                <td>
-                                                    $7,815
-                                                </td>
-                                                <td>
-                                                    05/06/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 23, 30, 67, 34, 56, 34, 56, 85, 9, 56]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck11" />
-                                                        <label className="form-check-label" htmlFor="customCheck11">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-10.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Dean Smithies</a>
-                                                </td>
-                                                <td>
-                                                    Circumous
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">506</span>
-                                                </td>
-                                                <td>
-                                                    $68,143
-                                                </td>
-                                                <td>
-                                                    04/09/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 82, 30, 67, 65, 25, 34, 56, 44, 9, 22]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck12" />
-                                                        <label className="form-check-label" htmlFor="customCheck12">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-1.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Labeeb Ghali</a>
-                                                </td>
-                                                <td>
-                                                    Laudent
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">121</span>
-                                                </td>
-                                                <td>
-                                                    $17,514
-                                                </td>
-                                                <td>
-                                                    06/19/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 54, 30, 44, 65, 25, 34, 33, 44, 9, 23]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
-                                            <tr>
-                                                <td>
-                                                    <div className="form-check">
-                                                        <input type="checkbox" className="form-check-input" id="customCheck13" />
-                                                        <label className="form-check-label" htmlFor="customCheck13">&nbsp;</label>
-                                                    </div>
-                                                </td>
-                                                <td className="table-user">
-                                                    <img src="assets/images/users/avatar-2.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                    <a href="javascript:void(0);" className="text-body fw-semibold">Rory Seekamp</a>
-                                                </td>
-                                                <td>
-                                                    Centinte
-                                                </td>
-                                                <td>
-                                                    <span className="fw-semibold">89</span>
-                                                </td>
-                                                <td>
-                                                    $14,384
-                                                </td>
-                                                <td>
-                                                    03/24/2018
-                                                </td>
-                                                <td>
-                                                    <div className="spark-chart" data-dataset="[25, 82, 23, 67, 65, 67, 65, 56, 32, 19, 22]" />
-                                                </td>
-                                                <td>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
-                                                    <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
-                                                </td>
-                                            </tr>
+                                            {designer && designer.length > 0 &&
+                                                designer.map((designerItem, index) => {
+                                                    return (
+                                                        <tr key={index}>
+                                                            <td>
+                                                                <div className="form-check">
+                                                                    <input type="checkbox" className="form-check-input" id="customCheck2" />
+                                                                    <label className="form-check-label" htmlFor="customCheck2">&nbsp;</label>
+                                                                </div>
+                                                            </td>
+                                                            <td className="table-user">
+                                                                <img src="assets/images/users/avatar-4.jpg" alt="table-user" className="me-2 rounded-circle" />
+                                                                <a href="javascript:void(0);" className="text-body fw-semibold">Paul J. Friend</a>
+                                                            </td>
+                                                            <td>
+                                                                Homovee
+                                                            </td>
+                                                            <td>
+                                                                <span className="fw-semibold">128</span>
+                                                            </td>
+                                                            <td>
+                                                                $128,250
+                                                            </td>
+                                                            <td>
+                                                                07/07/2018
+                                                            </td>
+                                                            <td>
+                                                                <div className="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" />
+                                                            </td>
+                                                            <td>
+                                                                <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                                                                <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                                                            </td>
+                                                        </tr>
+                                                    )
+                                                })}
                                         </tbody>
                                     </table>
                                 </div>
+                                <nav aria-label="...">
+                                    <ul className="pagination pagination-circle">
+                                        <li className={`page-item ${currentPage === 1 ? 'disabled' : ''}`}>
+                                            <button className="page-link" onClick={() => handlePaginationClick(currentPage - 1)}>Previous</button>
+                                        </li>
+                                        {Array.from({ length: totalPages }, (_, index) => index + 1).map(page => (
+                                            <li key={page} className={`page-item ${currentPage === page ? 'active' : ''}`}>
+                                                <button className="page-link" onClick={() => handlePaginationClick(page)}>{page}</button>
+                                            </li>
+                                        ))}
+                                        <li className={`page-item ${currentPage === totalPages ? 'disabled' : ''}`}>
+                                            <button className="page-link" onClick={() => handlePaginationClick(currentPage + 1)}>Next</button>
+                                        </li>
+                                    </ul>
+                                </nav>
                             </div> {/* end card-body*/}
                         </div> {/* end card*/}
                     </div> {/* end col */}
