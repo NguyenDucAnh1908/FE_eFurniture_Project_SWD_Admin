@@ -146,19 +146,7 @@ const UpdateProjectBooking = () => {
                                       <label className="form-label">Start Date</label>
                                       <input type="text" className="form-control" data-provide="datepicker" data-date-container="#datepicker1" data-date-format="d-M-yyyy" data-date-autoclose="true" />
                                   </div> */}
-                    <div className="mb-3">
-                      <label htmlFor="project-budget" className="form-label">
-                        Size
-                      </label>
-                      <input
-                        type="text"
-                        id="project-budget"
-                        className="form-control"
-                        placeholder="Enter project size"
-                        value={size}
-                        onChange={(event) => setSize(event.target.value)}
-                      />
-                    </div>
+                   
                     <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
                         Design Style
