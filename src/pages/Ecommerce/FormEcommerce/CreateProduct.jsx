@@ -15,13 +15,13 @@ const CreateProduct = () => {
     const navigate = useNavigate()
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
-    const [thumbnail, setThumbnail] = useState('');
+    // const [thumbnail, setThumbnail] = useState('');
     const [price_sale, setPriceSale] = useState(null);
     const [quantity, setQuantity] = useState(null);
-    const [material, setMaterial] = useState('');
+    // const [material, setMaterial] = useState('');
     const [size, setSize] = useState('');
     const [color, setColor] = useState(null);
-    const [quantity_sold, setQuantitySold] = useState(null);
+    // const [quantity_sold, setQuantitySold] = useState(null);
     const [status, setStatus] = useState(null);
     const [discount, setDiscount] = useState(null);
     const [category_id, setCategoryId] = useState(null);
@@ -81,8 +81,8 @@ const CreateProduct = () => {
                 return getDownloadURL(imgRef);
             }));
             const formattedImages = imageUrls.map(imageUrl => ({ image_url: imageUrl }));
-            let res = await createProduct(name, description, thumbnail, price_sale, quantity, material, size,
-                color, quantity_sold, status, discount, selectedCategoryId, selectedBrandId, selectedTagProductId, formattedImages);
+            let res = await createProduct(name, description, price_sale, quantity, size,
+                color, status, discount, selectedCategoryId, selectedBrandId, selectedTagProductId, formattedImages);
             console.log("Create productL ", res)
             if (res) {
                 // Chuyển hướng sang trang /product
@@ -164,21 +164,21 @@ const CreateProduct = () => {
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={price_sale} onChange={(event) => setPriceSale(event.target.value)} />
                                         </div>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">thumbnail</label>
                                             <input type="text" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={thumbnail} onChange={(event) => setThumbnail(event.target.value)} />
-                                        </div>
+                                        </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Color</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={color} onChange={(event) => setColor(event.target.value)} />
                                         </div>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Quantity Sold</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={quantity_sold} onChange={(event) => setQuantitySold(event.target.value)} />
-                                        </div>
+                                        </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">status</label>
                                             <input type="number" id="project-budget" className="form-control"
@@ -274,11 +274,11 @@ const CreateProduct = () => {
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={quantity} onChange={(event) => setQuantity(event.target.value)} />
                                         </div>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Material</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={material} onChange={(event) => setMaterial(event.target.value)} />
-                                        </div>
+                                        </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Discount</label>
                                             <input type="number" id="project-budget" className="form-control"

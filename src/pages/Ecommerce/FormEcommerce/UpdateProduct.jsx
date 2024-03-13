@@ -31,13 +31,13 @@ const UpdateProduct = () => {
         id: id,
         name: '',
         description: '',
-        thumbnail: '',
+        // thumbnail: '',
         price_sale: '',
         quantity: '',
-        material: '',
+        // material: '',
         size: '',
         color: '',
-        quantity_sold: '',
+        // quantity_sold: '',
         status: '',
         discount: '',
         brand_id: '',
@@ -67,13 +67,13 @@ const UpdateProduct = () => {
                     ...values,
                     name: res.data.name,
                     description: res.data.description,
-                    thumbnail: res.data.thumbnail,
+                    // thumbnail: res.data.thumbnail,
                     price_sale: res.data.priceSale,
                     quantity: res.data.quantity,
-                    material: res.data.material,
+                    // material: res.data.material,
                     size: res.data.size,
                     color: res.data.color,
-                    quantity_sold: res.data.quantitySold,
+                    // quantity_sold: res.data.quantitySold,
                     status: res.data.status,
                     discount: res.data.discount,
                     brand_id: res.data.brand.id,
@@ -232,21 +232,21 @@ const UpdateProduct = () => {
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.price_sale} onChange={(event) => setValues({ ...values, price_sale: event.target.value })} />
                                         </div>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">thumbnail</label>
                                             <input type="text" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.thumbnail} onChange={(event) => setValues({ ...values, thumbnail: event.target.value })} />
-                                        </div>
+                                        </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Color</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.color} onChange={(event) => setValues({ ...values, color: event.target.value })} />
                                         </div>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Quantity Sold</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.quantity_sold} onChange={(event) => setValues({ ...values, quantity_sold: event.target.value })} />
-                                        </div>
+                                        </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">status</label>
                                             <input type="number" id="project-budget" className="form-control"
@@ -347,11 +347,11 @@ const UpdateProduct = () => {
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.quantity} onChange={(event) => setValues({ ...values, quantity: event.target.value })} />
                                         </div>
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Material</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.material} onChange={(event) => setValues({ ...values, material: event.target.value })} />
-                                        </div>
+                                        </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Discount</label>
                                             <input type="number" id="project-budget" className="form-control"

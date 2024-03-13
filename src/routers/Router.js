@@ -28,6 +28,7 @@ import ProjectBooking from '../pages/ProjectBookings/ProjectBooking'
 import CreateProjectBooking from '../pages/ProjectBookings/CreateProjectBooking'
 import UpdateProjectBooking from '../pages/ProjectBookings/UpdateProjectBooking'
 import UpdateBlog from '../pages/Blog/UpdateBlog'
+import MyProfile from '../pages/Account/MyProfile'
 
 function Router() {
 
@@ -60,9 +61,11 @@ function Router() {
                 <Route path='/designer' element={<Designer />} />
                 <Route path='/deliver' element={<Deliver />} />
 
-                <Route path='/view-project-booking' element={<ProjectBooking />} />
+                <Route path='/view-project-booking/:bookingId' element={<ProjectBooking />} />
                 <Route path= '/create-project-booking' element= {<CreateProjectBooking />} />
                 <Route path= '/update-project-booking/:id' element= {<UpdateProjectBooking />} />
+
+                <Route path='/my-profile' element={<MyProfile />} />
                 
             </Routes>
         </>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import TopNavbar from '../../components/TopNavbar/TopNavbar';
+import TopNavbar from "../../components/TopNavbar/TopNavbar";
 import { useNavigate } from "react-router-dom";
-import axios from 'axios'; 
+import axios from "axios";
 
 const CreateProjectBooking = () => {
   const navigate = useNavigate;
@@ -22,33 +22,40 @@ const CreateProjectBooking = () => {
   const [selectedBookingId, setSelectedBookingId] = useState("");
   const handleCreateProjectBooking = async () => {
     try {
-        const response = await axios.post("http://localhost:8080/api/v1/booking/register-project-booking", {
-            projectName,
-            projectType,
-            size,
-            designStyle,
-            colorSchemes,
-            intendUse,
-            occupantsNumber,
-            timeLine, // Correct the key name
-            projectPrice,
-            code,
-            userId,
-            bookingId
-        });
-        console.log("Create project booking response: ", response.data);
-        // Redirect or navigate to another page
-        // navigate('/view-project-booking'); // Example: Redirect to product page
-        // Optionally show a success message
-        // toast.success("Create project booking successfully")
+      const response = await axios.post(
+        "http://localhost:8080/api/v1/booking/register-project-booking",
+        {
+          projectName,
+          projectType,
+          size,
+          designStyle,
+          colorSchemes,
+          intendUse,
+          occupantsNumber,
+          timeLine, // Correct the key name
+          projectPrice,
+          code,
+          userId,
+          bookingId,
+        }
+        
+
+      );
+      console.log("Create project booking response: ", response.data);
+      // Redirect or navigate to another page
+      // navigate('/view-project-booking'); // Example: Redirect to product page
+      // Optionally show a success message
+      // toast.success("Create project booking successfully")
     } catch (error) {
-        console.error('Error creating project booking:', error);
-        // Optionally show an error message
-        // toast.error("Create project booking fail")
+      console.error("Error creating project booking:", error);
+      // Optionally show an error message
+      // toast.error("Create project booking fail")
     }
-};
+   
+  
+  };
   return (
-<>
+    <>
       <TopNavbar />
       {/* Start Content*/}
       <div className="container-fluid">
@@ -176,7 +183,7 @@ const CreateProjectBooking = () => {
                         value={occupantsNumber}
                         onChange={(event) => {
                           const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
                           if (!isNaN(value) && +value >= 0) {
                             setOccupantsNumber(value);
                           } else if (value === "") {
@@ -184,7 +191,7 @@ const CreateProjectBooking = () => {
                             setOccupantsNumber("");
                           }
                           // Nếu không, không cập nhật giá trị (tức là khi nhập giá trị âm)
-                        }}  
+                        }}
                       />
                     </div>
                     <div className="mb-3">
@@ -212,7 +219,7 @@ const CreateProjectBooking = () => {
                         value={projectPrice}
                         onChange={(event) => {
                           const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
                           if (!isNaN(value) && +value >= 0) {
                             setProjectPrice(value);
                           } else if (value === "") {
@@ -264,8 +271,8 @@ const CreateProjectBooking = () => {
                     </div>
                   </div>{" "}
                   {/* end col*/}
-                   <div className="col-xl-6">
-                     <div className="mb-3 mt-3 mt-xl-0">
+                  <div className="col-xl-6">
+                    <div className="mb-3 mt-3 mt-xl-0">
                       {/* <label htmlFor="projectname" className="mb-0">
                         Avatar
                       </label> */}
@@ -336,9 +343,8 @@ const CreateProjectBooking = () => {
                       {/* <label htmlFor="project-overview" className="form-label">
                         Tags Product
                       </label> */}
-                     
                     </div>
-                   
+
                     <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
                         Size
@@ -348,11 +354,11 @@ const CreateProjectBooking = () => {
                         id="project-budget"
                         className="form-control"
                         placeholder="Enter project budget"
-                        min = "0"
+                        min="0"
                         value={size}
                         onChange={(event) => {
                           const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
                           if (!isNaN(value) && +value >= 0) {
                             setSize(value);
                           } else if (value === "") {
@@ -364,10 +370,7 @@ const CreateProjectBooking = () => {
                       />
                     </div>
                     {/* Date View */}
-                    
-                   
-                   
-                  </div>{" "} 
+                  </div>{" "}
                   {/* end col*/}
                 </div>
 
@@ -377,12 +380,23 @@ const CreateProjectBooking = () => {
               <div class="justify-content-end row">
                 <div class="col-9">
                   <button
-                  style={{ backgroundColor: "blue", color: "white", fontSize: "18px", border: "none", padding: "10px 20px", borderRadius: "5px", cursor: "pointer" }}
+                    style={{
+                      backgroundColor: "blue",
+                      color: "white",
+                      fontSize: "18px",
+                      border: "none",
+                      padding: "10px 20px",
+                      borderRadius: "5px",
+                      cursor: "pointer",
+                    }}
                     type="submit"
-                    onClick={() => handleCreateProjectBooking()}
+                    onClick={() => {
+                      handleCreateProjectBooking();
+                      window.history.back(); // Go back to the previous page
+                    }}
                     class="btn btn-info"
                   >
-                   <a href = "view-project-booking" style={{ color: "white", textDecoration: "none" }}>Create</a>
+                    Create
                   </button>
                 </div>
               </div>
