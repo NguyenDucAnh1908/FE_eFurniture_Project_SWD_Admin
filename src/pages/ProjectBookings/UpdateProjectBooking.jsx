@@ -211,9 +211,18 @@ const UpdateProjectBooking = () => {
                         placeholder="Enter number of occupants"
                         min="0"
                         value={occupantsNumber}
-                        onChange={(event) =>
-                          setOccupantsNumber(event.target.value)
-                        }
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          if (!isNaN(value) && +value >= 0) {
+                            setOccupantsNumber(value);
+                          } else if (value === "") {
+                            // Cho phép xóa giá trị
+                            setOccupantsNumber("");
+                          }
+                          // Nếu không, không cập nhật giá trị (tức là khi nhập giá trị âm)
+                        }}
+                      
                       />
                     </div>
                     <div className="mb-3">
@@ -378,7 +387,17 @@ const UpdateProjectBooking = () => {
                         placeholder="Enter project budget"
                         min="0"
                         value={size}
-                        onChange={(event) => setSize(event.target.value)}
+                        onChange={(event) => {
+                          const value = event.target.value;
+                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm  
+                          if (!isNaN(value) && +value >= 0) {
+                            setSize(value);
+                          } else if (value === "") {
+                            // Cho phép xóa giá trị
+                            setSize("");
+                          }
+                          // Nếu không, không cập nhật giá trị (tức là khi nhập giá trị âm)
+                        }}
                       />
                     </div>
                     {/* Date View */}
