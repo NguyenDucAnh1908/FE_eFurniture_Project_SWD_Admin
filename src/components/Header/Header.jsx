@@ -131,9 +131,7 @@ const Header = () => {
                                     <li>
                                         <a href="/booking">List Booking</a>
                                     </li>
-                                    <li>
-                                        <a href="/view-project-booking">ProjectBooking</a>
-                                    </li>
+                                  
                                     {/* <li>
                                         <a href="apps-projects-gantt.html">Gantt <span className="badge rounded-pill bg-light text-dark font-10 float-end">New</span></a>
                                     </li> */}

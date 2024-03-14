@@ -151,7 +151,7 @@ const Booking = () => {
 
                                                     </td>
                                                     <td>
-                                                        <a href="/view-project-booking" className="action-icon"> <i className="mdi mdi-eye" /></a>
+                                                        <a href={`/view-project-booking/${booking.id}`} className="action-icon"> <i className="mdi mdi-eye" /></a>
                                                         {booking.status !== 'Cancel' && (
                                                             <a className="action-icon" onClick={() => handleReceiveAndConfirm(booking.id)}>
                                                                 <i className="mdi mdi-check" />
