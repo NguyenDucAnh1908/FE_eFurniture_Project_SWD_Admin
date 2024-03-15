@@ -114,7 +114,7 @@ const Home = () => {
                             <div className="card card-h-100">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 className="header-title">Projections Vs Actuals</h4>
+                                        <h4 className="header-title">Chart total sale</h4>
                                         <div className="dropdown">
                                             <a href="#" className="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i className="mdi mdi-dots-vertical" />
@@ -258,7 +258,7 @@ const Home = () => {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 className="header-title">Top Selling Products</h4>
+                                        <h4 className="header-title">Top 5 Selling Products</h4>
                                         <a href="javascript:void(0);" className="btn btn-sm btn-link">Export <i className="mdi mdi-download ms-1" /></a>
                                     </div>
                                     <div className="table-responsive">
@@ -297,7 +297,7 @@ const Home = () => {
                             <div className="card">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center">
-                                        <h4 className="header-title">Total Sales</h4>
+                                        <h4 className="header-title">Chart rating product</h4>
                                         <div className="dropdown">
                                             <a href="#" className="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i className="mdi mdi-dots-vertical" />

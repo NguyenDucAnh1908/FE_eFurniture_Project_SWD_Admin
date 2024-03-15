@@ -198,10 +198,10 @@ const UpdateProduct = () => {
                                 <ol className="breadcrumb m-0">
                                     <li className="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
                                     <li className="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
-                                    <li className="breadcrumb-item active">Create Project</li>
+                                    <li className="breadcrumb-item active">Update Product</li>
                                 </ol>
                             </div>
-                            <h4 className="page-title">Create Project</h4>
+                            <h4 className="page-title">Update Product</h4>
                         </div>
                     </div>
                 </div>
