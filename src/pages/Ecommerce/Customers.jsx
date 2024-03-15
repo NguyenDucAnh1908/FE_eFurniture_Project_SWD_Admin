@@ -82,7 +82,7 @@ const Customer = () => {
                                                 <th>Phone</th>
                                                 <th>Email</th>
                                                 <th>Location</th>
-                                                <th>Create Date</th>
+                                                <th>Date of birth</th>
                                                 <th>Status</th>
                                                 <th style={{ width: 75 }}>Action</th>
                                             </tr>
@@ -100,22 +100,22 @@ const Customer = () => {
                                                             </td>
                                                             <td className="table-user">
                                                                 <img src="assets/images/users/avatar-4.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                                <a href="javascript:void(0);" className="text-body fw-semibold">Paul J. Friend</a>
+                                                                <a href="javascript:void(0);" className="text-body fw-semibold">{custommersItem.fullName}</a>
                                                             </td>
                                                             <td>
-                                                                937-330-1634
+                                                                {custommersItem.phoneNumber}
                                                             </td>
                                                             <td>
-                                                                pauljfrnd@jourrapide.com
+                                                               {custommersItem.email}
                                                             </td>
                                                             <td>
-                                                                New York
+                                                                Việt Nam
                                                             </td>
                                                             <td>
-                                                                07/07/2018
+                                                                {custommersItem.dateOfBirth}
                                                             </td>
                                                             <td>
-                                                                <span className="badge badge-success-lighten">Active</span>
+                                                                <span className="badge badge-success-lighten">{custommersItem.active ? 'active' : ''}</span>
                                                             </td>
                                                             <td>
                                                                 <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>

@@ -99,22 +99,22 @@ const Designer = () => {
                                                             </td>
                                                             <td className="table-user">
                                                                 <img src="assets/images/users/avatar-4.jpg" alt="table-user" className="me-2 rounded-circle" />
-                                                                <a href="javascript:void(0);" className="text-body fw-semibold">Paul J. Friend</a>
+                                                                <a href="javascript:void(0);" className="text-body fw-semibold">{designerItem.fullName}</a>
                                                             </td>
                                                             <td>
-                                                                Homovee
+                                                                {designerItem.phoneNumber}
                                                             </td>
                                                             <td>
-                                                                <span className="fw-semibold">128</span>
+                                                                {designerItem.email}
                                                             </td>
                                                             <td>
-                                                                $128,250
+                                                                Việt Nam
                                                             </td>
                                                             <td>
-                                                                07/07/2018
+                                                                {designerItem.dateOfBirth}
                                                             </td>
                                                             <td>
-                                                                <div className="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" />
+                                                                <span className="badge badge-success-lighten">{designerItem.active ? 'active' : ''}</span>
                                                             </td>
                                                             <td>
                                                                 <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>

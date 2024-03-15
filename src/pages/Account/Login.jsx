@@ -31,13 +31,16 @@ const Login = (props) => {
         console.log("Check login", response);
         // let role = response.user.role;
         // && role === "ADMIN"
-        if (response && response.staus === "Success" && response.role === "ADMIN") {
+        if (response && response.staus === "Success" && response.role === "ADMIN"
+         || response.role === "STAFF_DELIVERY" || response.role === "STAFF" || response.role === "DESIGNER"
+        ) {
             let user = response.user;
             let tokenJwt = response.token;
             let data = {
                 isAuthenticated: true,
                 token: response.token,
                 refesh_token: response.refesh_token,
+                role: response.role,
                 account: { user }
             }
             localStorage.setItem("account", JSON.stringify(data));
@@ -61,6 +64,7 @@ const Login = (props) => {
     useEffect(() => {
         let local = localStorage.getItem("account");
         if(local) {
+            toast.warning("You do not have access!");
             navigate('/')
         };
     },[])
