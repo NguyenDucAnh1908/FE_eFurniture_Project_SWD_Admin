@@ -23,6 +23,8 @@ import ListBlog from '../pages/Blog/ListBlog'
 
 import Designer from '../pages/Ecommerce/Designer'
 import Deliver from '../pages/Ecommerce/Deliver'
+import ListDesign from '../pages/Design/ListDesign'
+import DesignDetail from '../pages/Design/DesignDetail'
 
 import ProjectBooking from '../pages/ProjectBookings/ProjectBooking'
 import CreateProjectBooking from '../pages/ProjectBookings/CreateProjectBooking'
@@ -109,6 +111,8 @@ function Router() {
 
                 <Route path='/designer' element={<Designer />} />
                 <Route path='/deliver' element={<Deliver />} />
+                <Route path='/list-design/:id' element={<ListDesign />} />
+                <Route path='/design-detail/:id' element={<DesignDetail />} />
 
                 <Route path='/view-project-booking/:bookingId' element={<ProjectBooking />} />
                 <Route path= '/create-project-booking' element= {<CreateProjectBooking />} />
