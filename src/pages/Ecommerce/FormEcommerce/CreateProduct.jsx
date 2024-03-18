@@ -253,7 +253,7 @@ const CreateProduct = () => {
 
     const validateCategory = () => {
         if (selectedCategoryId === 'Select') {
-            setCategoryError('Vui lòng chọn một danh mục');
+            setCategoryError('Please select a category');
             return false;
         } else {
             setCategoryError('');
@@ -263,7 +263,7 @@ const CreateProduct = () => {
 
     const validateBrand = () => {
         if (selectedBrandId === 'Select') {
-            setBrandError('Vui lòng chọn một danh mục');
+            setBrandError('Please select a Brand');
             return false;
         } else {
             setBrandError('');
@@ -273,7 +273,7 @@ const CreateProduct = () => {
 
     const validateTagProduct = () => {
         if (selectedTagProductId === 'Select') {
-            setTagError('Vui lòng chọn một danh mục');
+            setTagError('Please select a Tag product');
             return false;
         } else {
             setTagError('');

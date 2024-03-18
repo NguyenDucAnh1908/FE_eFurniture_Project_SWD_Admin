@@ -27,6 +27,34 @@ const UpdateProduct = () => {
         id: '',
         name: ''
     });
+
+    // const [name, setName] = useState('');
+    // const [description, setDescription] = useState('');
+    // const [price_sale, setPriceSale] = useState(null);
+    // const [quantity, setQuantity] = useState(null);
+    // const [size, setSize] = useState('');
+    // const [color, setColor] = useState(null);
+    // const [status, setStatus] = useState('1');
+    // const [discount, setDiscount] = useState(null);
+    // const [category_id, setCategoryId] = useState(null);
+    // const [productImages, setProductImages] = useState([]);
+    // const [category, setCategory] = useState([]);
+    // const [brand, setBrand] = useState([]);
+    // const [tagProduct, setTagProduct] = useState([]);
+    // const [selectedCategoryId, setSelectedCategoryId] = useState('');
+    // const [selectedBrandId, setSelectedBrandId] = useState('');
+    // const [selectedTagProductId, setSelectedTagProducId] = useState('');
+
+    const [priceSaleError, setPriceSaleError] = useState('');
+    const [quantityError, setQuantityError] = useState('');
+    const [discountError, setDiscountError] = useState('');
+    const [nameError, setNameError] = useState('');
+    const [descriptionError, setDescriptionError] = useState('');
+    const [sizeError, setSizeError] = useState('');
+    const [categoryError, setCategoryError] = useState('');
+    const [brandError, setBrandError] = useState('');
+    const [tagError, setTagError] = useState('');
+
     const [values, setValues] = useState({
         id: id,
         name: '',
@@ -45,6 +73,7 @@ const UpdateProduct = () => {
         category_id: '',
         productImages: []
     });
+
 
     const [category, setCategory] = useState([]);
     const [brand, setBrand] = useState([]);
@@ -153,14 +182,95 @@ const UpdateProduct = () => {
         }
     }
 
-    const handleUpdateProduct = async (event) => {
-        //event.prevenDefault();
-        axios.put('http://localhost:8080/api/v1/products/' + id, values)
-            .then(res => {
-                navigate('/product');
-            })
-            .catch(err => console.log(err));
-    }
+    const validateInput = () => {
+        let isValid = true;
+        if (!values.name.trim()) {
+            setNameError('Name is a required field');
+            isValid = false;
+        } else {
+            setNameError('');
+        }
+        if (!values.description.trim()) {
+            setDescriptionError('Description is a required field');
+            isValid = false;
+        } else {
+            setDescriptionError('');
+        }
+        if (!values.price_sale || values.price_sale <= 0) {
+            setPriceSaleError('Invalid selling price');
+            isValid = false;
+        } else {
+            setPriceSaleError('');
+        }
+        if (!values.quantity || values.quantity <= 0) {
+            setQuantityError('Invalid quantity');
+            isValid = false;
+        } else {
+            setQuantityError('');
+        }
+        if (!values.discount || values.discount <= 0) {
+            setDiscountError('Discount not valid');
+            isValid = false;
+        } else {
+            setDiscountError('');
+        }
+        if (!values.size.trim()) {
+            setSizeError('Size is a required field');
+            isValid = false;
+        } else {
+            setSizeError('');
+        }
+
+        // Kiểm tra selectedCategory
+        if (!selectedCategory.id) {
+            setCategoryError('Category is a required field');
+            isValid = false;
+        } else {
+            setCategoryError('');
+        }
+        // Kiểm tra selectedBrand
+        if (!selectedBrand.id) {
+            setBrandError('Brand is a required field');
+            isValid = false;
+        } else {
+            setBrandError('');
+        }
+        // Kiểm tra selectedTagProduct
+        if (!selectedTagProduct.id) {
+            setTagError('Tag Product is a required field');
+            isValid = false;
+        } else {
+            setTagError('');
+        }
+        return isValid;
+    };
+
+
+    const handleUpdateProduct = async () => {
+        const isValid = validateInput();
+
+        if (!isValid) {
+            return;
+        }
+
+        try {
+            await axios.put('http://localhost:8080/api/v1/products/' + id, values);
+            navigate('/product');
+        } catch (error) {
+            console.error('Error updating product:', error);
+        }
+    };
+
+
+
+    // const handleUpdateProduct = async (event) => {
+    //     //event.prevenDefault();
+    //     axios.put('http://localhost:8080/api/v1/products/' + id, values)
+    //         .then(res => {
+    //             navigate('/product');
+    //         })
+    //         .catch(err => console.log(err));
+    // }
 
     // const handleCategoryChange = (event) => {
     //     setSelectedCategoryId(event.target.value);
@@ -183,6 +293,35 @@ const UpdateProduct = () => {
         }
     };
 
+    const validateCategory = () => {
+        if (selectedCategoryId === 'Select') {
+            setCategoryError('Please select a category');
+            return false;
+        } else {
+            setCategoryError('');
+            return true;
+        }
+    };
+
+    const validateBrand = () => {
+        if (selectedBrandId === 'Select') {
+            setBrandError('Please select a Brand');
+            return false;
+        } else {
+            setBrandError('');
+            return true;
+        }
+    };
+
+    const validateTagProduct = () => {
+        if (selectedTagProductId === 'Select') {
+            setTagError('Please select a Tag product');
+            return false;
+        } else {
+            setTagError('');
+            return true;
+        }
+    };
 
 
     return (
@@ -214,13 +353,15 @@ const UpdateProduct = () => {
                                     <div className="col-xl-6">
                                         <div className="mb-3">
                                             <label htmlFor="projectname" className="form-label">Name</label>
-                                            <input type="text" id="projectname" className="form-control"
+                                            <input type="text" id="projectname" className={`form-control ${nameError ? 'is-invalid' : ''}`}
                                                 placeholder="Enter project name" value={values.name} onChange={(event) => setValues({ ...values, name: event.target.value })} />
+                                            {nameError && <div className="invalid-feedback">{nameError}</div>}
                                         </div>
                                         <div className="mb-3">
                                             <label htmlFor="project-overview" className="form-label">Description</label>
-                                            <textarea className="form-control" id="project-overview" rows={5} placeholder="Enter some brief about project.."
+                                            <textarea className={`form-control ${descriptionError ? 'is-invalid' : ''}`} id="project-overview" rows={5} placeholder="Enter some brief about project.."
                                                 defaultValue={""} value={values.description} onChange={(event) => setValues({ ...values, description: event.target.value })} />
+                                            {descriptionError && <div className="invalid-feedback">{descriptionError}</div>}
                                         </div>
                                         {/* Date View */}
                                         {/* <div className="mb-3 position-relative" id="datepicker1">
@@ -229,30 +370,37 @@ const UpdateProduct = () => {
                                 </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">price sale</label>
-                                            <input type="number" id="project-budget" className="form-control"
+                                            <input type="number" id="project-budget" className={`form-control ${priceSaleError ? 'is-invalid' : ''}`}
                                                 placeholder="Enter project budget" value={values.price_sale} onChange={(event) => setValues({ ...values, price_sale: event.target.value })} />
+                                            {priceSaleError && <div className="invalid-feedback">{priceSaleError}</div>}
                                         </div>
                                         {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">thumbnail</label>
                                             <input type="text" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.thumbnail} onChange={(event) => setValues({ ...values, thumbnail: event.target.value })} />
                                         </div> */}
-                                        <div className="mb-3">
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Color</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.color} onChange={(event) => setValues({ ...values, color: event.target.value })} />
-                                        </div>
+                                        </div> */}
                                         {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Quantity Sold</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.quantity_sold} onChange={(event) => setValues({ ...values, quantity_sold: event.target.value })} />
                                         </div> */}
-                                        <div className="mb-3">
+                                        {/* Status */}
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">status</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.status} onChange={(event) => setValues({ ...values, status: event.target.value })} />
-                                        </div>
-                                        <div className="mb-0">
+                                        </div> */}
+                                        <select className="form-select" value={values.status} onChange={(event) => setValues({ ...values, status: event.target.value })}>
+                                            <option value="1" selected={values.status === "1"}>Active</option>
+                                            <option value="0" selected={values.status === "0"}>In-Active</option>
+                                        </select>
+                                        {/* Category */}
+                                        {/* <div className="mb-0">
                                             <label htmlFor="project-overview" className="form-label">Category</label>
                                             <select value={selectedCategory.id} onChange={handleCategoryChange} className="form-control select2" data-toggle="select2">
                                                 <option readonly>Select</option>
@@ -263,7 +411,21 @@ const UpdateProduct = () => {
                                                         )
                                                     })}
                                             </select>
+                                        </div> */}
+                                        <div className="mb-0">
+                                            <label htmlFor="project-overview" className="form-label">Category</label>
+                                            <select value={selectedCategory.id} onChange={handleCategoryChange} className={`form-control select2 ${categoryError ? 'is-invalid' : ''}`} data-toggle="select2">
+                                                <option value="">Select</option>
+                                                {category && category.length > 0 &&
+                                                    category.map((categoryItem, index) => {
+                                                        return (
+                                                            <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>
+                                                        )
+                                                    })}
+                                            </select>
+                                            {categoryError && <div className="invalid-feedback">{categoryError}</div>}
                                         </div>
+
                                     </div> {/* end col*/}
                                     <div className="col-xl-6">
                                         <div className="mb-3 mt-3 mt-xl-0">
@@ -312,7 +474,8 @@ const UpdateProduct = () => {
                                             </div>
                                             {/* end file preview template */}
                                         </div>
-                                        <div className="mb-0">
+                                        {/* brand */}
+                                        {/* <div className="mb-0">
                                             <label htmlFor="project-overview" className="form-label">Tags Product</label>
                                             <select value={selectedBrand.id} onChange={handlebrandChange} className="form-control select2" data-toggle="select2">
                                                 <option >Select</option>
@@ -323,8 +486,22 @@ const UpdateProduct = () => {
                                                         )
                                                     })}
                                             </select>
-                                        </div>
+                                        </div> */}
                                         <div className="mb-0">
+                                            <label htmlFor="project-overview" className="form-label">Brand</label>
+                                            <select value={selectedBrand.id} onChange={handlebrandChange} className={`form-control select2 ${brandError ? 'is-invalid' : ''}`} data-toggle="select2">
+                                                <option value="">Select</option>
+                                                {brand && brand.length > 0 &&
+                                                    brand.map((brandItem, index) => {
+                                                        return (
+                                                            <option key={brandItem.id} value={brandItem.id}>{brandItem.name}</option>
+                                                        )
+                                                    })}
+                                            </select>
+                                            {brandError && <div className="invalid-feedback">{brandError}</div>}
+                                        </div>
+                                        {/* TagProduct */}
+                                        {/* <div className="mb-0">
                                             <label htmlFor="project-overview" className="form-label">Brand</label>
                                             <select value={selectedTagProduct.id} onChange={handleTagProductChange} className="form-control select2" data-toggle="select2">
                                                 <option >Select</option>
@@ -335,17 +512,54 @@ const UpdateProduct = () => {
                                                         )
                                                     })}
                                             </select>
+                                        </div> */}
+                                        <div className="mb-0">
+                                            <label htmlFor="project-overview" className="form-label">Tag product</label>
+                                            <select value={selectedTagProduct.id} onChange={handleTagProductChange} className={`form-control select2 ${tagError ? 'is-invalid' : ''}`} data-toggle="select2">
+                                                <option value="">Select</option>
+                                                {tagProduct && tagProduct.length > 0 &&
+                                                    tagProduct.map((tagProductItem, index) => {
+                                                        return (
+                                                            <option key={tagProductItem.id} value={tagProductItem.id}>{tagProductItem.name}</option>
+                                                        )
+                                                    })}
+                                            </select>
+                                            {tagError && <div className="invalid-feedback">{tagError}</div>}
                                         </div>
-                                        <div className="mb-3">
+                                        {/* Size */}
+                                        {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Size</label>
                                             <input type="number" id="project-budget" className="form-control"
                                                 placeholder="Enter project budget" value={values.size} onChange={(event) => setValues({ ...values, size: event.target.value })} />
+                                        </div> */}
+                                        <div className="mb-3">
+                                            <label htmlFor="project-budget" className="form-label">Size</label>
+                                            <select
+                                                className={`form-select ${sizeError ? 'is-invalid' : ''}`}
+                                                value={values.size}
+                                                onChange={(event) => setValues({ ...values, size: event.target.value })}
+                                            >
+                                                <option value="">Select size</option>
+                                                <option value="750 – 850">750 – 850</option>
+                                                <option value="380 – 420">380 – 420</option>
+                                                <option value="850 – 1100">850 – 1100</option>
+                                                <option value="1000">1000</option>
+                                                <option value="800">800</option>
+                                                <option value="3000 – 2200 – 1700">3000 – 2200 – 1700</option>
+                                                <option value="850 – 900">850 – 900</option>
+                                                <option value="380 – 420">380 – 420</option>
+                                                <option value="2600 – 3200">2600 – 3200</option>
+                                                <option value="1600 – 1950">1600 – 1950</option>
+                                            </select>
+                                            {sizeError && <div className="invalid-feedback">{sizeError}</div>}
+
                                         </div>
                                         {/* Date View */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Quantity</label>
-                                            <input type="number" id="project-budget" className="form-control"
+                                            <input type="number" id="project-budget" className={`form-control ${quantityError ? 'is-invalid' : ''}`}
                                                 placeholder="Enter project budget" value={values.quantity} onChange={(event) => setValues({ ...values, quantity: event.target.value })} />
+                                            {quantityError && <div className="invalid-feedback">{quantityError}</div>}
                                         </div>
                                         {/* <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Material</label>
@@ -354,8 +568,9 @@ const UpdateProduct = () => {
                                         </div> */}
                                         <div className="mb-3">
                                             <label htmlFor="project-budget" className="form-label">Discount</label>
-                                            <input type="number" id="project-budget" className="form-control"
+                                            <input type="number" id="project-budget" className={`form-control ${discountError ? 'is-invalid' : ''}`}
                                                 placeholder="Enter project budget" value={values.discount} onChange={(event) => setValues({ ...values, discount: event.target.value })} />
+                                            {discountError && <div className="invalid-feedback">{discountError}</div>}
                                         </div>
                                     </div> {/* end col*/}
 
