@@ -9,6 +9,7 @@ const UserProvider = ({ children }) => {
     // Nếu có dữ liệu user trong localStorage thì lấy nó, ngược lại trả về user mặc định
     const storedUser = localStorage.getItem('account');
     return storedUser ? JSON.parse(storedUser) : {
+      isLoading: true,
       isAuthenticated: false,
       token: '',
       refresh_token: '',
@@ -18,7 +19,7 @@ const UserProvider = ({ children }) => {
 
   // Login updates the user data with a name parameter
   const login = (userData) => {
-    setUser(userData);
+    setUser({...userData, isLoading: false});
     localStorage.setItem('account', JSON.stringify(userData));
   };
 
