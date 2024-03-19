@@ -300,7 +300,7 @@ const CreateProduct = () => {
 
     return (
         <>
-        {
+            {
                 loading ? <ClockLoader
                     color={'#313A46'}
                     loading={loading}
@@ -310,200 +310,200 @@ const CreateProduct = () => {
                     data-testid="loader"
                 /> :
                     <>
-            <TopNavbar />
-            {/* Start Content*/}
-            <div className="container-fluid">
-                {/* start page title */}
-                <div className="row">
-                    <div className="col-12">
-                        <div className="page-title-box">
-                            <div className="page-title-right">
-                                <ol className="breadcrumb m-0">
-                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
-                                    <li className="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
-                                    <li className="breadcrumb-item active">Create Project</li>
-                                </ol>
+                        <TopNavbar />
+                        {/* Start Content*/}
+                        <div className="container-fluid">
+                            {/* start page title */}
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="page-title-box">
+                                        <div className="page-title-right">
+                                            <ol className="breadcrumb m-0">
+                                                <li className="breadcrumb-item"><a href="javascript: void(0);">Hyper</a></li>
+                                                <li className="breadcrumb-item"><a href="javascript: void(0);">Projects</a></li>
+                                                <li className="breadcrumb-item active">Create Project</li>
+                                            </ol>
+                                        </div>
+                                        <h4 className="page-title">Create Project</h4>
+                                    </div>
+                                </div>
                             </div>
-                            <h4 className="page-title">Create Project</h4>
-                        </div>
-                    </div>
-                </div>
-                {/* end page title */}
-                <div className="row">
-                    <div className="col-12">
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="row">
-                                    <div className="col-xl-6">
-                                        <div className="mb-3">
-                                            <label htmlFor="projectname" className="form-label">Name</label>
-                                            <input type="text" id="projectname"
-                                                className={`form-control ${nameError ? 'is-invalid' : ''}`}
-                                                placeholder="Enter project name"
-                                                value={name}
-                                                onChange={(event) => setName(event.target.value)} />
-                                            {nameError && <div className="invalid-feedback">{nameError}</div>}
-                                        </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="project-overview"
-                                                className="form-label">Description</label>
-                                            <textarea className={`form-control ${descriptionError ? 'is-invalid' : ''}`}
-                                                id="project-overview" rows={5}
-                                                placeholder="Enter some brief about project.."
-                                                defaultValue={""}
-                                                value={description} onChange={(event) => setDescription(event.target.value)} />
-                                            {descriptionError && <div className="invalid-feedback">{descriptionError}</div>}
-                                        </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="project-budget" className="form-label">Price sale</label>
-                                            <input
-                                                type="number"
-                                                id="project-budget"
-                                                className={`form-control ${priceSaleError ? 'is-invalid' : ''}`}
-                                                placeholder="Enter project budget"
-                                                value={price_sale}
-                                                onChange={handlePriceSaleChange} />
-                                            {priceSaleError && <div className="invalid-feedback">{priceSaleError}</div>}
-                                        </div>
-                                        <select className="form-select" value={status} onChange={(event) => setStatus(event.target.value)}>
-                                            <option value="1" selected={status === "1"}>Active</option>
-                                            <option value="0" selected={status === "0"}>In-Active</option>
-                                        </select>
+                            {/* end page title */}
+                            <div className="row">
+                                <div className="col-12">
+                                    <div className="card">
+                                        <div className="card-body">
+                                            <div className="row">
+                                                <div className="col-xl-6">
+                                                    <div className="mb-3">
+                                                        <label htmlFor="projectname" className="form-label">Name</label>
+                                                        <input type="text" id="projectname"
+                                                            className={`form-control ${nameError ? 'is-invalid' : ''}`}
+                                                            placeholder="Enter project name"
+                                                            value={name}
+                                                            onChange={(event) => setName(event.target.value)} />
+                                                        {nameError && <div className="invalid-feedback">{nameError}</div>}
+                                                    </div>
+                                                    <div className="mb-3">
+                                                        <label htmlFor="project-overview"
+                                                            className="form-label">Description</label>
+                                                        <textarea className={`form-control ${descriptionError ? 'is-invalid' : ''}`}
+                                                            id="project-overview" rows={5}
+                                                            placeholder="Enter some brief about project.."
+                                                            defaultValue={""}
+                                                            value={description} onChange={(event) => setDescription(event.target.value)} />
+                                                        {descriptionError && <div className="invalid-feedback">{descriptionError}</div>}
+                                                    </div>
+                                                    <div className="mb-3">
+                                                        <label htmlFor="project-budget" className="form-label">Price sale</label>
+                                                        <input
+                                                            type="number"
+                                                            id="project-budget"
+                                                            className={`form-control ${priceSaleError ? 'is-invalid' : ''}`}
+                                                            placeholder="Enter project budget"
+                                                            value={price_sale}
+                                                            onChange={handlePriceSaleChange} />
+                                                        {priceSaleError && <div className="invalid-feedback">{priceSaleError}</div>}
+                                                    </div>
+                                                    <select className="form-select" value={status} onChange={(event) => setStatus(event.target.value)}>
+                                                        <option value="1" selected={status === "1"}>Active</option>
+                                                        <option value="0" selected={status === "0"}>In-Active</option>
+                                                    </select>
 
-                                        <div className="mb-0">
-                                            <label htmlFor="project-overview" className="form-label">Category</label>
-                                            <select onChange={handleCategoryChange} className={`form-control select2 ${categoryError ? 'is-invalid' : ''}`} data-toggle="select2">
-                                                <option>Select</option>
-                                                {category && category.length > 0 &&
-                                                    category.map((categoryItem, index) => {
-                                                        return (
-                                                            <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>
-                                                        )
-                                                    })}
-                                            </select>
-                                            {categoryError && <div className="invalid-feedback">{categoryError}</div>}
-                                        </div>
-                                    </div> {/* end col*/}
-                                    <div className="col-xl-6">
-                                        <div className="mb-3 mt-3 mt-xl-0">
-                                            <label htmlFor="projectname" className="mb-0">Avatar</label>
-                                            <p className="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
-                                            <input type="file" onChange={handleImageChange} multiple />
-                                            <button onClick={handleCreateProduct}>Create Product</button>
-                                            {/* Preview */}
-                                            <div className="dropzone-previews mt-3" id="file-previews" />
-                                            {/* file preview template */}
-                                            <div className="d-none" id="uploadPreviewTemplate">
-                                                <div className="card mt-1 mb-0 shadow-none border">
-                                                    <div className="p-2">
-                                                        <div className="row align-items-center">
-                                                            <div className="col-auto">
-                                                                <img data-dz-thumbnail src="#" className="avatar-sm rounded bg-light" alt />
-                                                            </div>
-                                                            <div className="col ps-0">
-                                                                <a href="javascript:void(0);" className="text-muted fw-bold" data-dz-name />
-                                                                <p className="mb-0" data-dz-size />
-                                                            </div>
-                                                            <div className="col-auto">
-                                                                {/* Button */}
-                                                                <a href="#" className="btn btn-link btn-lg text-muted" data-dz-remove>
-                                                                    <i className="dripicons-cross" />
-                                                                </a>
+                                                    <div className="mb-0">
+                                                        <label htmlFor="project-overview" className="form-label">Category</label>
+                                                        <select onChange={handleCategoryChange} className={`form-control select2 ${categoryError ? 'is-invalid' : ''}`} data-toggle="select2">
+                                                            <option>Select</option>
+                                                            {category && category.length > 0 &&
+                                                                category.map((categoryItem, index) => {
+                                                                    return (
+                                                                        <option key={categoryItem.id} value={categoryItem.id}>{categoryItem.name}</option>
+                                                                    )
+                                                                })}
+                                                        </select>
+                                                        {categoryError && <div className="invalid-feedback">{categoryError}</div>}
+                                                    </div>
+                                                </div> {/* end col*/}
+                                                <div className="col-xl-6">
+                                                    <div className="mb-3 mt-3 mt-xl-0">
+                                                        <label htmlFor="projectname" className="mb-0">Avatar</label>
+                                                        <p className="text-muted font-14">Recommended thumbnail size 800x400 (px).</p>
+                                                        <input type="file" onChange={handleImageChange} multiple />
+                                                        <button onClick={handleCreateProduct}>Create Product</button>
+                                                        {/* Preview */}
+                                                        <div className="dropzone-previews mt-3" id="file-previews" />
+                                                        {/* file preview template */}
+                                                        <div className="d-none" id="uploadPreviewTemplate">
+                                                            <div className="card mt-1 mb-0 shadow-none border">
+                                                                <div className="p-2">
+                                                                    <div className="row align-items-center">
+                                                                        <div className="col-auto">
+                                                                            <img data-dz-thumbnail src="#" className="avatar-sm rounded bg-light" alt />
+                                                                        </div>
+                                                                        <div className="col ps-0">
+                                                                            <a href="javascript:void(0);" className="text-muted fw-bold" data-dz-name />
+                                                                            <p className="mb-0" data-dz-size />
+                                                                        </div>
+                                                                        <div className="col-auto">
+                                                                            {/* Button */}
+                                                                            <a href="#" className="btn btn-link btn-lg text-muted" data-dz-remove>
+                                                                                <i className="dripicons-cross" />
+                                                                            </a>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
+                                                        {/* end file preview template */}
                                                     </div>
-                                                </div>
+                                                    <div className="mb-0">
+                                                        <label htmlFor="project-overview" className="form-label">Brand</label>
+                                                        <select onChange={handlebrandChange} className={`form-control select2 ${brandError ? 'is-invalid' : ''}`} data-toggle="select2">
+                                                            <option>Select</option>
+                                                            {brand && brand.length > 0 &&
+                                                                brand.map((branditem, index) => {
+                                                                    return (
+                                                                        <option key={index} value={branditem.id}>{branditem.name}</option>
+                                                                    )
+                                                                })}
+                                                        </select>
+                                                        {brandError && <div className="invalid-feedback">{brandError}</div>}
+
+                                                    </div>
+                                                    <div className="mb-0">
+                                                        <label htmlFor="project-overview" className="form-label">Tag product</label>
+                                                        <select onChange={handleTagProductChange} className={`form-control select2 ${tagError ? 'is-invalid' : ''}`} data-toggle="select2">
+                                                            <option>Select</option>
+                                                            {tagProduct && tagProduct.length > 0 &&
+                                                                tagProduct.map((tagProductitem, index) => {
+                                                                    return (
+                                                                        <option key={index} value={tagProductitem.id}>{tagProductitem.name}</option>
+                                                                    )
+                                                                })}
+                                                        </select>
+                                                        {tagError && <div className="invalid-feedback">{tagError}</div>}
+                                                    </div>
+                                                    <div className="mb-3">
+                                                        <label htmlFor="project-budget" className="form-label">Size</label>
+                                                        <select
+                                                            className={`form-select ${sizeError ? 'is-invalid' : ''}`}
+                                                            value={size}
+                                                            onChange={(event) => setSize(event.target.value)}
+                                                        >
+                                                            <option value="">Select size</option>
+                                                            <option value="750 – 850">750 – 850</option>
+                                                            <option value="380 – 420">380 – 420</option>
+                                                            <option value="850 – 1100">850 – 1100</option>
+                                                            <option value="1000">1000</option>
+                                                            <option value="800">800</option>
+                                                            <option value="3000 – 2200 – 1700">3000 – 2200 – 1700</option>
+                                                            <option value="850 – 900">850 – 900</option>
+                                                            <option value="380 – 420">380 – 420</option>
+                                                            <option value="2600 – 3200">2600 – 3200</option>
+                                                            <option value="1600 – 1950">1600 – 1950</option>
+                                                        </select>
+                                                        {sizeError && <div className="invalid-feedback">{sizeError}</div>}
+
+                                                    </div>
+                                                    {/* Date View */}
+                                                    <div className="mb-3">
+                                                        <label htmlFor="project-budget" className="form-label">Quantity</label>
+                                                        <input
+                                                            type="number"
+                                                            id="project-budget"
+                                                            className={`form-control ${quantityError ? 'is-invalid' : ''}`}
+                                                            placeholder="Enter project budget"
+                                                            value={quantity}
+                                                            onChange={handleQuantityChange} />
+                                                        {quantityError && <div className="invalid-feedback">{quantityError}</div>}
+                                                    </div>
+                                                    <div className="mb-3">
+                                                        <label htmlFor="project-budget" className="form-label">Discount</label>
+                                                        <input type="number"
+                                                            id="project-budget"
+                                                            className={`form-control ${discountError ? 'is-invalid' : ''}`}
+                                                            placeholder="Enter project budget"
+                                                            value={discount}
+                                                            onChange={handleDiscountChange} />
+                                                        {discountError && <div className="invalid-feedback">{discountError}</div>}
+                                                    </div>
+                                                </div> {/* end col*/}
                                             </div>
-                                            {/* end file preview template */}
-                                        </div>
-                                        <div className="mb-0">
-                                            <label htmlFor="project-overview" className="form-label">Brand</label>
-                                            <select onChange={handlebrandChange} className={`form-control select2 ${brandError ? 'is-invalid' : ''}`} data-toggle="select2">
-                                                <option>Select</option>
-                                                {brand && brand.length > 0 &&
-                                                    brand.map((branditem, index) => {
-                                                        return (
-                                                            <option key={index} value={branditem.id}>{branditem.name}</option>
-                                                        )
-                                                    })}
-                                            </select>
-                                            {brandError && <div className="invalid-feedback">{brandError}</div>}
 
+                                            {/* end row */}
+                                        </div> {/* end card-body */}
+                                        <div class="justify-content-end row">
+                                            <div class="col-9">
+                                                <button type="submit" onClick={() => handleCreateProduct(validateInput())} class="btn btn-info">Create</button>
+                                            </div>
                                         </div>
-                                        <div className="mb-0">
-                                            <label htmlFor="project-overview" className="form-label">Tag product</label>
-                                            <select onChange={handleTagProductChange} className={`form-control select2 ${tagError ? 'is-invalid' : ''}`} data-toggle="select2">
-                                                <option>Select</option>
-                                                {tagProduct && tagProduct.length > 0 &&
-                                                    tagProduct.map((tagProductitem, index) => {
-                                                        return (
-                                                            <option key={index} value={tagProductitem.id}>{tagProductitem.name}</option>
-                                                        )
-                                                    })}
-                                            </select>
-                                            {tagError && <div className="invalid-feedback">{tagError}</div>}
-                                        </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="project-budget" className="form-label">Size</label>
-                                            <select
-                                                className={`form-select ${sizeError ? 'is-invalid' : ''}`}
-                                                value={size}
-                                                onChange={(event) => setSize(event.target.value)}
-                                            >
-                                                <option value="">Select size</option>
-                                                <option value="750 – 850">750 – 850</option>
-                                                <option value="380 – 420">380 – 420</option>
-                                                <option value="850 – 1100">850 – 1100</option>
-                                                <option value="1000">1000</option>
-                                                <option value="800">800</option>
-                                                <option value="3000 – 2200 – 1700">3000 – 2200 – 1700</option>
-                                                <option value="850 – 900">850 – 900</option>
-                                                <option value="380 – 420">380 – 420</option>
-                                                <option value="2600 – 3200">2600 – 3200</option>
-                                                <option value="1600 – 1950">1600 – 1950</option>
-                                            </select>
-                                            {sizeError && <div className="invalid-feedback">{sizeError}</div>}
-
-                                        </div>
-                                        {/* Date View */}
-                                        <div className="mb-3">
-                                            <label htmlFor="project-budget" className="form-label">Quantity</label>
-                                            <input
-                                                type="number"
-                                                id="project-budget"
-                                                className={`form-control ${quantityError ? 'is-invalid' : ''}`}
-                                                placeholder="Enter project budget"
-                                                value={quantity}
-                                                onChange={handleQuantityChange} />
-                                            {quantityError && <div className="invalid-feedback">{quantityError}</div>}
-                                        </div>
-                                        <div className="mb-3">
-                                            <label htmlFor="project-budget" className="form-label">Discount</label>
-                                            <input type="number"
-                                                id="project-budget"
-                                                className={`form-control ${discountError ? 'is-invalid' : ''}`}
-                                                placeholder="Enter project budget"
-                                                value={discount}
-                                                onChange={handleDiscountChange} />
-                                            {discountError && <div className="invalid-feedback">{discountError}</div>}
-                                        </div>
-                                    </div> {/* end col*/}
-                                </div>
-
-                                {/* end row */}
-                            </div> {/* end card-body */}
-                            <div class="justify-content-end row">
-                                <div class="col-9">
-                                    <button type="submit" onClick={() => handleCreateProduct(validateInput())} class="btn btn-info">Create</button>
-                                </div>
+                                    </div> {/* end card*/}
+                                </div> {/* end col*/}
                             </div>
-                        </div> {/* end card*/}
-                    </div> {/* end col*/}
-                </div>
-                {/* end row*/}
-            </div> {/* container */}
+                            {/* end row*/}
+                        </div> {/* container */}
 
-            </>}
+                    </>}
         </>
     )
 }
