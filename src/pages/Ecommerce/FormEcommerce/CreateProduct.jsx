@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import { imageDb } from '../../../Config/FireBaseConfig'
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage"
 import { v4 as uuidv4 } from 'uuid'
+import ClockLoader from "react-spinners/ClockLoader";
 
 const CreateProduct = () => {
     const navigate = useNavigate()
@@ -42,6 +43,13 @@ const CreateProduct = () => {
     const [imageError, setImageError] = useState('');
 
     const [isFormValid, setIsFormValid] = useState(false);
+    const [loading, setLoading] = useState(false);
+
+    const override: CSSProperties = {
+        display: "block",
+        margin: "0 auto",
+        borderColor: "blue",
+    };
 
 
     const validateInput = () => {
@@ -149,6 +157,7 @@ const CreateProduct = () => {
 
     const handleCreateProduct = async () => {
         try {
+            setLoading(true);
             const imageUrls = await Promise.all(productImages.map(async (image) => {
                 const imgRef = ref(imageDb, `images_eFurniture/${uuidv4()}`);
                 await uploadBytes(imgRef, image);
@@ -172,6 +181,8 @@ const CreateProduct = () => {
             }
         } catch (error) {
             console.error('Error calculating total:', error);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -289,6 +300,16 @@ const CreateProduct = () => {
 
     return (
         <>
+        {
+                loading ? <ClockLoader
+                    color={'#313A46'}
+                    loading={loading}
+                    cssOverride={override}
+                    size={70}
+                    aria-label="Loading Spinner"
+                    data-testid="loader"
+                /> :
+                    <>
             <TopNavbar />
             {/* Start Content*/}
             <div className="container-fluid">
@@ -482,7 +503,7 @@ const CreateProduct = () => {
                 {/* end row*/}
             </div> {/* container */}
 
-
+            </>}
         </>
     )
 }
