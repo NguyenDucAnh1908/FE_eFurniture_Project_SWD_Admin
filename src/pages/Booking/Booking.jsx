@@ -112,7 +112,7 @@ const Booking = () => {
                                                 <th>Status</th>
                                                 <th>Schedule</th>
                                                 <th style={{ width: 125 }}>Action</th>
-                                             
+
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -143,9 +143,12 @@ const Booking = () => {
                                                             }}
                                                             showTimeSelect
                                                             timeFormat="HH:mm"
-                                                            timeIntervals={15}
+                                                            timeIntervals={90}
                                                             dateFormat="yyyy-MM-dd HH:mm"
                                                             placeholderText={booking.schedule ? booking.schedule.toString() : 'Select date and time'}
+                                                            minDate={new Date()}
+                                                            minTime={new Date().setHours(9, 0)}
+                                                            maxTime={new Date().setHours(17, 0)}
                                                             disabled={booking.status === 'Cancel'}
                                                         />
 
@@ -161,7 +164,7 @@ const Booking = () => {
                                                         <a className="action-icon" onClick={() => handleCancelBooking(booking.id)}>
                                                             <i className="mdi mdi-delete" />
                                                         </a>
-                                                     </td>
+                                                    </td>
                                                 </tr>
                                             ))}
                                         </tbody>
