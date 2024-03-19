@@ -1,18 +1,25 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useContext } from 'react';
 import axios from 'axios';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { Select, MenuItem } from '@material-ui/core';
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom'
+import { UserContext } from '../../context/UserContext'
 
 const CreateBlog = () => {
+    const { user } = useContext(UserContext);
+    const user_blog = user.account.user.id
     const [formData, setFormData] = useState({
         title: '',
         content: '',
         categoryBlogIds: [],
-        userBlogId: '',
+        userBlogId: user_blog,
         tagBlogIds: []
     });
+
+    const navigate = useNavigate()
     const [categories, setCategories] = useState([]);
     const [tags, setTags] = useState([]);
     const [error, setError] = useState(null);
@@ -56,8 +63,9 @@ const CreateBlog = () => {
         try {
             const blogResponse = await axios.post('http://localhost:8080/api/v1/blogs/create_blog', formData);
             const blogId = blogResponse.data.id;
-
-            setSuccessMessage('Blog created successfully');
+            navigate("/list-blog");
+            toast.success("Create blog Success");
+            // setSuccessMessage('Blog created successfully');
         } catch (error) {
             setError(error.response.data);
         }
@@ -106,14 +114,14 @@ const CreateBlog = () => {
 
 
 
-                                            <div className="mb-3">
+                                            {/* <div className="mb-3">
                                                 <label htmlFor="author" className="form-label">Author</label>
 
                                                 <input className="form-control"
                                                     type="text" name="userBlogId"
                                                     value={formData.userBlogId} onChange={handleChange} required />
 
-                                            </div>
+                                            </div> */}
 
 
                                           

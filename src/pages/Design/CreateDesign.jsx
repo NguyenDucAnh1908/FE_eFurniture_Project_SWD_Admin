@@ -3,6 +3,9 @@ import axios from 'axios';
 import { UserContext } from '../../context/UserContext'
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
 import { useParams } from 'react-router-dom';
+import { toast } from 'react-toastify'
+import { useNavigate } from 'react-router-dom';
+
 
 const CreateDesign = () => {
     const { id } = useParams();
@@ -13,6 +16,7 @@ const CreateDesign = () => {
     const [imageUrls, setImageUrls] = useState(null);
     const [fileData, setFileData] = useState(null);
     const staff_name = user.account.user.fullName;
+    const navigate = useNavigate();
     useEffect(() => {
         setStaffName(staff_name);
     });
@@ -36,7 +40,10 @@ const CreateDesign = () => {
                         'Content-Type': 'multipart/form-data'
                     }
                 }
+                
             );
+            navigate(`/list-design/${id}`);
+            toast.success("Create disign Success");
             console.log('Design created:', response.data);
             // Handle success (e.g., redirect to another page, show a success message)
         } catch (error) {

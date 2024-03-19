@@ -17,7 +17,7 @@ const Account = () => {
                         <h6 className="text-overflow m-0">Welcome !</h6>
                     </div>
                     {/* item*/}
-                    <a href="javascript:void(0);" className="dropdown-item notify-item">
+                    <a href="/my-profile" className="dropdown-item notify-item">
                         <i className="mdi mdi-account-circle me-1" />
                         <span>My Account</span>
                     </a>

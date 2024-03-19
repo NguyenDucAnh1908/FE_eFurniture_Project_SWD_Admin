@@ -97,7 +97,7 @@ const ProjectBooking = () => {
                                                 <th>User ID</th>
                                                 <th>Booking ID</th>
                                                 <th>Action</th>
-                                                <th>Add Design</th>
+                                                <th>Design</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -121,7 +121,7 @@ const ProjectBooking = () => {
                                                         </Link>
                                                     </td>
                                                     
-                                                  <td>    <Link to={`/create-design/${projectBookings.id}`}>Add Design</Link></td>
+                                                  <td>    <Link to={`/list-design/${projectBookings.id}`}>View</Link></td>
                                                 </tr>
                                             
                                         </tbody>
