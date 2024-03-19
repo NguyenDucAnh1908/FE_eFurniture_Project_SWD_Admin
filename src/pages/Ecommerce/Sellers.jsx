@@ -29,13 +29,13 @@ const Sellers = () => {
               <div className="card-body">
                 <div className="row mb-2">
                   <div className="col-sm-5">
-                    <a href="javascript:void(0);" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add Sellers</a>
+                    {/* <a href="javascript:void(0);" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add Sellers</a> */}
                   </div>
                   <div className="col-sm-7">
                     <div className="text-sm-end">
                       <button type="button" className="btn btn-success mb-2 me-1"><i className="mdi mdi-cog" /></button>
-                      <button type="button" className="btn btn-light mb-2 me-1">Import</button>
-                      <button type="button" className="btn btn-light mb-2">Export</button>
+                      {/* <button type="button" className="btn btn-light mb-2 me-1">Import</button>
+                      <button type="button" className="btn btn-light mb-2">Export</button> */}
                     </div>
                   </div>{/* end col*/}
                 </div>
@@ -49,12 +49,12 @@ const Sellers = () => {
                             <label className="form-check-label" htmlFor="customCheck1">&nbsp;</label>
                           </div>
                         </th>
-                        <th>Seller</th>
-                        <th>Store Name</th>
-                        <th>Products</th>
-                        <th>Wallet Balance</th>
+                        <th>User</th>
+                        <th>Email</th>
+                        <th>Phone Number </th>
+                        <th>Message</th>
                         <th>Create Date</th>
-                        <th>Revenue</th>
+                        <th>Status</th>
                         <th style={{ width: 75 }}>Action</th>
                       </tr>
                     </thead>
@@ -71,23 +71,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Paul J. Friend</a>
                         </td>
                         <td>
-                          Homovee
+                          abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">128</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $128,250
+                         abc
                         </td>
                         <td>
                           07/07/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" />
+                          <div className="spark-chart" data-dataset="[25, 66, 41, 89, 63, 25, 44, 12, 36, 9, 54]" /> Processing 
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>
@@ -102,23 +103,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Bryan J. Luellen</a>
                         </td>
                         <td>
-                          Execucy
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">09</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $78,410
+                        abc
                         </td>
                         <td>
                           09/12/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 66, 41, 45, 63, 25, 66, 12, 45, 9, 54]" />
+                          <div className="spark-chart" data-dataset="[25, 66, 41, 45, 63, 25, 66, 12, 45, 9, 54]" /> Processing 
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>
@@ -133,23 +135,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Kathryn S. Collier</a>
                         </td>
                         <td>
-                          Epiloo
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">78</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $89,458
+                        abc
                         </td>
                         <td>
                           06/30/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 66, 41, 34, 63, 25, 34, 12, 434, 9, 54]" />
+                          <div className="spark-chart" data-dataset="[25, 66, 41, 34, 63, 25, 34, 12, 434, 9, 54]" /> Confirmed
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>
@@ -164,23 +167,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Timothy Kauper</a>
                         </td>
                         <td>
-                          Uberer
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">847</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $258,125
+                        abc
                         </td>
                         <td>
                           09/08/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 66, 41, 34, 33, 25, 34, 50, 65, 9, 54]" />
+                          <div className="spark-chart" data-dataset="[25, 66, 41, 34, 33, 25, 34, 50, 65, 9, 54]" /> Cancelled
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>
@@ -195,23 +199,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Zara Raws</a>
                         </td>
                         <td>
-                          Symic
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">235</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $56,210
+                        abc
                         </td>
                         <td>
                           07/15/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 66, 45, 34, 33, 34, 34, 50, 55, 9, 54]" />
+                          <div className="spark-chart" data-dataset="[25, 66, 45, 34, 33, 34, 34, 50, 55, 9, 54]" />Cancelled
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>
@@ -226,23 +231,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Annette P. Kelsch</a>
                         </td>
                         <td>
-                          Insulore
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">485</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $330,251
+                        abc
                         </td>
                         <td>
                           09/05/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 66, 30, 67, 33, 25, 34, 56, 65, 9, 54]" />
+                          <div className="spark-chart" data-dataset="[25, 66, 30, 67, 33, 25, 34, 56, 65, 9, 54]" /> Confirmed
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>
@@ -257,23 +263,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Jenny C. Gero</a>
                         </td>
                         <td>
-                          Susadmin
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">38</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $12,000
+                        abc
                         </td>
                         <td>
                           08/02/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 66, 30, 45, 33, 25, 44, 56, 33, 9, 33]" />
+                          <div className="spark-chart" data-dataset="[25, 66, 30, 45, 33, 25, 44, 56, 33, 9, 33]" /> Confirmed
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>
@@ -284,28 +291,30 @@ const Sellers = () => {
                           </div>
                         </td>
                         <td className="table-user">
-                          <img src="assets/images/users/avatar-8.jpg" alt="table-user" className="me-2 rounded-circle" />
+                          <img src="assets/images/users/avatar-8.jpg" alt="table-user" className="me-2 rounded-circle" /> 
                           <a href="javascript:void(0);" className="text-body fw-semibold">Edward Roseby</a>
                         </td>
                         <td>
-                          Hyperill
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">77</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $45,216
+                        abc
                         </td>
                         <td>
                           08/23/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 43, 30, 67, 34, 25, 34, 56, 43, 9, 56]" />
+                          <div className="spark-chart" data-dataset="[25, 43, 30, 67, 34, 25, 34, 56, 43, 9, 56]" />Processing
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
+                        
                       </tr>
                       <tr>
                         <td>
@@ -319,23 +328,24 @@ const Sellers = () => {
                           <a href="javascript:void(0);" className="text-body fw-semibold">Anna Ciantar</a>
                         </td>
                         <td>
-                          Vicedel
+                        abc@gmail.com
                         </td>
                         <td>
-                          <span className="fw-semibold">347</span>
+                          <span className="fw-semibold">1234567890</span>
                         </td>
                         <td>
-                          $7,815
+                        abc
                         </td>
                         <td>
                           05/06/2018
                         </td>
                         <td>
-                          <div className="spark-chart" data-dataset="[25, 23, 30, 67, 34, 56, 34, 56, 85, 9, 56]" />
+                          <div className="spark-chart" data-dataset="[25, 23, 30, 67, 34, 56, 34, 56, 85, 9, 56]" />Processing
                         </td>
                         <td>
-                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-square-edit-outline" /></a>
+                          <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-eye" /></a>
                           <a href="javascript:void(0);" className="action-icon"> <i className="mdi mdi-delete" /></a>
+                          <a href="javascript:void(0);" class="action-icon" > <i class="mdi mdi-checkbox-marked-outline"></i></a>
                         </td>
                       </tr>
                       <tr>

@@ -68,7 +68,7 @@ const ProjectBooking = () => {
                             <div className="card-body">
                                 <div className="row mb-2">
                                     <div className="col-sm-5">
-                                        <a href="/create-project-booking" className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add ProjectBooking</a>
+                                        <a href={`/create-project-booking/${bookingId}`} className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add ProjectBooking</a>
                                     </div>
                                     <div className="col-sm-7">
                                         <div className="text-sm-end">

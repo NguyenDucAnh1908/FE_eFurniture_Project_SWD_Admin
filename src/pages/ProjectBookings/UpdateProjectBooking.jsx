@@ -101,10 +101,10 @@ const UpdateProjectBooking = () => {
                   <li className="breadcrumb-item">
                     <a href="javascript: void(0);">Projects</a>
                   </li>
-                  <li className="breadcrumb-item active">Update Project</li>
+                  <li className="breadcrumb-item active">Update User</li>
                 </ol>
               </div>
-              <h4 className="page-title">Update Project</h4>
+              <h4 className="page-title">Update User</h4>
             </div>
           </div>
         </div>
@@ -130,7 +130,7 @@ const UpdateProjectBooking = () => {
                     </div>
                     <div className="mb-3">
                       <label htmlFor="projectType" className="form-label">
-                        Type
+                        Phone Number
                       </label>
                       <input
                         type="text"
@@ -149,7 +149,7 @@ const UpdateProjectBooking = () => {
 
                     <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
-                        Design Style
+                        Email
                       </label>
                       <input
                         type="text"
@@ -162,7 +162,7 @@ const UpdateProjectBooking = () => {
                     </div>
                     <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
-                        Color Schemes
+                        Create Date
                       </label>
                       <input
                         type="text"
@@ -175,218 +175,7 @@ const UpdateProjectBooking = () => {
                         }
                       />
                     </div>
-                    <div className="mb-3">
-                      <label htmlFor="project-budget" className="form-label">
-                        Intended Use
-                      </label>
-                      <input
-                        type="text"
-                        id="project-budget"
-                        className="form-control"
-                        placeholder="Enter project intended use"
-                        value={intendUse}
-                        onChange={(event) => setIntendUse(event.target.value)}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="project-budget" className="form-label">
-                        Occupants Number
-                      </label>
-                      <input
-                        type="number"
-                        id="project-budget"
-                        className="form-control"
-                        placeholder="Enter number of occupants"
-                        min="0"
-                        value={occupantsNumber}
-                        onChange={(event) => {
-                          const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
-                          if (!isNaN(value) && +value >= 0) {
-                            setOccupantsNumber(value);
-                          } else if (value === "") {
-                            // Cho phép xóa giá trị
-                            setOccupantsNumber("");
-                          }
-                          // Nếu không, không cập nhật giá trị (tức là khi nhập giá trị âm)
-                        }}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="project-budget" className="form-label">
-                        Timeline
-                      </label>
-                      <input
-                        type="text"
-                        id="project-budget"
-                        className="form-control"
-                        placeholder="Enter project timeline"
-                        value={timeLine}
-                        onChange={(event) => setTimeLine(event.target.value)}
-                      />
-                    </div>
-                    <div className="mb-3">
-                      <label htmlFor="project-price" className="form-label">
-                        Project Price
-                      </label>
-                      <input
-                        type="text"
-                        id="project-price"
-                        className="form-control"
-                        placeholder="Enter project price"
-                        value={projectPrice}
-                        onChange={(event) => {
-                          const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
-                          if (!isNaN(value) && +value >= 0) {
-                            setProjectPrice(value);
-                          } else if (value === "") {
-                            // Cho phép xóa giá trị
-                            setProjectPrice("");
-                          }
-                          // Nếu không, không cập nhật giá trị (tức là khi nhập giá trị âm)
-                        }}
-                      />
-                    </div>
-                    {/* <div className="mb-3">
-                        <label htmlFor="project-budget" className="form-label">
-                          UserId
-                        </label>
-                        <input
-                          type="text"
-                          id="project-budget"
-                          className="form-control"
-                          placeholder="Enter project code"
-                          value={userId}
-                          onChange={(event) => setUserId(event.target.value)}
-                        />
-                      </div> */}
-                    {/* <div className="mb-3">
-                        <label htmlFor="project-budget" className="form-label">
-                          User ID
-                        </label>
-                        <input
-                          type="number"
-                          id="project-budget"
-                          className="form-control"
-                          placeholder="Enter user ID"
-                          value={userId}
-                          onChange={(event) => setUserId(event.target.value)}
-                        />
-                      </div> */}
-                    {/* <div className="mb-3">
-                        <label htmlFor="project-budget" className="form-label">
-                          Booking ID
-                        </label>
-                        <input
-                          type="number"
-                          id="project-budget"
-                          className="form-control"
-                          placeholder="Enter booking ID"
-                          value={bookingId}
-                          onChange={(event) => setBookingId(event.target.value)}
-                        />
-                      </div> */}
-                  </div>{" "}
-                  {/* end col*/}
-                  <div className="col-xl-6">
-                    <div className="mb-3 mt-3 mt-xl-0">
-                      {/* <label htmlFor="projectname" className="mb-0">
-                          Avatar
-                        </label> */}
-                      {/* <p className="text-muted font-14">
-                          Recommended thumbnail size 800x400 (px).
-                        </p> */}
-                      {/* <div action="https://coderthemes.com/" method="post" className="dropzone" id="myAwesomeDropzone" data-plugin="dropzone" data-previews-container="#file-previews" data-upload-preview-template="#uploadPreviewTemplate">
-                                          <div className="fallback">
-                                              <input name="file" type="file" onChange={(event) => setImg(event.target.file[0])} />
-                                              <button onClick={handleClick}>Upload</button>
-                                          </div>
-                                          <div className="dz-message needsclick">
-                                              <i className="h3 text-muted dripicons-cloud-upload" />
-                                              <h4>Drop files here or click to upload.</h4>
-                                          </div>
-                                      </div> */}
-                      {/* <input
-                          type="file"
-                          onChange={handleImageChange}
-                          multiple
-                        />
-                        <button onClick={handleUpdateProjectBooking}>
-                          Update Product
-                        </button> */}
-                      {/* Preview */}
-                      <div
-                        className="dropzone-previews mt-3"
-                        id="file-previews"
-                      />
-                      {/* file preview template */}
-                      <div className="d-none" id="uploadPreviewTemplate">
-                        <div className="card mt-1 mb-0 shadow-none border">
-                          <div className="p-2">
-                            <div className="row align-items-center">
-                              <div className="col-auto">
-                                <img
-                                  data-dz-thumbnail
-                                  src="#"
-                                  className="avatar-sm rounded bg-light"
-                                  alt
-                                />
-                              </div>
-                              <div className="col ps-0">
-                                <a
-                                  href="javascript:void(0);"
-                                  className="text-muted fw-bold"
-                                  data-dz-name
-                                />
-                                <p className="mb-0" data-dz-size />
-                              </div>
-                              <div className="col-auto">
-                                {/* Button */}
-                                <a
-                                  href="#"
-                                  className="btn btn-link btn-lg text-muted"
-                                  data-dz-remove
-                                >
-                                  <i className="dripicons-cross" />
-                                </a>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      {/* end file preview template */}
-                    </div>
-                    <div className="mb-0">
-                      {/* <label htmlFor="project-overview" className="form-label">
-                          Tags Product
-                        </label> */}
-                    </div>
-
-                    <div className="mb-3">
-                      <label htmlFor="project-budget" className="form-label">
-                        Size
-                      </label>
-                      <input
-                        type="number"
-                        id="project-budget"
-                        className="form-control"
-                        placeholder="Enter project budget"
-                        min="0"
-                        value={size}
-                        onChange={(event) => {
-                          const value = event.target.value;
-                          // Kiểm tra xem giá trị nhập vào có phải là số và không âm
-                          if (!isNaN(value) && +value >= 0) {
-                            setSize(value);
-                          } else if (value === "") {
-                            // Cho phép xóa giá trị
-                            setSize("");
-                          }
-                          // Nếu không, không cập nhật giá trị (tức là khi nhập giá trị âm)
-                        }}
-                      />
-                    </div>
+                    
                     {/* Date View */}
                   </div>{" "}
                   {/* end col*/}

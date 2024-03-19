@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import TopNavbar from "../../components/TopNavbar/TopNavbar";
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
 
 const CreateProjectBooking = () => {
+  const { id } = useParams();
   const navigate = useNavigate;
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("");
@@ -23,7 +25,7 @@ const CreateProjectBooking = () => {
   const handleCreateProjectBooking = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/api/v1/booking/register-project-booking",
+        `http://localhost:8080/api/v1/booking/register-project-booking/${id}`,
         {
           projectName,
           projectType,
@@ -36,7 +38,7 @@ const CreateProjectBooking = () => {
           projectPrice,
           code,
           userId,
-          bookingId,
+         
         }
         
 
@@ -256,7 +258,7 @@ const CreateProjectBooking = () => {
                         onChange={(event) => setUserId(event.target.value)}
                       />
                     </div> */}
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
                         Booking ID
                       </label>
@@ -268,7 +270,7 @@ const CreateProjectBooking = () => {
                         value={bookingId}
                         onChange={(event) => setBookingId(event.target.value)}
                       />
-                    </div>
+                    </div> */}
                   </div>{" "}
                   {/* end col*/}
                   <div className="col-xl-6">

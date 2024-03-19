@@ -114,7 +114,7 @@ const Home = () => {
                             <div className="card card-h-100">
                                 <div className="card-body">
                                     <div className="d-flex justify-content-between align-items-center mb-2">
-                                        <h4 className="header-title">Projections Vs Actuals</h4>
+                                        <h4 className="header-title">Growth Chart</h4>
                                         <div className="dropdown">
                                             <a href="#" className="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i className="mdi mdi-dots-vertical" />
@@ -202,9 +202,9 @@ const Home = () => {
                                     <div className="d-flex justify-content-between align-items-center">
                                         <h4 className="header-title">Revenue By Location</h4>
                                         <div className="dropdown">
-                                            <a href="#" className="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
+                                            {/* <a href="#" className="dropdown-toggle arrow-none card-drop" data-bs-toggle="dropdown" aria-expanded="false">
                                                 <i className="mdi mdi-dots-vertical" />
-                                            </a>
+                                            </a> */}
                                             <div className="dropdown-menu dropdown-menu-end">
                                                 {/* item*/}
                                                 <a href="javascript:void(0);" className="dropdown-item">Sales Report</a>

@@ -22,7 +22,7 @@ const TotalOrders = () => {
                 <div className="float-end">
                     <i className="mdi mdi-cart-plus widget-icon" />
                 </div>
-                <h5 className="text-muted fw-normal mt-0" title="Number of Orders">Orders</h5>
+                <h5 className="text-muted fw-normal mt-0" title="Number of Orders">Quantites Of Product</h5>
                 <h3 className="mt-3 mb-3">{dataTotalOrder.totalOrders}</h3>
                 <p className="mb-0 text-muted">
                     {/* <span className="text-danger me-2"><i className="mdi mdi-arrow-down-bold" /> {dataTotalOrder.orderChangePercentage}%</span> */}
