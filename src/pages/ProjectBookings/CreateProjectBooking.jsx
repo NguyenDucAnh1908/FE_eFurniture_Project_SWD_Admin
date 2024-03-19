@@ -3,8 +3,6 @@ import TopNavbar from "../../components/TopNavbar/TopNavbar";
 // import { useNavigate } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
-import { toast } from 'react-toastify'
-
 
 const CreateProjectBooking = () => {
   const { id } = useParams();
@@ -46,10 +44,10 @@ const CreateProjectBooking = () => {
 
       );
       console.log("Create project booking response: ", response.data);
-      navigate(`/view-project-booking/${bookingId}`);
-      
-      toast.success("Create disign Success");
-      
+      // Redirect or navigate to another page
+      // navigate('/view-project-booking'); // Example: Redirect to product page
+      // Optionally show a success message
+      // toast.success("Create project booking successfully")
     } catch (error) {
       console.error("Error creating project booking:", error);
       // Optionally show an error message
