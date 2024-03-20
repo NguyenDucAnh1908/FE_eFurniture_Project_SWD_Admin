@@ -1,11 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TopNavbar from "../../components/TopNavbar/TopNavbar";
 import axios from "axios";
 import { useParams, useNavigate } from "react-router-dom";
+import { UserContext } from '../../context/UserContext'
+
 
 const UpdateProjectBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate();
+  const { user } = useContext(UserContext);
   // const [projectBookings, setProjectBookings] = useState("");
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("");
@@ -73,6 +76,7 @@ const UpdateProjectBooking = () => {
       alert("Please fill in all fields.");
       return;
     }
+    const userId = user.account.user.id;
       const response = await axios.put(
         `http://localhost:8080/api/v1/booking/updateProjectBooking/${id}`,
         {
@@ -267,7 +271,7 @@ const UpdateProjectBooking = () => {
                     />
                   </div>
                
-                  <div className="mb-3">
+                  {/* <div className="mb-3">
                     <label htmlFor="project-budget" className="form-label">
                       UserId
                     </label>
@@ -279,7 +283,7 @@ const UpdateProjectBooking = () => {
                       value={userId}
                       onChange={(event) => setUserId(event.target.value)}
                     />
-                  </div>
+                  </div> */}
                 </div>
               </div>
               <div class="justify-content-end row">

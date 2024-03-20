@@ -8,7 +8,7 @@ const Product = () => {
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
     const [keyword, setKeyword] = useState('');
-    const limit = 2;
+    const limit = 6;
 
     useEffect(() => {
         fetchProducts();

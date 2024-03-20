@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Link } from 'react-router-dom';
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
 
@@ -68,7 +68,7 @@ const ProjectBooking = () => {
                             <div className="card-body">
                                 <div className="row mb-2">
                                     <div className="col-sm-5">
-                                        <a href={`/create-project-booking/${bookingId}`} className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add ProjectBooking</a>
+                                        <Link to={`/create-project-booking/${bookingId}`} className="btn btn-danger mb-2"><i className="mdi mdi-plus-circle me-2" /> Add ProjectBooking</Link>
                                     </div>
                                     <div className="col-sm-7">
                                         <div className="text-sm-end">

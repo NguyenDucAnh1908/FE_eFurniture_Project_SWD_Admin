@@ -1,12 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import TopNavbar from "../../components/TopNavbar/TopNavbar";
 // import { useNavigate } from "react-router-dom";
 import { useParams, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { UserContext } from '../../context/UserContext'
+
 
 const CreateProjectBooking = () => {
   const { id } = useParams();
   const navigate = useNavigate;
+  const { user } = useContext(UserContext);
   const [projectName, setProjectName] = useState("");
   const [projectType, setProjectType] = useState("");
   const [size, setSize] = useState("");
@@ -24,6 +27,7 @@ const CreateProjectBooking = () => {
   const [selectedBookingId, setSelectedBookingId] = useState("");
   const handleCreateProjectBooking = async () => {
     try {
+      const userId = user.account.user.id;
       const response = await axios.post(
         `http://localhost:8080/api/v1/booking/register-project-booking/${id}`,
         {
@@ -232,7 +236,7 @@ const CreateProjectBooking = () => {
                         }}
                       />
                     </div>
-                    <div className="mb-3">
+                    {/* <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
                         UserId
                       </label>
@@ -244,7 +248,7 @@ const CreateProjectBooking = () => {
                         value={userId}
                         onChange={(event) => setUserId(event.target.value)}
                       />
-                    </div>
+                    </div> */}
                     {/* <div className="mb-3">
                       <label htmlFor="project-budget" className="form-label">
                         User ID

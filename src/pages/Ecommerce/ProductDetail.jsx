@@ -95,9 +95,17 @@ const ProductDetail = () => {
                                                     <span className="text-warning mdi mdi-star" />
                                                 </p>
                                                 {/* Product stock */}
-                                                <div className="mt-3">
+                                                {/* <div className="mt-3">
                                                     <h4><span className="badge badge-success-lighten">{productDetail.status}</span></h4>
+                                                </div> */}
+                                                <div className="mt-3">
+                                                    <h4>
+                                                        <span className={`badge badge-${productDetail.status === 0 ? 'danger' : 'success'}-lighten`}>
+                                                            {productDetail.status === 0 ? 'Deactive' : 'Active'}
+                                                        </span>
+                                                    </h4>
                                                 </div>
+
                                                 {/* Product description */}
                                                 <div className="mt-4">
                                                     <h6 className="font-14">Retail Price:</h6>
