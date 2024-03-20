@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import TopNavbar from '../../components/TopNavbar/TopNavbar';
 import 'react-datepicker/dist/react-datepicker.css';
 import DatePicker from 'react-datepicker';
 import { toast } from 'react-toastify'
+import { UserContext } from '../../context/UserContext'
 
 
 const Booking = () => {
@@ -14,6 +15,8 @@ const Booking = () => {
         totalElements: 0,
         currentPage: 0
     });
+    const { user } = useContext(UserContext);
+
 
     const fetchBookings = async (page) => {
         try {
@@ -34,6 +37,8 @@ const Booking = () => {
 
     const handleReceiveAndConfirm = async (bookingId) => {
         try {
+            const id = user.account.user.id;
+
             // Check if a schedule has been selected
             if (!selectedDates[bookingId]) {
                 toast.warning("Please select a schedule before confirming.");
@@ -43,7 +48,7 @@ const Booking = () => {
 
             const response = await axios.put(`http://localhost:8080/api/v1/booking/receive-booking-request/${bookingId}`, {
                 schedule: selectedDates[bookingId],
-                designerId: 1
+                designerId: id
             });
 
             const updatedBookings = bookings.map(booking =>
@@ -136,10 +141,14 @@ const Booking = () => {
                                                         <DatePicker
                                                             selected={selectedDates[booking.id] || (booking.schedule ? new Date(booking.schedule) : null)}
                                                             onChange={(date) => {
-                                                                setSelectedDates((prevState) => ({
-                                                                    ...prevState,
-                                                                    [booking.id]: date,
-                                                                }));
+                                                                if (date instanceof Date && !isNaN(date)) {
+                                                                    setSelectedDates((prevState) => ({
+                                                                        ...prevState,
+                                                                        [booking.id]: date,
+                                                                    }));
+                                                                } else {
+                                                                    console.error("Invalid date selected:", date);
+                                                                }
                                                             }}
                                                             showTimeSelect
                                                             timeFormat="HH:mm"
@@ -147,11 +156,11 @@ const Booking = () => {
                                                             dateFormat="yyyy-MM-dd HH:mm"
                                                             placeholderText={booking.schedule ? booking.schedule.toString() : 'Select date and time'}
                                                             minDate={new Date()}
-                                                            minTime={new Date().setHours(9, 0)}
-                                                            maxTime={new Date().setHours(17, 0)}
+                                                            minTime={new Date(new Date().setHours(9, 0))}
+                                                            maxTime={new Date(new Date().setHours(17, 0))}
+
                                                             disabled={booking.status === 'Cancel'}
                                                         />
-
                                                     </td>
                                                     <td>
                                                         <a href={`/view-project-booking/${booking.id}`} className="action-icon"> <i className="mdi mdi-eye" /></a>
