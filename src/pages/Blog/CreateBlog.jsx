@@ -183,11 +183,6 @@ const CreateBlog = () => {
                                                             </Select>
                                                         </div>
 
-
-
-
-
-
                                                         <div className="mb-3">
                                                             <label htmlFor="project-overview" className="form-label">Content</label>
                                                             <ReactQuill
@@ -196,20 +191,10 @@ const CreateBlog = () => {
                                                                 style={{ height: '30em', width: '80em' }}
                                                             />
                                                         </div>
-
-
-
-
-
-
-
                                                     </div> {/* end col*/}
 
 
                                                     <div className="col-xl-6">
-
-
-
 
 
                                                     </div>
