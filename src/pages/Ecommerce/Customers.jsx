@@ -8,7 +8,7 @@ const Customer = () => {
     const [custommers, setCustommer] = useState([]);
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
-    const limit = 2;
+    const limit = 6;
     const [loading, setLoading] = useState(false);
 
     const override: CSSProperties = {

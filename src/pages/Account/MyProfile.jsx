@@ -129,7 +129,7 @@ const MyProfile = () => {
                                                 <p className="mb-0">Address</p>
                                             </div>
                                             <div className="col-sm-9">
-                                                <p className="text-muted mb-0">Bay Area, San Francisco, CA</p>
+                                                <p className="text-muted mb-0">Việt Nam</p>
                                             </div>
                                         </div>
                                     </div>

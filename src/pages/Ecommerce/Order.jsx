@@ -35,7 +35,7 @@ const Order = () => {
                 params: {
                     keyword: '',
                     page: currentPage - 1,
-                    limit: 1,
+                    limit: 6,
                     categoryIds: categoryIds
                 },
             })
