@@ -19,7 +19,8 @@ const UpdateOrderStatus = () => {
     // });
     const [selectedStatus, setSelectedStatus] = useState(1);
     const handleStatusChange = (e) => {
-        setSelectedStatus(parseInt(e.target.value));
+        const newStatusId = parseInt(e.target.value);
+        setSelectedStatus(newStatusId);
     };
     const [selectedPaymentStatus, setSelectedPaymentStatus] = useState({
         id: '',
@@ -124,12 +125,14 @@ const UpdateOrderStatus = () => {
     const fetchOrderStatus = async () => {
         try {
             const res = await dataStatusOrder();
-            setStatusOrder(res.data);
-
+            const sortedStatusOrder = sortStatusOrder(res.data);
+            setStatusOrder(sortedStatusOrder);
         } catch (error) {
             console.error('Error fetching order status:', error);
         }
-    }
+    };
+
+
     const fetchOrderPaymentStatus = async () => {
         try {
             const res = await dataOrderpaymentStatus();
@@ -166,6 +169,18 @@ const UpdateOrderStatus = () => {
             })
             .catch(err => console.log(err));
     }
+
+    const sortStatusOrder = (statusOrder) => {
+        // Định nghĩa thứ tự mong muốn của các trạng thái
+        const desiredOrder = ['Order', 'Confirm', 'Packing', 'Export from warehouse', 'Waiting for delivery', 'Delivering', 'Successful delivery', 'Cancelled'];
+
+        // Sắp xếp mảng theo thứ tự mong muốn
+        const sortedStatusOrder = statusOrder.sort((a, b) => {
+            return desiredOrder.indexOf(a.name) - desiredOrder.indexOf(b.name);
+        });
+
+        return sortedStatusOrder;
+    };
 
     return (
         <div>
@@ -220,7 +235,7 @@ const UpdateOrderStatus = () => {
                         <div className="horizontal-steps mt-4 mb-4 pb-5" id="tooltip-container">
                             <div className="horizontal-steps-content">
                                 {statusOrder.map((statusOrderItem, index) => {
-                                    if (statusOrderItem.code !== "cancelled" && statusOrderItem.code !== "delivery_canceled") {
+                                    if (statusOrderItem.code !== "CANCELLED") {
                                         return (
                                             <div key={statusOrderItem.id} className={`step-item ${selectedStatus === statusOrderItem.id ? 'current' : ''}`}>
                                                 <span data-bs-container="#tooltip-container" data-bs-toggle="tooltip" data-bs-placement="bottom" title={`21/08/2018 11:32 AM`}>{statusOrderItem.name}</span>
@@ -371,7 +386,6 @@ const UpdateOrderStatus = () => {
                                     }
                                 </select> */}
                                 <select className="select-box" value={selectedStatus} onChange={handleStatusChange}>
-                                    <option value={1}>Order</option>
                                     {statusOrder.map((statusOrderItem) => {
                                         if (statusOrderItem.id >= selectedStatus) {
                                             return (

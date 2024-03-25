@@ -7,7 +7,7 @@ const PrivateRountDelivery = () => {
     const { user } = useContext(UserContext);
     console.log("Check User contextttt: ", user)
 
-    if (user && user.isAuthenticated === true && user.role === 'ADMIN' || user.role === 'STAFF_DELIVERY') {
+    if (user && user.isAuthenticated === true && user.role === 'STAFF' || user.role === 'STAFF_DELIVERY') {
         return <Outlet />;
     } else {
         return <Navigate to="/login" />;

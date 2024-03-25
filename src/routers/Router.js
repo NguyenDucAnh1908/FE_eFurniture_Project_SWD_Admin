@@ -58,18 +58,19 @@ function Router() {
                     {/* <Route path='/my-profile' element={<MyProfile />} /> */}
                 </Route>
 
-                {/* <Route element={<PrivateRountDelivery />}>
+                <Route element={<PrivateRountDelivery />}>
 
-                    <Route path='/deliver' element={<Deliver />} />
+                    {/* <Route path='/deliver' element={<Deliver />} />
                     <Route path='/my-profile' element={<MyProfile />} />
                     <Route path='/order' element={<Orderder />} />
-                    <Route path='/order-detail/:id' element={<OrderDetail />} />
-                </Route> */}
+                    <Route path='/order-detail/:id' element={<OrderDetail />} /> */}
+                    <Route path='/update-status-order/:id' element={<UpdateOrderStatus />} />
+                </Route>
                 <Route element={<PrivateRountStaff />}>
                     {/* <Route path='/' element={<Home />} /> */}
                     <Route path='/order' element={<Orderder />} />
                     <Route path='/order-detail/:id' element={<OrderDetail />} />
-                    <Route path='/update-status-order/:id' element={<UpdateOrderStatus />} />
+                    {/* <Route path='/update-status-order/:id' element={<UpdateOrderStatus />} /> */}
                     <Route path='/product-detail/:id' element={<ProductDetail />} />
                     <Route path='/product' element={<Product />} />
                     <Route path='/update-product/:id' element={<UpdateProduct />} />
@@ -115,11 +116,11 @@ function Router() {
                 <Route path='/design-detail/:id' element={<DesignDetail />} />
 
                 <Route path='/view-project-booking/:bookingId' element={<ProjectBooking />} />
-                <Route path= '/create-project-booking/:id' element= {<CreateProjectBooking />} />
-                <Route path= '/update-project-booking/:id' element= {<UpdateProjectBooking />} />
+                <Route path='/create-project-booking/:id' element={<CreateProjectBooking />} />
+                <Route path='/update-project-booking/:id' element={<UpdateProjectBooking />} />
 
                 <Route path='/my-profile' element={<MyProfile />} />
-                
+
             </Routes>
         </>
     )
